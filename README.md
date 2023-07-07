@@ -2,7 +2,7 @@
 
 ## ✨ Introduction
 
-[Awesome CV](https://github.com/posquit0/Awesome-CV)를 기반으로 하는 레쥬메 만들기 사이트
+[Awesome CV](https://github.com/posquit0/Awesome-CV)를 기반으로 하는 레쥬메 에디터
 
 ## 🔗 Links
 
@@ -11,7 +11,7 @@
 ## 🛠️ Tech Stack
 
 - `Next.js`
-- `TypeScript`
+- `JavaScript`
 
 ## ⚙️ Run code
 
