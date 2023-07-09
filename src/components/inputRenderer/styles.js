@@ -43,7 +43,7 @@ const Page = styled.div`
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 
   width: 100%;
 
@@ -77,7 +77,7 @@ const AddSection = styled.button`
   
   margin-top: 2rem;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray};
   border-radius: 1rem;
 
   color: ${color.gray};
@@ -88,7 +88,7 @@ const AddSection = styled.button`
     cursor: pointer;
     color: ${color.grayHover};
     font-weight: 900;
-    border: 3px solid ${color.lightGrayHover};
+    border: 2px solid ${color.lightGrayHover};
   }
 }
 `;
@@ -97,7 +97,7 @@ const AddItem = styled.button`
   padding: 0.5rem 1rem;
   background-color: transparent;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray};
   border-radius: 0.8rem;
 
   color: ${color.gray};
@@ -108,7 +108,7 @@ const AddItem = styled.button`
     cursor: pointer;
     color: ${color.grayHover};
     font-weight: 900;
-    border: 3px solid ${color.lightGrayHover};
+    border: 2px solid ${color.lightGrayHover};
   }
 `;
 
@@ -211,9 +211,9 @@ const Check = styled.img`
 const SectionItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray};
   border-radius: 0.8rem;
 
   padding: 1rem;
