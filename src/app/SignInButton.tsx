@@ -22,7 +22,7 @@ const buttonStyle = {
 };
 
 export default function SignInButton({ signInData }: { signInData: any }) {
-  const singUp = () => {
+  const signIn = () => {
     alert("ewfwef");
   };
 
@@ -30,7 +30,7 @@ export default function SignInButton({ signInData }: { signInData: any }) {
     <button
       css={buttonStyle}
       onClick={() => {
-        singUp();
+        signIn();
       }}
     >
       로그인

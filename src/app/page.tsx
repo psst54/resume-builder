@@ -10,6 +10,11 @@ import XIcon from "@assets//XIcon";
 import SignInButton from "./SignInButton";
 import SignUpButton from "./SignUpButton";
 
+import {
+  checkPasswordLength,
+  checkConfirmPassword,
+} from "@libs/singUpValidation";
+
 const breakpoints = [768];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
@@ -128,35 +133,6 @@ export default function Home() {
     },
   ]);
 
-  const checkEmail = () => {
-    const email = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "email"
-    )[0].value;
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
-
-  const checkPasswordLength = () => {
-    const password = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "password"
-    )[0].value;
-    return password !== "" && password.length >= 6;
-  };
-
-  const checkConfirmPassword = () => {
-    const password = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "password"
-    )[0].value;
-    const confirmPassword = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "confirmPassword"
-    )[0].value;
-
-    return (
-      password !== "" && confirmPassword !== "" && password === confirmPassword
-    );
-  };
-
   return (
     <Container>
       <div>
@@ -251,16 +227,42 @@ export default function Home() {
             ))}
 
             <CheckPasswordContainer>
-              <CheckPasswordItem isValid={checkPasswordLength()}>
-                {checkPasswordLength() ? (
+              <CheckPasswordItem
+                isValid={checkPasswordLength({
+                  password: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "password"
+                  )[0].value,
+                })}
+              >
+                {checkPasswordLength({
+                  password: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "password"
+                  )[0].value,
+                }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (
                   <XIcon size={"1rem"} color={color.invalid} />
                 )}
                 6자리 이상
               </CheckPasswordItem>
-              <CheckPasswordItem isValid={checkConfirmPassword()}>
-                {checkConfirmPassword() ? (
+              <CheckPasswordItem
+                isValid={checkConfirmPassword({
+                  password: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "password"
+                  )[0].value,
+                  confirmPassword: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "confirmPassword"
+                  )[0].value,
+                })}
+              >
+                {checkConfirmPassword({
+                  password: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "password"
+                  )[0].value,
+                  confirmPassword: signUpData.filter(
+                    (signUpDatum) => signUpDatum.field === "confirmPassword"
+                  )[0].value,
+                }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (
                   <XIcon size={"1rem"} color={color.invalid} />
