@@ -32,7 +32,11 @@ const longTypeStyles = StyleSheet.create({
     lineHeight: 1.4,
   },
   sectionItem: { wordBreak: "keep-all" },
-  sectionPositionText: { color: color.gray, fontSize: 9, fontWeight: 300 },
+  sectionPositionText: {
+    color: color.gray.standard,
+    fontSize: 9,
+    fontWeight: 300,
+  },
   techStackList: {
     display: "flex",
     flexDirection: "row",
@@ -40,7 +44,7 @@ const longTypeStyles = StyleSheet.create({
     flexWrap: "wrap",
   },
   techStackItem: {
-    backgroundColor: color.lightGray,
+    backgroundColor: color.lightGray.standard,
     lineHeight: 1.4,
     fontWeight: 300,
 
@@ -58,7 +62,7 @@ const longTypeStyles = StyleSheet.create({
     fontWeight: 300,
   },
   dateText: {
-    color: color.gray,
+    color: color.gray.standard,
   },
 });
 

@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-
-const color = {
-  white: "#fff",
-  primary: "#003FC7",
-  gray: "#676A6F",
-  lightGray: "#E2E6EF",
-};
+import { color } from "@/app/styles";
 
 const Page = styled.div`
   min-height: 100vh;
@@ -23,7 +17,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
 
-  border-bottom: 2px solid ${color.lightGray};
+  border-bottom: 2px solid ${color.lightGray.standard};
 
   z-index: 11;
 `;
@@ -47,7 +41,7 @@ const InputContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color.gray};
+    background: ${color.gray.standard};
     width: 0.8rem;
     border-radius: 0.2rem;
   }
@@ -61,7 +55,7 @@ const InputContainer = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background: ${color.gray};
+      background: ${color.gray.standard};
       width: 0.6rem;
       border-radius: 0.2rem;
     }
@@ -76,7 +70,7 @@ const ViewerContainer = styled.div`
 
   display: flex;
 
-  background: ${color.lightGray};
+  background: ${color.lightGray.standard};
 
   ::-webkit-scrollbar {
     background: transparent;
@@ -84,7 +78,7 @@ const ViewerContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color.gray};
+    background: ${color.gray.standard};
     width: 0.8rem;
     border-radius: 0.2rem;
   }

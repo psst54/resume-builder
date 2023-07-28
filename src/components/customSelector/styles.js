@@ -51,7 +51,7 @@ const OptionContainer = styled.div`
   position: absolute;
   margin-top: 0.2rem;
 
-  border: 2px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 0.8rem;
   background: #fff;
 
