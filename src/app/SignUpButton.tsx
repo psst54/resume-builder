@@ -65,7 +65,9 @@ export default function SignUpButton({ signUpData }: { signUpData: any }) {
         password,
       });
 
-      alert("회원가입 완료. route처리");
+      alert(
+        "이메일 주소로 인증 메일이 발송되었어요.\n메일을 인증하고 로그인해주세요!"
+      );
 
       if (error) throw new Error("회원가입 실패");
     } catch (e) {

@@ -180,8 +180,8 @@ export default function Home() {
 
         {isSignIn && (
           <>
-            {signInData.map((signInDatum) => (
-              <div css={InputContainer}>
+            {signInData.map((signInDatum, signInDatumIdx) => (
+              <div css={InputContainer} key={signInDatumIdx}>
                 {signInDatum.label}
                 <input
                   css={Input}
@@ -206,8 +206,8 @@ export default function Home() {
 
         {!isSignIn && (
           <>
-            {signUpData.map((signUpDatum) => (
-              <div css={InputContainer}>
+            {signUpData.map((signUpDatum, signUpDatumIdx) => (
+              <div css={InputContainer} key={signUpDatumIdx}>
                 {signUpDatum.label}
                 <input
                   css={Input}
