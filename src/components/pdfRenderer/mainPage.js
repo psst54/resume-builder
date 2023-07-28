@@ -155,7 +155,10 @@ const PDFPage = ({ data, mainColor }) => {
                     <Text style={styles.contactText}>
                       {contactBaseData[contactItem.type]?.isLink && (
                         <Link
-                          style={styles.disableLinkStyle}
+                          style={[
+                            styles.disableLinkStyle,
+                            { color: mainColor },
+                          ]}
                           src={
                             contactBaseData[contactItem.type]?.baseUrl +
                             contactItem.text

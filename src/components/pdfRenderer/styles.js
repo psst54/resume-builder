@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------
 
   page: {
-    paddingTop: 20,
+    paddingTop: 40,
     paddingBottom: 30,
 
     display: "flex",
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
   },
   pageWrapper: {
-    paddingLeft: 30,
-    paddingRight: 40,
+    paddingLeft: 50,
+    paddingRight: 50,
   },
   sections: { display: "flex", flexDirection: "column", gap: 20 },
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   contactItemIcon: { width: 8, height: 8 },
-  disableLinkStyle: { color: color.black, textDecoration: "none" },
+  disableLinkStyle: { color: color.primary, textDecoration: "none" },
 
   quote: {
     marginTop: 10,

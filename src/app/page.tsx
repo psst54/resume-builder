@@ -1,10 +1,32 @@
+"use client";
+import react from "react";
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100vh;
+`;
+const SignInButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+const SignInButton = styled.button`
+  width: 30vw;
+  height: 30vw;
+  background: teal;
+`;
+
 export default function Home() {
   return (
-    <div>
-      <h1>메인 페이지에는 무엇이 들어가야 할까요?</h1>
-      <h3>✨멋진 소개글✨</h3>
-      <h3>예시 이미지 넣기</h3>
-      <h3>/build 페이지로 라우팅 넣기</h3>
-    </div>
+    <Container>
+      <SignInButtonWrapper>
+        <SignInButton>로그인</SignInButton>
+        <SignInButton>가입하기</SignInButton>
+      </SignInButtonWrapper>
+    </Container>
   );
 }

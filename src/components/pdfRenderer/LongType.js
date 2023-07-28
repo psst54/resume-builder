@@ -106,7 +106,10 @@ const LongType = ({ data, mainColor }) => {
 
               if (descItem.type === "link")
                 return (
-                  <Link style={styles.disableLinkStyle} src={descItem.url}>
+                  <Link
+                    style={[styles.disableLinkStyle, { color: mainColor }]}
+                    src={descItem.url}
+                  >
                     {descItem.title}
                   </Link>
                 );
