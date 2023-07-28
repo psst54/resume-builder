@@ -7,16 +7,22 @@ import { color } from "@/app/styles";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 
+import SignInButton from "./SignInButton";
+import SignUpButton from "./SignUpButton";
+
+const breakpoints = [768];
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+
 const Container = styled.div`
   display: flex;
-  // align-items: center;
-
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 
   width: 100vw;
   min-height: 100vh;
   padding: 2rem;
-  padding-top: 20vh;
+  padding-top: 10vh;
 
   background: ${color.lightGray.standard};
 `;
@@ -26,29 +32,12 @@ const SignInButtonWrapper = styled.div`
   justify-content: center;
   gap: 1.5rem;
 
+  width: fit-content;
   height: fit-content;
   padding: 1rem 3rem 3rem 3rem;
   background: ${color.white.standard};
 
   border-radius: 1rem;
-`;
-const SignInButton = styled.button`
-  width: 18rem;
-  height: 3rem;
-  margin-top: 2rem;
-
-  background: ${color.primary.standard};
-  color: ${color.white.standard};
-  font-weight: 500;
-
-  border: none;
-  border-radius: 1rem;
-
-  cursor: pointer;
-
-  &:active {
-    background: ${color.gray.standard};
-  }
 `;
 
 const InputContainer = {
@@ -104,8 +93,6 @@ const CheckPasswordItem = styled.div`
 
 export default function Home() {
   const [isSignIn, setIsSignIn] = react.useState(true);
-
-  const [email, setEmail] = react.useState("");
 
   const [signInData, setSignInData] = react.useState([
     { label: "이메일", field: "email", value: "", placeholder: "" },
@@ -172,6 +159,29 @@ export default function Home() {
 
   return (
     <Container>
+      <div>
+        <h1 css={{ fontSize: "2rem", marginBottom: "1rem" }}>
+          Awesome Resume Builder
+        </h1>
+        <p
+          css={{
+            width: "fit-content",
+            marginBottom: "2rem",
+
+            color: color.primary.standard,
+            fontSize: "1.2rem",
+            fontWeight: 800,
+            wordBreak: "keep-all",
+
+            [mq[0]]: {
+              display: "none",
+            },
+          }}
+        >
+          * PC 혹은 충분히 넓은 화면에서 사용하시는 것을 추천드려요!
+        </p>
+      </div>
+
       <SignInButtonWrapper>
         <div css={{ display: "flex" }}>
           <button
@@ -213,6 +223,8 @@ export default function Home() {
                 />
               </div>
             ))}
+
+            <SignInButton signInData={signInData} />
           </>
         )}
 
@@ -256,10 +268,10 @@ export default function Home() {
                 비밀번호 일치함
               </CheckPasswordItem>
             </CheckPasswordContainer>
+
+            <SignUpButton signUpData={signUpData} />
           </>
         )}
-
-        <SignInButton>로그인</SignInButton>
       </SignInButtonWrapper>
     </Container>
   );
