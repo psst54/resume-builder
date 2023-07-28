@@ -23,7 +23,9 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
-      "@libs/*": ["./src/libs/*"]
+      "@libs/*": ["./src/libs/*"],
+      "@redux/*": ["./src/redux/*"],
+      "@features/*": ["./src/features/*"]
     }
   },
   "include": [

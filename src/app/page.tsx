@@ -7,6 +7,7 @@ import { color } from "@/app/styles";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 
+import { useAppSelector } from "@/redux/hooks";
 import SignInButton from "./SignInButton";
 import SignUpButton from "./SignUpButton";
 
@@ -97,6 +98,12 @@ const CheckPasswordItem = styled.div`
 `;
 
 export default function Home() {
+  const isSignedIn =
+    useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===
+    "true";
+
+  const id = useAppSelector((state) => state.userReducer.resume_builder_id);
+
   const [isSignIn, setIsSignIn] = react.useState(true);
 
   const [signInData, setSignInData] = react.useState([
@@ -135,146 +142,151 @@ export default function Home() {
 
   return (
     <Container>
-      <div>
-        <h1 css={{ fontSize: "2rem", marginBottom: "1rem" }}>
-          Awesome Resume Builder
-        </h1>
-        <p
-          css={{
-            width: "fit-content",
-            marginBottom: "2rem",
+      {isSignedIn && <div>{id}</div>}
+      {!isSignedIn && (
+        <>
+          <div>
+            <h1 css={{ fontSize: "2rem", marginBottom: "1rem" }}>
+              Awesome Resume Builder
+            </h1>
+            <p
+              css={{
+                width: "fit-content",
+                marginBottom: "2rem",
 
-            color: color.primary.standard,
-            fontSize: "1.2rem",
-            fontWeight: 800,
-            wordBreak: "keep-all",
+                color: color.primary.standard,
+                fontSize: "1.2rem",
+                fontWeight: 800,
+                wordBreak: "keep-all",
 
-            [mq[0]]: {
-              display: "none",
-            },
-          }}
-        >
-          * PC 혹은 충분히 넓은 화면에서 사용하시는 것을 추천드려요!
-        </p>
-      </div>
+                [mq[0]]: {
+                  display: "none",
+                },
+              }}
+            >
+              * PC 혹은 충분히 넓은 화면에서 사용하시는 것을 추천드려요!
+            </p>
+          </div>
 
-      <SignInButtonWrapper>
-        <div css={{ display: "flex" }}>
-          <button
-            css={[ToggleButton, isSignIn && SelectedToggleButton]}
-            onClick={() => {
-              setIsSignIn(true);
-            }}
-          >
-            로그인
-          </button>
-          <button
-            css={[ToggleButton, !isSignIn && SelectedToggleButton]}
-            onClick={() => {
-              setIsSignIn(false);
-            }}
-          >
-            회원가입
-          </button>
-        </div>
-
-        {isSignIn && (
-          <>
-            {signInData.map((signInDatum, signInDatumIdx) => (
-              <div css={InputContainer} key={signInDatumIdx}>
-                {signInDatum.label}
-                <input
-                  css={Input}
-                  value={signInDatum.value}
-                  onChange={(event) => {
-                    const newSignInData = signInData.map((oldDatum) =>
-                      oldDatum.field === signInDatum.field
-                        ? { ...oldDatum, value: event?.target?.value }
-                        : oldDatum
-                    );
-
-                    setSignInData(newSignInData);
-                  }}
-                  type={signInDatum?.type}
-                />
-              </div>
-            ))}
-
-            <SignInButton signInData={signInData} />
-          </>
-        )}
-
-        {!isSignIn && (
-          <>
-            {signUpData.map((signUpDatum, signUpDatumIdx) => (
-              <div css={InputContainer} key={signUpDatumIdx}>
-                {signUpDatum.label}
-                <input
-                  css={Input}
-                  value={signUpDatum.value}
-                  onChange={(event) => {
-                    const newSignUpData = signUpData.map((oldDatum) =>
-                      oldDatum.field === signUpDatum.field
-                        ? { ...oldDatum, value: event?.target?.value }
-                        : oldDatum
-                    );
-
-                    setSignUpData(newSignUpData);
-                  }}
-                  type={signUpDatum?.type}
-                />
-              </div>
-            ))}
-
-            <CheckPasswordContainer>
-              <CheckPasswordItem
-                isValid={checkPasswordLength({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                })}
+          <SignInButtonWrapper>
+            <div css={{ display: "flex" }}>
+              <button
+                css={[ToggleButton, isSignIn && SelectedToggleButton]}
+                onClick={() => {
+                  setIsSignIn(true);
+                }}
               >
-                {checkPasswordLength({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                }) ? (
-                  <CheckIcon size={"1rem"} color={color.valid} />
-                ) : (
-                  <XIcon size={"1rem"} color={color.invalid} />
-                )}
-                6자리 이상
-              </CheckPasswordItem>
-              <CheckPasswordItem
-                isValid={checkConfirmPassword({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                  confirmPassword: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "confirmPassword"
-                  )[0].value,
-                })}
+                로그인
+              </button>
+              <button
+                css={[ToggleButton, !isSignIn && SelectedToggleButton]}
+                onClick={() => {
+                  setIsSignIn(false);
+                }}
               >
-                {checkConfirmPassword({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                  confirmPassword: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "confirmPassword"
-                  )[0].value,
-                }) ? (
-                  <CheckIcon size={"1rem"} color={color.valid} />
-                ) : (
-                  <XIcon size={"1rem"} color={color.invalid} />
-                )}
-                비밀번호 일치함
-              </CheckPasswordItem>
-            </CheckPasswordContainer>
+                회원가입
+              </button>
+            </div>
 
-            <SignUpButton signUpData={signUpData} />
-          </>
-        )}
-      </SignInButtonWrapper>
+            {isSignIn && (
+              <>
+                {signInData.map((signInDatum, signInDatumIdx) => (
+                  <div css={InputContainer} key={signInDatumIdx}>
+                    {signInDatum.label}
+                    <input
+                      css={Input}
+                      value={signInDatum.value}
+                      onChange={(event) => {
+                        const newSignInData = signInData.map((oldDatum) =>
+                          oldDatum.field === signInDatum.field
+                            ? { ...oldDatum, value: event?.target?.value }
+                            : oldDatum
+                        );
+
+                        setSignInData(newSignInData);
+                      }}
+                      type={signInDatum?.type}
+                    />
+                  </div>
+                ))}
+
+                <SignInButton signInData={signInData} />
+              </>
+            )}
+
+            {!isSignIn && (
+              <>
+                {signUpData.map((signUpDatum, signUpDatumIdx) => (
+                  <div css={InputContainer} key={signUpDatumIdx}>
+                    {signUpDatum.label}
+                    <input
+                      css={Input}
+                      value={signUpDatum.value}
+                      onChange={(event) => {
+                        const newSignUpData = signUpData.map((oldDatum) =>
+                          oldDatum.field === signUpDatum.field
+                            ? { ...oldDatum, value: event?.target?.value }
+                            : oldDatum
+                        );
+
+                        setSignUpData(newSignUpData);
+                      }}
+                      type={signUpDatum?.type}
+                    />
+                  </div>
+                ))}
+
+                <CheckPasswordContainer>
+                  <CheckPasswordItem
+                    isValid={checkPasswordLength({
+                      password: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "password"
+                      )[0].value,
+                    })}
+                  >
+                    {checkPasswordLength({
+                      password: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "password"
+                      )[0].value,
+                    }) ? (
+                      <CheckIcon size={"1rem"} color={color.valid} />
+                    ) : (
+                      <XIcon size={"1rem"} color={color.invalid} />
+                    )}
+                    6자리 이상
+                  </CheckPasswordItem>
+                  <CheckPasswordItem
+                    isValid={checkConfirmPassword({
+                      password: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "password"
+                      )[0].value,
+                      confirmPassword: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "confirmPassword"
+                      )[0].value,
+                    })}
+                  >
+                    {checkConfirmPassword({
+                      password: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "password"
+                      )[0].value,
+                      confirmPassword: signUpData.filter(
+                        (signUpDatum) => signUpDatum.field === "confirmPassword"
+                      )[0].value,
+                    }) ? (
+                      <CheckIcon size={"1rem"} color={color.valid} />
+                    ) : (
+                      <XIcon size={"1rem"} color={color.invalid} />
+                    )}
+                    비밀번호 일치함
+                  </CheckPasswordItem>
+                </CheckPasswordContainer>
+
+                <SignUpButton signUpData={signUpData} />
+              </>
+            )}
+          </SignInButtonWrapper>
+        </>
+      )}
     </Container>
   );
 }

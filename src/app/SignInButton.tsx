@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
+import { useAppDispatch } from "@/redux/hooks";
+import { setSignIn } from "@features/userSlice";
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -28,6 +30,7 @@ const buttonStyle = {
 };
 
 export default function SignInButton({ signInData }: { signInData: any }) {
+  const dispatch = useAppDispatch();
   const signIn = async () => {
     const email = signInData.filter(
       (signInDatum) => signInDatum.field === "email"
@@ -42,9 +45,8 @@ export default function SignInButton({ signInData }: { signInData: any }) {
         password,
       });
 
-      alert(data?.user?.id);
-
       if (error) throw new Error("로그인 실패");
+      dispatch(setSignIn(data?.user?.id));
     } catch (e) {
       alert("로그인에 실패했습니다.\n잠시 뒤에 다시 시도해주세요");
     }
