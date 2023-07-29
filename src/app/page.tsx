@@ -1,10 +1,77 @@
+/** @jsxImportSource @emotion/react */
+"use client";
+import react from "react";
+import styled from "@emotion/styled";
+
+import { color } from "@/app/styles";
+import SignInPage from "./SignInPage";
+import MainPage from "./MainPage";
+
+import { useAppSelector } from "@/redux/hooks";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100vw;
+  min-height: 100vh;
+  padding: 2rem;
+
+  background: ${color.lightGray.standard};
+`;
+
 export default function Home() {
+  const isSignedIn =
+    useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===
+    "true";
+
+  const [signInData, setSignInData] = react.useState([
+    { label: "이메일", field: "email", value: "", placeholder: "" },
+    {
+      label: "비밀번호",
+      field: "password",
+      value: "",
+      placeholder: "",
+      type: "password",
+    },
+  ]);
+
+  const [signUpData, setSignUpData] = react.useState([
+    {
+      label: "이메일",
+      field: "email",
+      value: "",
+      placeholder: "sample@example.com",
+    },
+    {
+      label: "비밀번호",
+      field: "password",
+      value: "",
+      placeholder: "6자리 이상",
+      type: "password",
+    },
+    {
+      label: "비밀번호 확인",
+      field: "confirmPassword",
+      value: "",
+      placeholder: "비밀번호를 다시 입력주세요",
+      type: "password",
+    },
+  ]);
+
   return (
-    <div>
-      <h1>메인 페이지에는 무엇이 들어가야 할까요?</h1>
-      <h3>✨멋진 소개글✨</h3>
-      <h3>예시 이미지 넣기</h3>
-      <h3>/build 페이지로 라우팅 넣기</h3>
-    </div>
+    <Container>
+      {isSignedIn && <MainPage />}
+      {!isSignedIn && (
+        <SignInPage
+          signInData={signInData}
+          setSignInData={setSignInData}
+          signUpData={signUpData}
+          setSignUpData={setSignUpData}
+        />
+      )}
+    </Container>
   );
 }

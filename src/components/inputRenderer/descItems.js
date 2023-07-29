@@ -31,10 +31,10 @@ const ItemInput = styled.input`
 
   font-size: 1rem;
   background: ${({ isFocused }) =>
-    isFocused ? "transparent" : color.lightGray};
+    isFocused ? "transparent" : color.lightGray.standard};
   padding: 0.2rem 2rem 0.2rem 1rem;
 
-  border: 2px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 0.6rem;
 
   ${({ isTag }) => (isTag ? "" : "justify-content: space-between;")}
@@ -64,7 +64,7 @@ const AddButton = styled.button`
   background: transparent;
   padding: 0.2rem 1rem;
 
-  border: 2px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 0.6rem;
 
   &:hover {

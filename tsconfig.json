@@ -21,7 +21,11 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@libs/*": ["./src/libs/*"],
+      "@redux/*": ["./src/redux/*"],
+      "@features/*": ["./src/features/*"]
     }
   },
   "include": [

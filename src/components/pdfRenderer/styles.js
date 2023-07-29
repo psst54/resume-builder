@@ -1,19 +1,11 @@
 import { StyleSheet } from "@react-pdf/renderer";
-
-const color = {
-  white: "#fff",
-  black: "#000",
-  primary: "#003FC7",
-  gray: "#676A6F",
-  lightGray: "#E2E6EF",
-  darkGray: "#333333",
-};
+import { color } from "@/app/styles";
 
 const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------
 
   page: {
-    paddingTop: 20,
+    paddingTop: 40,
     paddingBottom: 30,
 
     display: "flex",
@@ -24,11 +16,11 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     wordBreak: "keep-all",
 
-    backgroundColor: color.white,
+    backgroundColor: color.white.standard,
   },
   pageWrapper: {
-    paddingLeft: 30,
-    paddingRight: 40,
+    paddingLeft: 50,
+    paddingRight: 50,
   },
   sections: { display: "flex", flexDirection: "column", gap: 20 },
 
@@ -49,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   userName: {
-    color: color.gray,
+    color: color.gray.standard,
     fontSize: 32,
     fontWeight: 300,
   },
@@ -63,7 +55,7 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   contactItemIcon: { width: 8, height: 8 },
-  disableLinkStyle: { color: color.black, textDecoration: "none" },
+  disableLinkStyle: { color: color.primary.standard, textDecoration: "none" },
 
   quote: {
     marginTop: 10,
@@ -89,13 +81,13 @@ const styles = StyleSheet.create({
   },
   pageNumber: {
     fontSize: 9,
-    color: color.gray,
+    color: color.gray.standard,
   },
 
   // common--------------------------------------------------------------------------
 
   locationText: {
-    color: color.primary,
+    color: color.primary.standarad,
     fontSize: 9,
     fontWeight: 200,
     flexShrink: 0,

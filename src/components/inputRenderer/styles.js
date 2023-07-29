@@ -43,7 +43,7 @@ const Page = styled.div`
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 
   width: 100%;
 
@@ -57,7 +57,7 @@ const SectionTitleContainer = styled.div`
   margin-bottom: 0.8rem;
 `;
 const SectionBorder = styled.div`
-  border-bottom: 2px solid ${color.gray};
+  border-bottom: 2px solid ${color.gray.standard};
   flex-grow: 1;
   height: 5px;
 `;
@@ -67,6 +67,7 @@ const SectionTitle = styled.h1`
   color: #000;
 `;
 const HighlightTitle = styled.span`
+  font-size: 1.2rem;
   color: ${({ mainColor }) => mainColor};
 `;
 
@@ -77,18 +78,18 @@ const AddSection = styled.button`
   
   margin-top: 2rem;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 1rem;
 
-  color: ${color.gray};
+  color: ${color.gray.standard};
   font-size: 1rem;
   font-weight: 500;
 
   &:hover {
     cursor: pointer;
-    color: ${color.grayHover};
+    color: ${color.gray.standard.hover};
     font-weight: 900;
-    border: 3px solid ${color.lightGrayHover};
+    border: 2px solid ${color.lightGray.hover};
   }
 }
 `;
@@ -97,18 +98,18 @@ const AddItem = styled.button`
   padding: 0.5rem 1rem;
   background-color: transparent;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 0.8rem;
 
-  color: ${color.gray};
+  color: ${color.gray.standard};
   font-size: 1rem;
   font-weight: 500;
 
   &:hover {
     cursor: pointer;
-    color: ${color.grayHover};
+    color: ${color.gray.standard.hover};
     font-weight: 900;
-    border: 3px solid ${color.lightGrayHover};
+    border: 2px solid ${color.lightGray.hover};
   }
 `;
 
@@ -211,9 +212,9 @@ const Check = styled.img`
 const SectionItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 
-  border: 3px solid ${color.lightGray};
+  border: 2px solid ${color.lightGray.standard};
   border-radius: 0.8rem;
 
   padding: 1rem;
