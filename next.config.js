@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  webpack: (config, options) => {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+      };
+    }
+
     config.module.rules.push({
       test: /\.(woff|woff2|ttf|eot)$/,
       use: {
