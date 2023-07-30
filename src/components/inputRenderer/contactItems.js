@@ -104,14 +104,6 @@ const ContactItems = ({ data, setData, mainColor }) => {
       oldList.splice(dragIndex, 1);
       oldList.splice(hoverIndex, 0, prevData.header.contactItems[dragIndex]);
 
-      console.log({
-        ...prevData,
-        header: {
-          ...prevData.header,
-          contactItems: oldList,
-        },
-      });
-
       return {
         ...prevData,
         header: {

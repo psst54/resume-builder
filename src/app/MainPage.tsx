@@ -49,7 +49,6 @@ export default function Home() {
         .eq("uid", uid)
         .order("modified_at", { ascending: false });
 
-      console.log(data);
       if (error) throw new Error();
 
       return data;
