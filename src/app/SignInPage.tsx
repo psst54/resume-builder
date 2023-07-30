@@ -18,6 +18,22 @@ import {
 const breakpoints = [768];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100vw;
+  height: 100vh;
+
+  padding: 2rem;
+
+  background: ${color.lightGray.standard};
+
+  overflow-y: auto;
+`;
+
 const SignInButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -97,7 +113,7 @@ export default function Home({
   const [isSignIn, setIsSignIn] = react.useState(true);
 
   return (
-    <>
+    <Container>
       <div>
         <h1
           css={{ fontSize: "2rem", marginBottom: "1rem", paddingTop: "10vh" }}
@@ -240,6 +256,6 @@ export default function Home({
           </>
         )}
       </SignInButtonWrapper>
-    </>
+    </Container>
   );
 }

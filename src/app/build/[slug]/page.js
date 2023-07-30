@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import react from "react";
+import { useRouter } from "next/navigation";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
 import { useAppSelector } from "@/redux/hooks";
@@ -16,37 +17,41 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 import axios from "axios";
+import { emptyTemplate } from "@assets/resumeTemplate";
 import * as pdfjs from "pdfjs-dist";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-import {
-  Page,
-  Header,
-  HeaderTtile,
-  Body,
-  InputContainer,
-  ViewerContainer,
-} from "./styles";
+import { Page, Body, InputContainer, ViewerContainer } from "./styles";
+import Header from "@components/Header";
 
 function App({ params }) {
   console.error = () => {}; // todo : fix error
-  const [mainColor, setMainColor] = react.useState("#003FC7");
+  const router = useRouter();
+  const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
 
   const loadData = async () => {
     try {
       const { data, error } = await supabase
         .from("resume")
         .select()
-        .eq("id", params.slug);
+        .match({ id: params.slug, uid });
 
       if (error) throw new Error();
+      if (data.length === 0) throw new Error();
 
       return data[0];
-    } catch (e) {}
+    } catch (e) {
+      alert("이력서를 불러오지 못했습니다.");
+
+      router.push("/");
+    }
   };
 
   const [data, setData] = react.useState({});
   const [resumeId, setResumeId] = react.useState(null);
+  const [resumeTitle, setResumeTitle] = react.useState("");
+  const [mainColor, setMainColor] = react.useState("#003FC7");
+
   const [pdfComponent, setPdfComponent] = react.useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
@@ -125,8 +130,9 @@ function App({ params }) {
         .update([
           {
             content: data,
-            title: "updated",
+            title: resumeTitle,
             modified_at: new Date(),
+            main_color: mainColor,
           },
         ])
         .eq("id", resumeId);
@@ -142,6 +148,8 @@ function App({ params }) {
     loadData().then((res) => {
       setData(res.content);
       setResumeId(res.id);
+      setResumeTitle(res.title);
+      setMainColor(res.main_color);
     });
   }, []);
 
@@ -165,9 +173,7 @@ function App({ params }) {
 
   return (
     <Page>
-      <Header>
-        <HeaderTtile>Resume Builder</HeaderTtile>
-      </Header>
+      <Header />
 
       <Body>
         <InputContainer>
@@ -182,6 +188,8 @@ function App({ params }) {
             setData={setData}
             mainColor={mainColor}
             setMainColor={setMainColor}
+            resumeTitle={resumeTitle}
+            setResumeTitle={setResumeTitle}
           />
         </InputContainer>
 

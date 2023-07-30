@@ -23,6 +23,7 @@ import {
 import Selector from "../customSelector";
 import Input from "./input";
 import ContactItems from "./contactItems";
+import TitleInput from "./titleInput";
 import ColorSelector from "./colorSelector";
 import DescItemsDragWrapper from "./descItemsDragWrapper";
 
@@ -50,7 +51,14 @@ const emptyContentTemplate = {
   position: "",
 };
 
-const InputPage = ({ data, setData, mainColor, setMainColor }) => {
+const InputPage = ({
+  data,
+  setData,
+  mainColor,
+  setMainColor,
+  resumeTitle,
+  setResumeTitle,
+}) => {
   const setHeader = ({ field, value }) => {
     const newData = { ...data };
     newData.header[field] = value;
@@ -253,6 +261,14 @@ const InputPage = ({ data, setData, mainColor, setMainColor }) => {
 
   return (
     <Page>
+      <SectionWrapper>
+        <TitleInput
+          mainColor={mainColor}
+          resumeTitle={resumeTitle}
+          setResumeTitle={setResumeTitle}
+        />
+      </SectionWrapper>
+
       <SectionWrapper>
         <ColorSelector mainColor={mainColor} setMainColor={setMainColor} />
       </SectionWrapper>
