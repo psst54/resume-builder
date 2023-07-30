@@ -259,6 +259,45 @@ const InputPage = ({
     });
   };
 
+  const editDescLink = ({ idxObj, value }) => {
+    setData({
+      ...data,
+      body: data.body.map((oldDatum, oldDatumIdx) => {
+        return oldDatumIdx === idxObj.bodyItemIdx
+          ? {
+              ...oldDatum,
+              content: oldDatum.content.map(
+                (oldContentItem, oldContentItemIdx) => {
+                  return oldContentItemIdx === idxObj.contentItemIdx
+                    ? {
+                        ...oldContentItem,
+                        descItems: oldContentItem.descItems.map(
+                          (oldDescItem, oldDescItemIdx) => {
+                            return oldDescItemIdx === idxObj.descItemIdx
+                              ? {
+                                  ...oldDescItem,
+                                  title:
+                                    idxObj.field === "title"
+                                      ? value
+                                      : oldDescItem.title,
+                                  url:
+                                    idxObj.field === "url"
+                                      ? value
+                                      : oldDescItem.url,
+                                }
+                              : oldDescItem;
+                          }
+                        ),
+                      }
+                    : oldContentItem;
+                }
+              ),
+            }
+          : oldDatum;
+      }),
+    });
+  };
+
   return (
     <Page>
       <SectionWrapper>
@@ -562,6 +601,7 @@ const InputPage = ({
                       addDescItem={addDescItem}
                       deleteDescItem={deleteDescItem}
                       editDescItem={editDescItem}
+                      editDescLink={editDescLink}
                     />
 
                     <AddItem

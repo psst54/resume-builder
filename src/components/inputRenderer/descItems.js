@@ -2,6 +2,7 @@ import react from "react";
 
 import styled from "@emotion/styled";
 import { color } from "@/app/styles";
+import Input from "./input";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -78,11 +79,15 @@ const DescItems = ({
   addDescItem,
   deleteDescItem,
   editDescItem,
+  editDescLink,
 }) => {
   const type = descItem.type;
   const isTag = type === "tag";
 
   const [editingIdx, setEditingIdx] = react.useState(undefined);
+
+  if (descItem.type === "link" || descItem.type === "tag")
+    console.log(descItem);
 
   return (
     <Wrapper isTag={isTag}>
@@ -137,7 +142,38 @@ const DescItems = ({
         </>
       )}
 
-      {descItem.type === "link" && <div>ewfwe</div>}
+      {descItem.type === "link" && (
+        <>
+          <Input
+            type="link"
+            value={descItem.title}
+            placeholder="이력서에 표시될 내용을 입력해주세요"
+            setValue={(event) => {
+              editDescLink({
+                idxObj: {
+                  ...idxObj,
+                  field: "title",
+                },
+                value: event.target.value,
+              });
+            }}
+          />
+          <Input
+            type="link"
+            value={descItem.url}
+            placeholder="페이지의 URL을 입력해주세요"
+            setValue={(event) => {
+              editDescLink({
+                idxObj: {
+                  ...idxObj,
+                  field: "url",
+                },
+                value: event.target.value,
+              });
+            }}
+          />
+        </>
+      )}
     </Wrapper>
   );
 };
