@@ -1,6 +1,5 @@
 import react from "react";
 import styled from "@emotion/styled";
-import { useDrag, useDrop } from "react-dnd";
 import { InputContainer, InputTitle, LargeInput } from "./styles";
 import Selector from "../customSelector";
 
