@@ -30,6 +30,7 @@ const DescItemsDragWrapper = ({
   addDescItem,
   deleteDescItem,
   editDescItem,
+  editDescLink,
 }) => {
   return (
     <DndProvider backend={HTML5Backend}>
@@ -49,6 +50,7 @@ const DescItemsDragWrapper = ({
               addDescItem={addDescItem}
               deleteDescItem={deleteDescItem}
               editDescItem={editDescItem}
+              editDescLink={editDescLink}
             />
           </InputContainer>
         );
