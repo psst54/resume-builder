@@ -79,10 +79,10 @@ export default function Home() {
   };
 
   react.useEffect(() => {
-    getResumes().then((res) => setResumenData(res));
+    getResumes().then((res: any) => setResumenData(res));
   }, []);
 
-  const timeForToday = (value) => {
+  const timeForToday = (value: Date) => {
     const today = new Date();
     const timeValue = new Date(value);
 
