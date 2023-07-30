@@ -32,7 +32,6 @@ function App() {
   console.error = () => {}; // todo : fix error
   const [mainColor, setMainColor] = react.useState("#003FC7");
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
-  const resumeId = "123";
 
   const loadData = () => {
     try {
@@ -131,8 +130,16 @@ function App() {
     try {
       const { data: upsertData, error: upsertError } = await supabase
         .from("resume")
-        .upsert([{ id: resumeId, uid: uid, content: data, title: "" }]);
+        .update([
+          {
+            content: data,
+            title: "test",
+            modified_at: new Date(),
+          },
+        ])
+        .eq("id", 123);
 
+      console.log(upsertError);
       if (upsertError) throw new Error();
       alert("저장되었습니다.");
     } catch (e) {
