@@ -36,10 +36,10 @@ export default function SignInButton({ signInData }: { signInData: any }) {
   const dispatch = useAppDispatch();
   const signIn = async () => {
     const email = signInData.filter(
-      (signInDatum) => signInDatum.field === "email"
+      (signInDatum: any) => signInDatum.field === "email"
     )[0].value;
     const password = signInData.filter(
-      (signInDatum) => signInDatum.field === "password"
+      (signInDatum: any) => signInDatum.field === "password"
     )[0].value;
 
     try {
