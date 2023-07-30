@@ -2,7 +2,7 @@ import react from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import Input from "./input";
+import DraggableInput from "./draggableInput";
 
 const contactTypeData = [
   {
@@ -104,10 +104,18 @@ const ContactItems = ({ data, setData, mainColor }) => {
       oldList.splice(dragIndex, 1);
       oldList.splice(hoverIndex, 0, prevData.header.contactItems[dragIndex]);
 
-      return {
-        ...data,
+      console.log({
+        ...prevData,
         header: {
-          ...data.header,
+          ...prevData.header,
+          contactItems: oldList,
+        },
+      });
+
+      return {
+        ...prevData,
+        header: {
+          ...prevData.header,
           contactItems: oldList,
         },
       };
@@ -125,7 +133,7 @@ const ContactItems = ({ data, setData, mainColor }) => {
           const placeholder = contactTypeDatum.placeholder;
 
           return (
-            <Input
+            <DraggableInput
               type="select"
               value={contactItem.text}
               placeholder={placeholder}
