@@ -11,7 +11,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-import { emptyTemplate } from "@assets/resumeTemplate";
+import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
+import Header from "@components/Header";
 
 const resumeCard = {
   display: "flex",
@@ -57,8 +58,8 @@ export default function Home() {
       const { data, error } = await supabase
         .from("resume")
         .insert({
-          title: "새 이력서",
-          content: emptyTemplate,
+          title: useTemplate ? "템플릿으로 시작하기" : "빈 이력서",
+          content: useTemplate ? basicTemplate : emptyTemplate,
           uid: uid,
           modified_at: new Date(),
           main_color: "#003FC7",
@@ -104,70 +105,89 @@ export default function Home() {
   };
 
   return (
-    <div
-      css={{
-        display: "grid",
-        gap: "1rem",
-        width: "100%",
-        gridTemplateColumns: "repeat(auto-fit, minmax(15rem, auto))",
-      }}
-    >
-      {resumeData.map((resumeDatum, resumeDatumIdx) => (
-        <Link
-          key={resumeDatumIdx}
-          href={`/build/${resumeDatum?.id}`}
-          css={{ width: "100%", textDecoration: "none" }}
+    <div>
+      <Header />
+
+      <div
+        css={{
+          height: "calc(100vh - 4rem)",
+          background: color.lightGray.standard,
+        }}
+      >
+        <div
+          css={{
+            display: "grid",
+            gap: "1rem",
+            width: "100%",
+            gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
+
+            padding: "2rem",
+          }}
         >
-          <button css={resumeCard}>
-            <h2 css={{ fontSize: "1.2rem", wordBreak: "keep-all" }}>
-              {resumeDatum?.title}
+          {resumeData.map((resumeDatum, resumeDatumIdx) => (
+            <Link
+              key={resumeDatumIdx}
+              href={`/build/${resumeDatum?.id}`}
+              css={{ width: "100%", textDecoration: "none" }}
+            >
+              <button css={resumeCard}>
+                <h2
+                  css={{
+                    fontSize: "1.2rem",
+                    wordBreak: "keep-all",
+                    textAlign: "left",
+                  }}
+                >
+                  {resumeDatum?.title}
+                </h2>
+                <p css={{ color: color.gray.standard }}>
+                  마지막 수정 {timeForToday(resumeDatum?.modified_at)}
+                </p>
+              </button>
+            </Link>
+          ))}
+          <button
+            css={[resumeCard, secondaryCard]}
+            onClick={async () => {
+              const id = await makeNewResume({ useTemplate: false });
+
+              if (id) {
+                router.push(`/build/${id}`);
+              }
+            }}
+          >
+            <h2
+              css={{
+                margin: "auto",
+                fontSize: "1.2rem",
+                wordBreak: "keep-all",
+              }}
+            >
+              처음부터 시작하기
             </h2>
-            <p css={{ color: color.gray.standard }}>
-              마지막 수정 {timeForToday(resumeDatum?.modified_at)}
-            </p>
           </button>
-        </Link>
-      ))}
-      <button
-        css={[resumeCard, secondaryCard]}
-        onClick={async () => {
-          const id = await makeNewResume({ useTemplate: false });
+          <button
+            css={[resumeCard, secondaryCard]}
+            onClick={async () => {
+              const id = await makeNewResume({ useTemplate: true });
 
-          if (id) {
-            router.push(`/build/${id}`);
-          }
-        }}
-      >
-        <h2
-          css={{
-            margin: "auto",
-            fontSize: "1.2rem",
-            wordBreak: "keep-all",
-          }}
-        >
-          처음부터 시작하기
-        </h2>
-      </button>
-      <button
-        css={[resumeCard, secondaryCard]}
-        onClick={async () => {
-          const id = await makeNewResume({ useTemplate: true });
-
-          if (id) {
-            router.push(`/build/${id}`);
-          }
-        }}
-      >
-        <h2
-          css={{
-            margin: "auto",
-            fontSize: "1.2rem",
-            wordBreak: "keep-all",
-          }}
-        >
-          템플릿으로 시작하기
-        </h2>
-      </button>
+              if (id) {
+                router.push(`/build/${id}`);
+              }
+            }}
+          >
+            <h2
+              css={{
+                margin: "auto",
+                fontSize: "1.2rem",
+                wordBreak: "keep-all",
+              }}
+            >
+              템플릿으로 시작하기
+            </h2>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

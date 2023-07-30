@@ -8,22 +8,6 @@ const Page = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.div`
-  height: 4rem;
-
-  background-color: #fff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-bottom: 2px solid ${color.lightGray.standard};
-
-  z-index: 11;
-`;
-
-const HeaderTtile = styled.h1``;
-
 const Body = styled.div`
   flex-grow: 1;
   display: flex;
@@ -88,4 +72,4 @@ const ViewerContainer = styled.div`
   }
 `;
 
-export { Page, Header, HeaderTtile, Body, InputContainer, ViewerContainer };
+export { Page, Body, InputContainer, ViewerContainer };

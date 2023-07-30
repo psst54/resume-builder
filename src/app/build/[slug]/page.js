@@ -21,14 +21,8 @@ import { emptyTemplate } from "@assets/resumeTemplate";
 import * as pdfjs from "pdfjs-dist";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-import {
-  Page,
-  Header,
-  HeaderTtile,
-  Body,
-  InputContainer,
-  ViewerContainer,
-} from "./styles";
+import { Page, Body, InputContainer, ViewerContainer } from "./styles";
+import Header from "@components/Header";
 
 function App({ params }) {
   console.error = () => {}; // todo : fix error
@@ -179,9 +173,7 @@ function App({ params }) {
 
   return (
     <Page>
-      <Header>
-        <HeaderTtile>Resume Builder</HeaderTtile>
-      </Header>
+      <Header />
 
       <Body>
         <InputContainer>

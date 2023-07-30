@@ -17,6 +17,7 @@ const color = {
   inputBorder: "#ccc",
 
   white: { standard: "#fff", hover: "#f3f3f3", active: "#eee" },
+  black: { standard: "#000", hover: "#000", active: "#000" },
 
   valid: "#23DC3D",
   invalid: "red",

@@ -1,29 +1,11 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import react from "react";
-import styled from "@emotion/styled";
 
-import { color } from "@/app/styles";
 import SignInPage from "./SignInPage";
 import MainPage from "./MainPage";
 
 import { useAppSelector } from "@/redux/hooks";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-
-  width: 100vw;
-  height: 100vh;
-
-  padding: 2rem;
-
-  background: ${color.lightGray.standard};
-
-  overflow-y: auto;
-`;
 
 export default function Home() {
   const isSignedIn =
@@ -65,7 +47,7 @@ export default function Home() {
   ]);
 
   return (
-    <Container>
+    <>
       {isSignedIn && <MainPage />}
       {!isSignedIn && (
         <SignInPage
@@ -75,6 +57,6 @@ export default function Home() {
           setSignUpData={setSignUpData}
         />
       )}
-    </Container>
+    </>
   );
 }
