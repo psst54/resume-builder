@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import react from "react";
 import { HexColorPicker } from "react-colorful";
 import styled from "@emotion/styled";
