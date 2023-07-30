@@ -4,7 +4,10 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  supabaseUrl ? supabaseUrl : "",
+  supabaseKey ? supabaseKey : ""
+);
 
 import { color } from "@/app/styles";
 import {
@@ -35,13 +38,13 @@ const buttonStyle = {
 export default function SignUpButton({ signUpData }: { signUpData: any }) {
   const signUp = async () => {
     const email = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "email"
+      (signUpDatum: any) => signUpDatum.field === "email"
     )[0].value;
     const password = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "password"
+      (signUpDatum: any) => signUpDatum.field === "password"
     )[0].value;
     const confirmPassword = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "confirmPassword"
+      (signUpDatum: any) => signUpDatum.field === "confirmPassword"
     )[0].value;
 
     if (!checkEmail({ email })) {

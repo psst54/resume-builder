@@ -9,8 +9,12 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  supabaseUrl ? supabaseUrl : "",
+  supabaseKey ? supabaseKey : ""
+);
 
+import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
 
@@ -33,7 +37,7 @@ const secondaryCard = {
 };
 
 export default function Home() {
-  const [resumeData, setResumenData] = react.useState([]);
+  const [resumeData, setResumenData] = react.useState<Resume[] | null>(null);
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
   const router = useRouter();
 
@@ -45,11 +49,13 @@ export default function Home() {
         .eq("uid", uid)
         .order("modified_at", { ascending: false });
 
+      console.log(data);
       if (error) throw new Error();
 
       return data;
     } catch (err) {
       alert("데이터를 불러오지 못했습니다");
+      return null;
     }
   };
 
@@ -76,10 +82,12 @@ export default function Home() {
   };
 
   react.useEffect(() => {
-    getResumes().then((res) => setResumenData(res));
+    getResumes().then((res: Resume[] | null) => {
+      if (res) setResumenData(res);
+    });
   }, []);
 
-  const timeForToday = (value) => {
+  const timeForToday = (value: Date) => {
     const today = new Date();
     const timeValue = new Date(value);
 
@@ -124,10 +132,10 @@ export default function Home() {
             padding: "2rem",
           }}
         >
-          {resumeData.map((resumeDatum, resumeDatumIdx) => (
+          {resumeData?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
             <Link
               key={resumeDatumIdx}
-              href={`/build/${resumeDatum?.id}`}
+              href={`/build?resumeId=${resumeDatum?.id}`}
               css={{ width: "100%", textDecoration: "none" }}
             >
               <button css={resumeCard}>
@@ -152,7 +160,7 @@ export default function Home() {
               const id = await makeNewResume({ useTemplate: false });
 
               if (id) {
-                router.push(`/build/${id}`);
+                router.push(`/build?resumeId=${id}`);
               }
             }}
           >
@@ -172,7 +180,7 @@ export default function Home() {
               const id = await makeNewResume({ useTemplate: true });
 
               if (id) {
-                router.push(`/build/${id}`);
+                router.push(`/build?resumeId=${id}`);
               }
             }}
           >

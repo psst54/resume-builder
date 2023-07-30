@@ -6,7 +6,10 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(
+  supabaseUrl ? supabaseUrl : "",
+  supabaseKey ? supabaseKey : ""
+);
 
 import { color } from "@/app/styles";
 
@@ -33,10 +36,10 @@ export default function SignInButton({ signInData }: { signInData: any }) {
   const dispatch = useAppDispatch();
   const signIn = async () => {
     const email = signInData.filter(
-      (signInDatum) => signInDatum.field === "email"
+      (signInDatum: any) => signInDatum.field === "email"
     )[0].value;
     const password = signInData.filter(
-      (signInDatum) => signInDatum.field === "password"
+      (signInDatum: any) => signInDatum.field === "password"
     )[0].value;
 
     try {

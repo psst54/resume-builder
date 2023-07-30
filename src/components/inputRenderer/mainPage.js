@@ -276,7 +276,8 @@ const InputPage = ({
       <SectionWrapper>
         <SectionTitleContainer>
           <SectionTitle>
-            <HighlightTitle mainColor={mainColor}>기</HighlightTitle>본 정보
+            <span css={{ fontSize: "1.2rem", color: mainColor }}>기</span>본
+            정보
           </SectionTitle>
           <SectionBorder />
         </SectionTitleContainer>
@@ -337,9 +338,9 @@ const InputPage = ({
           <SectionWrapper key={bodyItemIdx}>
             <SectionTitleContainer>
               <SectionTitle>
-                <HighlightTitle mainColor={mainColor}>
+                <span css={{ fontSize: "1.2rem", color: mainColor }}>
                   {bodyItemIdx + 1}
-                </HighlightTitle>
+                </span>
                 번째 섹션
               </SectionTitle>
               <SectionBorder />

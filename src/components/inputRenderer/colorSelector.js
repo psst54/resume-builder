@@ -5,7 +5,6 @@ import styled from "@emotion/styled";
 import {
   SectionTitleContainer,
   SectionTitle,
-  HighlightTitle,
   SectionBorder,
   InputContainer,
   InputTitle,
@@ -52,11 +51,13 @@ const ColorSelector = ({ mainColor, setMainColor }) => {
 
   const [isOpen, setIsOpen] = react.useState(false);
 
+  // return <div>wefwe</div>;
+
   return (
     <>
       <SectionTitleContainer>
         <SectionTitle>
-          <HighlightTitle mainColor={mainColor}>색</HighlightTitle>상 선택
+          <span css={{ fontSize: "1.2rem", color: mainColor }}>색</span>상 선택
         </SectionTitle>
         <SectionBorder />
       </SectionTitleContainer>

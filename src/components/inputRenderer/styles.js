@@ -66,10 +66,6 @@ const SectionTitle = styled.h1`
   font-weight: 800;
   color: #000;
 `;
-const HighlightTitle = styled.span`
-  font-size: 1.2rem;
-  color: ${({ mainColor }) => mainColor};
-`;
 
 const AddSection = styled.button`
   width: 100%;
@@ -226,7 +222,6 @@ export {
   SectionTitleContainer,
   SectionBorder,
   SectionTitle,
-  HighlightTitle,
   AddSection,
   AddItem,
   InputContainer,

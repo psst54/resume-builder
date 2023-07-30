@@ -25,7 +25,8 @@
       "@assets/*": ["./src/assets/*"],
       "@libs/*": ["./src/libs/*"],
       "@redux/*": ["./src/redux/*"],
-      "@features/*": ["./src/features/*"]
+      "@features/*": ["./src/features/*"],
+      "@type/*": ["./src/types/*"]
     }
   },
   "include": [

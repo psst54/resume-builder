@@ -1,44 +1,13 @@
-import react from "react";
-import { HexColorPicker } from "react-colorful";
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
 
 import {
   SectionTitleContainer,
   SectionTitle,
-  HighlightTitle,
   SectionBorder,
   InputContainer,
   InputTitle,
   LargeInput,
 } from "./styles";
-
-const Warning = styled.p`
-  color: red;
-  font-size: 0.8rem;
-`;
-const ColorPreview = styled.div`
-  width: 2.4rem;
-  height: 2.4rem;
-
-  border: 1px solid #ccc;
-  border-radius: 0.6rem;
-
-  background: ${({ mainColor }) => mainColor};
-
-  cursor: pointer;
-`;
-const Backdrop = styled.div`
-  position: fixed;
-
-  background: #3333;
-  width: 100vw;
-  height: 100vh;
-
-  top: 0;
-  left: 0;
-
-  z-index: 9;
-`;
 
 const TitleInput = ({
   mainColor,
@@ -53,7 +22,8 @@ const TitleInput = ({
     <>
       <SectionTitleContainer>
         <SectionTitle>
-          <HighlightTitle mainColor={mainColor}>이</HighlightTitle>력서 제목
+          <span css={{ fontSize: "1.2rem", color: mainColor }}>이</span>
+          력서 제목
         </SectionTitle>
         <SectionBorder />
       </SectionTitleContainer>

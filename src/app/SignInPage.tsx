@@ -89,25 +89,15 @@ const CheckPasswordContainer = styled.div`
   gap: 0.2rem;
 `;
 
-const CheckPasswordItem = styled.div`
-  display: flex;
-  gap: 0.6rem;
-  align-items: center;
-
-  margin-left: 1rem;
-
-  color: ${({ isValid }) => (isValid ? color.valid : color.invalid)};
-`;
-
 export default function Home({
   signInData,
   setSignInData,
   signUpData,
   setSignUpData,
 }: {
-  signInData: {};
+  signInData: any[];
   setSignInData: Function;
-  signUpData: {};
+  signUpData: any[];
   setSignUpData: Function;
 }) {
   const [isSignIn, setIsSignIn] = react.useState(true);
@@ -161,7 +151,7 @@ export default function Home({
 
         {isSignIn && (
           <>
-            {signInData.map((signInDatum, signInDatumIdx) => (
+            {signInData.map((signInDatum: any, signInDatumIdx: number) => (
               <div css={InputContainer} key={signInDatumIdx}>
                 {signInDatum.label}
                 <input
@@ -187,14 +177,14 @@ export default function Home({
 
         {!isSignIn && (
           <>
-            {signUpData.map((signUpDatum, signUpDatumIdx) => (
+            {signUpData.map((signUpDatum: any, signUpDatumIdx: number) => (
               <div css={InputContainer} key={signUpDatumIdx}>
                 {signUpDatum.label}
                 <input
                   css={Input}
                   value={signUpDatum.value}
                   onChange={(event) => {
-                    const newSignUpData = signUpData.map((oldDatum) =>
+                    const newSignUpData = signUpData.map((oldDatum: any) =>
                       oldDatum.field === signUpDatum.field
                         ? { ...oldDatum, value: event?.target?.value }
                         : oldDatum
@@ -208,16 +198,26 @@ export default function Home({
             ))}
 
             <CheckPasswordContainer>
-              <CheckPasswordItem
-                isValid={checkPasswordLength({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                })}
+              <div
+                css={{
+                  display: "flex",
+                  gap: "0.6rem",
+                  alignItems: "center",
+
+                  marginLeft: "1rem",
+
+                  color: checkPasswordLength({
+                    password: signUpData.filter(
+                      (signUpDatum: any) => signUpDatum.field === "password"
+                    )[0].value,
+                  })
+                    ? color.valid
+                    : color.invalid,
+                }}
               >
                 {checkPasswordLength({
                   password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
+                    (signUpDatum: any) => signUpDatum.field === "password"
                   )[0].value,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
@@ -225,23 +225,35 @@ export default function Home({
                   <XIcon size={"1rem"} color={color.invalid} />
                 )}
                 6자리 이상
-              </CheckPasswordItem>
-              <CheckPasswordItem
-                isValid={checkConfirmPassword({
-                  password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
-                  )[0].value,
-                  confirmPassword: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "confirmPassword"
-                  )[0].value,
-                })}
+              </div>
+              <div
+                css={{
+                  display: "flex",
+                  gap: "0.6rem",
+                  alignItems: "center",
+
+                  marginLeft: "1rem",
+
+                  color: checkConfirmPassword({
+                    password: signUpData.filter(
+                      (signUpDatum: any) => signUpDatum.field === "password"
+                    )[0].value,
+                    confirmPassword: signUpData.filter(
+                      (signUpDatum: any) =>
+                        signUpDatum.field === "confirmPassword"
+                    )[0].value,
+                  })
+                    ? color.valid
+                    : color.invalid,
+                }}
               >
                 {checkConfirmPassword({
                   password: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "password"
+                    (signUpDatum: any) => signUpDatum.field === "password"
                   )[0].value,
                   confirmPassword: signUpData.filter(
-                    (signUpDatum) => signUpDatum.field === "confirmPassword"
+                    (signUpDatum: any) =>
+                      signUpDatum.field === "confirmPassword"
                   )[0].value,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
@@ -249,7 +261,7 @@ export default function Home({
                   <XIcon size={"1rem"} color={color.invalid} />
                 )}
                 비밀번호 일치함
-              </CheckPasswordItem>
+              </div>
             </CheckPasswordContainer>
 
             <SignUpButton signUpData={signUpData} />
