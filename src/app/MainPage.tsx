@@ -14,6 +14,7 @@ const supabase = createClient(
   supabaseKey ? supabaseKey : ""
 );
 
+import { Resume } from "@types/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
 
@@ -36,7 +37,7 @@ const secondaryCard = {
 };
 
 export default function Home() {
-  const [resumeData, setResumenData] = react.useState([]);
+  const [resumeData, setResumenData] = react.useState<Resume[] | null>(null);
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
   const router = useRouter();
 
@@ -48,11 +49,13 @@ export default function Home() {
         .eq("uid", uid)
         .order("modified_at", { ascending: false });
 
+      console.log(data);
       if (error) throw new Error();
 
       return data;
     } catch (err) {
       alert("데이터를 불러오지 못했습니다");
+      return null;
     }
   };
 
@@ -79,7 +82,9 @@ export default function Home() {
   };
 
   react.useEffect(() => {
-    getResumes().then((res: any) => setResumenData(res));
+    getResumes().then((res: Resume[] | null) => {
+      if (res) setResumenData(res);
+    });
   }, []);
 
   const timeForToday = (value: Date) => {
@@ -127,7 +132,7 @@ export default function Home() {
             padding: "2rem",
           }}
         >
-          {resumeData.map((resumeDatum, resumeDatumIdx) => (
+          {resumeData?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
             <Link
               key={resumeDatumIdx}
               href={`/build/${resumeDatum?.id}`}
