@@ -30,7 +30,6 @@ import {
 
 function App({ params }) {
   console.error = () => {}; // todo : fix error
-  const [mainColor, setMainColor] = react.useState("#003FC7");
 
   const loadData = async () => {
     try {
@@ -47,6 +46,9 @@ function App({ params }) {
 
   const [data, setData] = react.useState({});
   const [resumeId, setResumeId] = react.useState(null);
+  const [resumeTitle, setResumeTitle] = react.useState("");
+  const [mainColor, setMainColor] = react.useState("#003FC7");
+
   const [pdfComponent, setPdfComponent] = react.useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
@@ -125,8 +127,9 @@ function App({ params }) {
         .update([
           {
             content: data,
-            title: "updated",
+            title: resumeTitle,
             modified_at: new Date(),
+            main_color: mainColor,
           },
         ])
         .eq("id", resumeId);
@@ -142,6 +145,8 @@ function App({ params }) {
     loadData().then((res) => {
       setData(res.content);
       setResumeId(res.id);
+      setResumeTitle(res.title);
+      setMainColor(res.main_color);
     });
   }, []);
 
@@ -182,6 +187,8 @@ function App({ params }) {
             setData={setData}
             mainColor={mainColor}
             setMainColor={setMainColor}
+            resumeTitle={resumeTitle}
+            setResumeTitle={setResumeTitle}
           />
         </InputContainer>
 

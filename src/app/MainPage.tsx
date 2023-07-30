@@ -61,6 +61,7 @@ export default function Home() {
           content: emptyTemplate,
           uid: uid,
           modified_at: new Date(),
+          main_color: "#003FC7",
         })
         .select();
 
@@ -113,10 +114,11 @@ export default function Home() {
     >
       {resumeData.map((resumeDatum, resumeDatumIdx) => (
         <Link
+          key={resumeDatumIdx}
           href={`/build/${resumeDatum?.id}`}
           css={{ width: "100%", textDecoration: "none" }}
         >
-          <button css={resumeCard} key={resumeDatumIdx}>
+          <button css={resumeCard}>
             <h2 css={{ fontSize: "1.2rem", wordBreak: "keep-all" }}>
               {resumeDatum?.title}
             </h2>

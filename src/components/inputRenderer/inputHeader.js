@@ -39,7 +39,7 @@ const InputHeader = ({ url, fileName, saveResume }) => {
           saveResume();
         }}
       >
-        (미구현) 저장하기
+        저장하기
       </Button>
       <A style={{ padding: "1rem" }} href={url} download={fileName}>
         pdf로 다운로드
