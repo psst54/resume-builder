@@ -38,13 +38,13 @@ const buttonStyle = {
 export default function SignUpButton({ signUpData }: { signUpData: any }) {
   const signUp = async () => {
     const email = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "email"
+      (signUpDatum: any) => signUpDatum.field === "email"
     )[0].value;
     const password = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "password"
+      (signUpDatum: any) => signUpDatum.field === "password"
     )[0].value;
     const confirmPassword = signUpData.filter(
-      (signUpDatum) => signUpDatum.field === "confirmPassword"
+      (signUpDatum: any) => signUpDatum.field === "confirmPassword"
     )[0].value;
 
     if (!checkEmail({ email })) {
