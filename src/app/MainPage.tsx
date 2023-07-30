@@ -9,6 +9,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+import { emptyTemplate } from "@assets/resumeTemplate";
+
 const resumeCard = {
   flexShrink: 0,
   display: "flex",
@@ -46,6 +48,28 @@ export default function Home() {
       return data;
     } catch (err) {
       alert("데이터를 불러오지 못했습니다");
+    }
+  };
+
+  const makeNewResume = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("resume")
+        .insert({
+          title: "새 이력서",
+          content: emptyTemplate,
+          uid: uid,
+          modified_at: new Date(),
+        })
+        .select();
+
+      console.log(data);
+
+      if (error) throw new Error();
+
+      return data;
+    } catch (err) {
+      alert("새로 이력서를 만들지 못했습니다");
     }
   };
 
@@ -97,7 +121,12 @@ export default function Home() {
           </p>
         </button>
       ))}
-      <button css={[resumeCard, secondaryCard]}>
+      <button
+        css={[resumeCard, secondaryCard]}
+        onClick={() => {
+          makeNewResume();
+        }}
+      >
         <h2
           css={{
             margin: "auto",
@@ -105,7 +134,7 @@ export default function Home() {
             wordBreak: "keep-all",
           }}
         >
-          새로 만들기
+          처음부터 시작하기
         </h2>
       </button>
       <button css={[resumeCard, secondaryCard]}>
