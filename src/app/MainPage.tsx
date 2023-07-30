@@ -14,7 +14,7 @@ const supabase = createClient(
   supabaseKey ? supabaseKey : ""
 );
 
-import { Resume } from "@types/resume";
+import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
 
