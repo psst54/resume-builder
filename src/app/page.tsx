@@ -16,10 +16,13 @@ const Container = styled.div`
   gap: 1rem;
 
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+
   padding: 2rem;
 
   background: ${color.lightGray.standard};
+
+  overflow-y: auto;
 `;
 
 export default function Home() {

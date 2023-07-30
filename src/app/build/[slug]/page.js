@@ -1,12 +1,19 @@
+/** @jsxImportSource @emotion/react */
 "use client";
 import react from "react";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
+import { useAppSelector } from "@/redux/hooks";
 
 import InputPage from "@components/inputRenderer/mainPage";
 import InputHeader from "@components/inputRenderer/inputHeader";
 import PDFPage from "@components/pdfRenderer/mainPage";
 import PDFPreViewer from "@components/pdfPreViewer";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
@@ -21,32 +28,25 @@ import {
   ViewerContainer,
 } from "./styles";
 
-function App() {
+function App({ params }) {
   console.error = () => {}; // todo : fix error
   const [mainColor, setMainColor] = react.useState("#003FC7");
 
-  const loadData = () => {
+  const loadData = async () => {
     try {
-      const tmpData = require("/tmpData.json");
+      const { data, error } = await supabase
+        .from("resume")
+        .select()
+        .eq("id", params.slug);
 
-      if (tmpData) return tmpData;
+      if (error) throw new Error();
 
-      throw new Error();
-    } catch (e) {
-      return {
-        header: {},
-        body: [
-          {
-            title: "Section Title",
-            type: "text",
-            desc: "작성을 시작해보세요.",
-          },
-        ],
-      };
-    }
+      return data[0];
+    } catch (e) {}
   };
 
-  const [data, setData] = react.useState(loadData());
+  const [data, setData] = react.useState({});
+  const [resumeId, setResumeId] = react.useState(null);
   const [pdfComponent, setPdfComponent] = react.useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
@@ -118,6 +118,33 @@ function App() {
     }
   };
 
+  const saveResume = async () => {
+    try {
+      const { data: upsertData, error: upsertError } = await supabase
+        .from("resume")
+        .update([
+          {
+            content: data,
+            title: "updated",
+            modified_at: new Date(),
+          },
+        ])
+        .eq("id", resumeId);
+
+      if (upsertError) throw new Error();
+      alert("저장되었습니다.");
+    } catch (e) {
+      alert("저장에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
+    }
+  };
+
+  react.useEffect(() => {
+    loadData().then((res) => {
+      setData(res.content);
+      setResumeId(res.id);
+    });
+  }, []);
+
   react.useEffect(() => {
     setPdfComponent(<PDFPage data={data} mainColor={mainColor} />);
   }, [data, mainColor]);
@@ -147,6 +174,7 @@ function App() {
           <InputHeader
             url={instance.url}
             fileName={`${data?.header?.title}.pdf`}
+            saveResume={saveResume}
           />
 
           <InputPage

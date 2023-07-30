@@ -31,10 +31,16 @@ const A = styled.a`
   text-decoration: none;
 `;
 
-const InputHeader = ({ url, fileName }) => {
+const InputHeader = ({ url, fileName, saveResume }) => {
   return (
     <Container>
-      <Button>(미구현) 저장하기</Button>
+      <Button
+        onClick={() => {
+          saveResume();
+        }}
+      >
+        (미구현) 저장하기
+      </Button>
       <A style={{ padding: "1rem" }} href={url} download={fileName}>
         pdf로 다운로드
       </A>
