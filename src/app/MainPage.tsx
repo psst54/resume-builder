@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import react from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { color } from "@/app/styles";
 import { useAppSelector } from "@/redux/hooks";
 import { createClient } from "@supabase/supabase-js";
@@ -12,11 +14,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 import { emptyTemplate } from "@assets/resumeTemplate";
 
 const resumeCard = {
-  flexShrink: 0,
   display: "flex",
   flexDirection: "column" as "column",
 
-  // width: "15rem",
+  width: "100%",
   height: "10rem",
   padding: "2rem 3rem",
   background: color.white.standard,
@@ -32,8 +33,8 @@ const secondaryCard = {
 
 export default function Home() {
   const [resumeData, setResumenData] = react.useState([]);
-
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
+  const router = useRouter();
 
   const getResumes = async () => {
     try {
@@ -51,7 +52,7 @@ export default function Home() {
     }
   };
 
-  const makeNewResume = async () => {
+  const makeNewResume = async ({ useTemplate }: { useTemplate: boolean }) => {
     try {
       const { data, error } = await supabase
         .from("resume")
@@ -63,13 +64,12 @@ export default function Home() {
         })
         .select();
 
-      console.log(data);
-
       if (error) throw new Error();
 
-      return data;
+      return data[0].id;
     } catch (err) {
       alert("새로 이력서를 만들지 못했습니다");
+      return null;
     }
   };
 
@@ -112,19 +112,28 @@ export default function Home() {
       }}
     >
       {resumeData.map((resumeDatum, resumeDatumIdx) => (
-        <button css={resumeCard} key={resumeDatumIdx}>
-          <h2 css={{ fontSize: "1.2rem", wordBreak: "keep-all" }}>
-            {resumeDatum?.title}
-          </h2>
-          <p css={{ color: color.gray.standard }}>
-            마지막 수정 {timeForToday(resumeDatum?.modified_at)}
-          </p>
-        </button>
+        <Link
+          href={`/build/${resumeDatum?.id}`}
+          css={{ width: "100%", textDecoration: "none" }}
+        >
+          <button css={resumeCard} key={resumeDatumIdx}>
+            <h2 css={{ fontSize: "1.2rem", wordBreak: "keep-all" }}>
+              {resumeDatum?.title}
+            </h2>
+            <p css={{ color: color.gray.standard }}>
+              마지막 수정 {timeForToday(resumeDatum?.modified_at)}
+            </p>
+          </button>
+        </Link>
       ))}
       <button
         css={[resumeCard, secondaryCard]}
-        onClick={() => {
-          makeNewResume();
+        onClick={async () => {
+          const id = await makeNewResume({ useTemplate: false });
+
+          if (id) {
+            router.push(`/build/${id}`);
+          }
         }}
       >
         <h2
@@ -137,7 +146,16 @@ export default function Home() {
           처음부터 시작하기
         </h2>
       </button>
-      <button css={[resumeCard, secondaryCard]}>
+      <button
+        css={[resumeCard, secondaryCard]}
+        onClick={async () => {
+          const id = await makeNewResume({ useTemplate: true });
+
+          if (id) {
+            router.push(`/build/${id}`);
+          }
+        }}
+      >
         <h2
           css={{
             margin: "auto",
