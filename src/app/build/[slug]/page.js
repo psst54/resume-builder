@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 
 import react from "react";
 import { useRouter } from "next/navigation";
