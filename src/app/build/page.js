@@ -149,6 +149,28 @@ function App() {
     }
   };
 
+  const deleteResume = async () => {
+    const result = confirm(
+      "삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?"
+    );
+
+    if (!result) return;
+
+    try {
+      const { data: upsertData, error: upsertError } = await supabase
+        .from("resume")
+        .delete()
+        .eq("id", resumeId);
+
+      if (upsertError) throw new Error();
+      alert("삭제되었습니다.");
+
+      router.push("/");
+    } catch (e) {
+      alert("삭제에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
+    }
+  };
+
   react.useEffect(() => {
     loadData().then((res) => {
       setData(res.content);
@@ -186,6 +208,7 @@ function App() {
             url={instance.url}
             fileName={`${data?.header?.title}.pdf`}
             saveResume={saveResume}
+            deleteResume={deleteResume}
           />
 
           <InputPage

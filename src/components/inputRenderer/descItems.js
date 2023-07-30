@@ -87,95 +87,93 @@ const DescItems = ({
   const [editingIdx, setEditingIdx] = react.useState(undefined);
 
   if (descItem.type === "link" || descItem.type === "tag")
-    console.log(descItem);
+    return (
+      <Wrapper isTag={isTag}>
+        {(descItem.type === "tag" || descItem.type === "list") && (
+          <>
+            {descItem.items?.map((item, itemIdx) => (
+              <ItemWrapper len={item.length} isTag={isTag}>
+                <ItemInput
+                  isTag={isTag}
+                  isFocused={editingIdx === itemIdx}
+                  value={item}
+                  len={item.length}
+                  onFocus={() => {
+                    setEditingIdx(itemIdx);
+                  }}
+                  onBlur={() => {
+                    setEditingIdx(undefined);
+                  }}
+                  onChange={(event) => {
+                    editDescItem({
+                      idxObj: {
+                        ...idxObj,
+                        targetIdx: itemIdx,
+                      },
+                      value: event.target.value,
+                    });
+                  }}
+                />
 
-  return (
-    <Wrapper isTag={isTag}>
-      {(descItem.type === "tag" || descItem.type === "list") && (
-        <>
-          {descItem.items?.map((item, itemIdx) => (
-            <ItemWrapper len={item.length} isTag={isTag}>
-              <ItemInput
-                isTag={isTag}
-                isFocused={editingIdx === itemIdx}
-                value={item}
-                len={item.length}
-                onFocus={() => {
-                  setEditingIdx(itemIdx);
-                }}
-                onBlur={() => {
-                  setEditingIdx(undefined);
-                }}
-                onChange={(event) => {
-                  editDescItem({
-                    idxObj: {
-                      ...idxObj,
-                      targetIdx: itemIdx,
-                    },
-                    value: event.target.value,
-                  });
-                }}
-              />
+                <DeleteTagItemButton
+                  src="/deleteLeft.svg"
+                  onClick={() => {
+                    deleteDescItem({
+                      idxObj: {
+                        ...idxObj,
+                        targetIdx: itemIdx,
+                      },
+                    });
+                  }}
+                />
+              </ItemWrapper>
+            ))}
+            <AddButton
+              onClick={() => {
+                addDescItem({
+                  idxObj,
+                });
+              }}
+            >
+              추가하기
+            </AddButton>
+          </>
+        )}
 
-              <DeleteTagItemButton
-                src="/deleteLeft.svg"
-                onClick={() => {
-                  deleteDescItem({
-                    idxObj: {
-                      ...idxObj,
-                      targetIdx: itemIdx,
-                    },
-                  });
-                }}
-              />
-            </ItemWrapper>
-          ))}
-          <AddButton
-            onClick={() => {
-              addDescItem({
-                idxObj,
-              });
-            }}
-          >
-            추가하기
-          </AddButton>
-        </>
-      )}
-
-      {descItem.type === "link" && (
-        <>
-          <Input
-            type="link"
-            value={descItem.title}
-            placeholder="이력서에 표시될 내용을 입력해주세요"
-            setValue={(event) => {
-              editDescLink({
-                idxObj: {
-                  ...idxObj,
-                  field: "title",
-                },
-                value: event.target.value,
-              });
-            }}
-          />
-          <Input
-            type="link"
-            value={descItem.url}
-            placeholder="페이지의 URL을 입력해주세요"
-            setValue={(event) => {
-              editDescLink({
-                idxObj: {
-                  ...idxObj,
-                  field: "url",
-                },
-                value: event.target.value,
-              });
-            }}
-          />
-        </>
-      )}
-    </Wrapper>
-  );
+        {descItem.type === "link" && (
+          <>
+            <Input
+              type="link"
+              value={descItem.title}
+              placeholder="이력서에 표시될 내용을 입력해주세요"
+              setValue={(event) => {
+                editDescLink({
+                  idxObj: {
+                    ...idxObj,
+                    field: "title",
+                  },
+                  value: event.target.value,
+                });
+              }}
+            />
+            <Input
+              type="link"
+              value={descItem.url}
+              placeholder="페이지의 URL을 입력해주세요"
+              setValue={(event) => {
+                editDescLink({
+                  idxObj: {
+                    ...idxObj,
+                    field: "url",
+                  },
+                  value: event.target.value,
+                });
+              }}
+            />
+          </>
+        )}
+      </Wrapper>
+    );
 };
 
 export default DescItems;
