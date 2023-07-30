@@ -2,7 +2,7 @@
 "use client";
 
 import react from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
 import { useAppSelector } from "@/redux/hooks";
@@ -21,24 +21,26 @@ const supabase = createClient(
 );
 
 import axios from "axios";
-import { emptyTemplate } from "@assets/resumeTemplate";
 import * as pdfjs from "pdfjs-dist";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 import { Page, Body, InputContainer, ViewerContainer } from "./styles";
 import Header from "@components/Header";
 
-function App({ params }) {
+function App() {
   console.error = () => {}; // todo : fix error
   const router = useRouter();
+  const searchParams = useSearchParams();
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
 
   const loadData = async () => {
     try {
+      const id = searchParams.get("resumeId");
+
       const { data, error } = await supabase
         .from("resume")
         .select()
-        .match({ id: params.slug, uid });
+        .match({ id, uid });
 
       if (error) throw new Error();
       if (data.length === 0) throw new Error();
@@ -46,7 +48,6 @@ function App({ params }) {
       return data[0];
     } catch (e) {
       alert("이력서를 불러오지 못했습니다.");
-
       router.push("/");
     }
   };

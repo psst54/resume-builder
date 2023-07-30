@@ -135,7 +135,7 @@ export default function Home() {
           {resumeData?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
             <Link
               key={resumeDatumIdx}
-              href={`/build/${resumeDatum?.id}`}
+              href={`/build?resumeId=${resumeDatum?.id}`}
               css={{ width: "100%", textDecoration: "none" }}
             >
               <button css={resumeCard}>
@@ -160,7 +160,7 @@ export default function Home() {
               const id = await makeNewResume({ useTemplate: false });
 
               if (id) {
-                router.push(`/build/${id}`);
+                router.push(`/build?resumeId=${id}`);
               }
             }}
           >
@@ -180,7 +180,7 @@ export default function Home() {
               const id = await makeNewResume({ useTemplate: true });
 
               if (id) {
-                router.push(`/build/${id}`);
+                router.push(`/build?resumeId=${id}`);
               }
             }}
           >
