@@ -28,33 +28,25 @@ import {
   ViewerContainer,
 } from "./styles";
 
-function App() {
+function App({ params }) {
   console.error = () => {}; // todo : fix error
   const [mainColor, setMainColor] = react.useState("#003FC7");
-  const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
 
-  const loadData = () => {
+  const loadData = async () => {
     try {
-      const tmpData = require("/tmpData.json");
+      const { data, error } = await supabase
+        .from("resume")
+        .select()
+        .eq("id", params.slug);
 
-      if (tmpData) return tmpData;
+      if (error) throw new Error();
 
-      throw new Error();
-    } catch (e) {
-      return {
-        header: {},
-        body: [
-          {
-            title: "Section Title",
-            type: "text",
-            desc: "작성을 시작해보세요.",
-          },
-        ],
-      };
-    }
+      return data[0];
+    } catch (e) {}
   };
 
-  const [data, setData] = react.useState(loadData());
+  const [data, setData] = react.useState({});
+  const [resumeId, setResumeId] = react.useState(null);
   const [pdfComponent, setPdfComponent] = react.useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
@@ -133,19 +125,25 @@ function App() {
         .update([
           {
             content: data,
-            title: "test",
+            title: "updated",
             modified_at: new Date(),
           },
         ])
-        .eq("id", 123);
+        .eq("id", resumeId);
 
-      console.log(upsertError);
       if (upsertError) throw new Error();
       alert("저장되었습니다.");
     } catch (e) {
       alert("저장에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
     }
   };
+
+  react.useEffect(() => {
+    loadData().then((res) => {
+      setData(res.content);
+      setResumeId(res.id);
+    });
+  }, []);
 
   react.useEffect(() => {
     setPdfComponent(<PDFPage data={data} mainColor={mainColor} />);

@@ -55,32 +55,32 @@ Font.register({
   family: "Pretendard-PDF",
   fonts: [
     {
-      src: "./fonts/Pretendard-Thin.ttf",
+      src: "/fonts/Pretendard-Thin.ttf",
       format: "truetype",
       fontWeight: 100,
     },
     {
-      src: "./fonts/Pretendard-ExtraLight.ttf",
+      src: "/fonts/Pretendard-ExtraLight.ttf",
       format: "truetype",
       fontWeight: 200,
     },
     {
-      src: "./fonts/Pretendard-Light.ttf",
+      src: "/fonts/Pretendard-Light.ttf",
       format: "truetype",
       fontWeight: 300,
     },
     {
-      src: "./fonts/Pretendard-Regular.ttf",
+      src: "/fonts/Pretendard-Regular.ttf",
       format: "truetype",
       fontWeight: 400,
     },
     {
-      src: "./fonts/Pretendard-Medium.ttf",
+      src: "/fonts/Pretendard-Medium.ttf",
       format: "truetype",
       fontWeight: 500,
     },
     {
-      src: "./fonts/Pretendard-SemiBold.ttf",
+      src: "/fonts/Pretendard-SemiBold.ttf",
       format: "truetype",
       fontWeight: 600,
     },
