@@ -86,7 +86,11 @@ const DescItems = ({
 
   const [editingIdx, setEditingIdx] = react.useState(undefined);
 
-  if (descItem.type === "link" || descItem.type === "tag")
+  if (
+    descItem.type === "list" ||
+    descItem.type === "tag" ||
+    descItem.type === "link"
+  )
     return (
       <Wrapper isTag={isTag}>
         {(descItem.type === "tag" || descItem.type === "list") && (
