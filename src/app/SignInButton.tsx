@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
+import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSignIn } from "@features/userSlice";
 import { createClient } from "@supabase/supabase-js";
@@ -33,6 +34,7 @@ const buttonStyle = {
 };
 
 export default function SignInButton({ signInData }: { signInData: any }) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const signIn = async () => {
     const email = signInData.filter(
@@ -50,6 +52,7 @@ export default function SignInButton({ signInData }: { signInData: any }) {
 
       if (error) throw new Error("로그인 실패");
       dispatch(setSignIn(data?.user?.id));
+      router.push("/");
     } catch (e) {
       alert("로그인에 실패했습니다.\n잠시 뒤에 다시 시도해주세요");
     }
