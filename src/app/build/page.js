@@ -5,20 +5,15 @@ import react from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { setSignOut } from "@features/userSlice";
 
 import InputPage from "@components/inputRenderer/mainPage";
 import InputHeader from "@components/inputRenderer/inputHeader";
 import PDFPage from "@components/pdfRenderer/mainPage";
 import PDFPreViewer from "@components/pdfPreViewer";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(
-  supabaseUrl ? supabaseUrl : "",
-  supabaseKey ? supabaseKey : ""
-);
+import { supabase } from "@libs/supabase";
+import { refreshSession } from "@libs/refreshSession";
 
 import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
@@ -32,6 +27,7 @@ function App() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
+  const dispatch = useAppDispatch();
 
   const loadData = async () => {
     try {
@@ -197,6 +193,10 @@ function App() {
   react.useEffect(() => {
     renderCanvas({ pageNumber: pageNumber });
   }, [pageNumber]);
+
+  react.useEffect(() => {
+    refreshSession(supabase, dispatch, setSignOut, router);
+  }, []);
 
   return (
     <Page>

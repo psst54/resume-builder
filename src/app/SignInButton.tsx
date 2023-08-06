@@ -3,14 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSignIn } from "@features/userSlice";
-import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(
-  supabaseUrl ? supabaseUrl : "",
-  supabaseKey ? supabaseKey : ""
-);
+import { supabase } from "@libs/supabase";
 
 import { color } from "@/app/styles";
 

@@ -19,9 +19,13 @@ export const userSlice = createSlice({
       state.resume_builder_id = action.payload;
       state.is_signed_in_resume_builder = "true";
     },
+    setSignOut: (state) => {
+      (state.resume_builder_id = ""),
+        (state.is_signed_in_resume_builder = "false");
+    },
   },
 });
 
-export const { setSignIn } = userSlice.actions;
+export const { setSignIn, setSignOut } = userSlice.actions;
 
 export default userSlice.reducer;
