@@ -78,7 +78,7 @@ const ColorSelector = ({ mainColor, setMainColor }) => {
           onChange={(event) => {
             let nextColor = event.target.value;
             if (nextColor.length > 0 && nextColor[0] !== "#")
-              nextColor = "3" + nextColor;
+              nextColor = "#" + nextColor;
             setMainColor(nextColor);
           }}
         />
