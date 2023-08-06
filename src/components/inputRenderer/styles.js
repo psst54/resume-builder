@@ -66,6 +66,14 @@ const SectionTitle = styled.h1`
   font-weight: 800;
   color: #000;
 `;
+const SectionIcon = styled.img`
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem;
+
+  cursor: pointer;
+  ${({ down }) => down && "transform: rotate(0.5turn)"};
+`;
 
 const AddSection = styled.button`
   width: 100%;
@@ -222,6 +230,7 @@ export {
   SectionTitleContainer,
   SectionBorder,
   SectionTitle,
+  SectionIcon,
   AddSection,
   AddItem,
   InputContainer,

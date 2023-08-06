@@ -8,7 +8,7 @@ import {
   SectionTitleContainer,
   SectionBorder,
   SectionTitle,
-  HighlightTitle,
+  SectionIcon,
   InputContainer,
   InputTitle,
   LargeInput,
@@ -385,6 +385,46 @@ const InputPage = ({
                 번째 섹션
               </SectionTitle>
               <SectionBorder />
+              {bodyItemIdx !== 0 && (
+                <SectionIcon
+                  src="/upCircle.svg"
+                  onClick={() => {
+                    const oldBody = [...data.body];
+                    oldBody[bodyItemIdx] = data.body[bodyItemIdx - 1];
+                    oldBody[bodyItemIdx - 1] = data.body[bodyItemIdx];
+                    setData({
+                      ...data,
+                      body: oldBody,
+                    });
+                  }}
+                />
+              )}
+              {bodyItemIdx !== data?.body.length - 1 && (
+                <SectionIcon
+                  src="/upCircle.svg"
+                  down={true}
+                  onClick={() => {
+                    const oldBody = [...data.body];
+                    oldBody[bodyItemIdx] = data.body[bodyItemIdx + 1];
+                    oldBody[bodyItemIdx + 1] = data.body[bodyItemIdx];
+                    setData({
+                      ...data,
+                      body: oldBody,
+                    });
+                  }}
+                />
+              )}
+              <SectionIcon
+                src="/delete.svg"
+                onClick={() => {
+                  setData({
+                    ...data,
+                    body: data.body.filter(
+                      (_, oldBodyItemIdx) => oldBodyItemIdx !== bodyItemIdx
+                    ),
+                  });
+                }}
+              />
             </SectionTitleContainer>
 
             <Selector
@@ -510,7 +550,6 @@ const InputPage = ({
                         }}
                       />
                     </InputContainer>
-
                     <InputContainer>
                       <InputTitle>항목 설명</InputTitle>
                       <LargeInput
@@ -524,7 +563,6 @@ const InputPage = ({
                         }}
                       />
                     </InputContainer>
-
                     <InputContainer>
                       <InputTitle>위치</InputTitle>
                       <LargeInput
@@ -538,7 +576,6 @@ const InputPage = ({
                         }}
                       />
                     </InputContainer>
-
                     <InputContainer>
                       <InputTitle>기간</InputTitle>
                       <DateInputContainer>
@@ -592,7 +629,6 @@ const InputPage = ({
                         </CheckBoxWrapper>
                       </DateInputContainer>
                     </InputContainer>
-
                     <DescItemsDragWrapper
                       contentItem={contentItem}
                       idxObj={{
@@ -605,7 +641,6 @@ const InputPage = ({
                       editDescItem={editDescItem}
                       editDescLink={editDescLink}
                     />
-
                     <AddItem
                       onClick={() => {
                         setData({
