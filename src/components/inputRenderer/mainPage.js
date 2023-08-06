@@ -8,7 +8,7 @@ import {
   SectionTitleContainer,
   SectionBorder,
   SectionTitle,
-  HighlightTitle,
+  SectionIcon,
   InputContainer,
   InputTitle,
   LargeInput,
@@ -385,6 +385,19 @@ const InputPage = ({
                 번째 섹션
               </SectionTitle>
               <SectionBorder />
+              <SectionIcon src="/upCircle.svg" />
+              <SectionIcon src="/upCircle.svg" down={true} />
+              <SectionIcon
+                src="/delete.svg"
+                onClick={() => {
+                  setData({
+                    ...data,
+                    body: data.body.filter(
+                      (_, oldBodyItemIdx) => oldBodyItemIdx !== bodyItemIdx
+                    ),
+                  });
+                }}
+              />
             </SectionTitleContainer>
 
             <Selector
