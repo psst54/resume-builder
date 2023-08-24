@@ -214,6 +214,7 @@ const Check = styled.img`
 `;
 
 const SectionItemContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;

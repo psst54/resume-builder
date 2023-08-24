@@ -14,6 +14,13 @@ const longTypeStyles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 10,
   },
+  titleSection: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+  titleText: {},
   sectionMain: {
     display: "flex",
     flexDirection: "column",
@@ -72,10 +79,34 @@ const LongType = ({ data, mainColor }) => {
       {data?.content?.map((content, contentIdx) => (
         <div key={contentIdx} style={longTypeStyles.sectionContent}>
           <div style={longTypeStyles.sectionMain}>
-            <Text style={longTypeStyles.contentTitle}>{content.title}</Text>
-            <Text style={longTypeStyles.sectionPositionText}>
-              {content.position}
-            </Text>
+            <div style={longTypeStyles.titleSection}>
+              <div style={longTypeStyles.titleText}>
+                <Text style={longTypeStyles.contentTitle}>{content.title}</Text>
+                <Text style={longTypeStyles.sectionPositionText}>
+                  {content.position}
+                </Text>
+              </div>
+
+              <div style={longTypeStyles.sectionSide}>
+                <Text
+                  style={{
+                    color: mainColor,
+                    fontSize: 9,
+                    fontWeight: 200,
+                    flexShrink: 0,
+                  }}
+                >
+                  {content.location ? content.location : ""}
+                </Text>
+                <Text style={longTypeStyles.dateText}>{`${
+                  content.start ? content.start : ""
+                }${
+                  content.useEndDate
+                    ? ` - ${content.end ? content.end : ""}`
+                    : ""
+                }`}</Text>
+              </div>
+            </div>
 
             {content?.descItems?.map((descItem, descItemIdx) => {
               if (descItem.type === "tag")
@@ -118,24 +149,6 @@ const LongType = ({ data, mainColor }) => {
                   </Link>
                 );
             })}
-          </div>
-
-          <div style={longTypeStyles.sectionSide}>
-            <Text
-              style={{
-                color: mainColor,
-                fontSize: 9,
-                fontWeight: 200,
-                flexShrink: 0,
-              }}
-            >
-              {content.location ? content.location : ""}
-            </Text>
-            <Text style={longTypeStyles.dateText}>{`${
-              content.start ? content.start : ""
-            }${
-              content.useEndDate ? ` - ${content.end ? content.end : ""}` : ""
-            }`}</Text>
           </div>
         </div>
       ))}

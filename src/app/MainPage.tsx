@@ -5,14 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { color } from "@/app/styles";
 import { useAppSelector } from "@/redux/hooks";
-import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-const supabase = createClient(
-  supabaseUrl ? supabaseUrl : "",
-  supabaseKey ? supabaseKey : ""
-);
+import { supabase } from "@libs/supabase";
 
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
