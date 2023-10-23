@@ -22,6 +22,7 @@ import {
   Check,
   SectionItemContainer,
 } from "./styles";
+import ActionPanel from "./ActionPanel";
 import Selector from "../customSelector";
 import Input from "./input";
 import ContactItems from "./contactItems";
@@ -302,6 +303,8 @@ const InputPage = ({
 
   return (
     <Page>
+      <ActionPanel />
+
       <SectionWrapper>
         <TitleInput
           mainColor={mainColor}
@@ -309,11 +312,9 @@ const InputPage = ({
           setResumeTitle={setResumeTitle}
         />
       </SectionWrapper>
-
       <SectionWrapper>
         <ColorSelector mainColor={mainColor} setMainColor={setMainColor} />
       </SectionWrapper>
-
       <SectionWrapper>
         <SectionTitleContainer>
           <SectionTitle>
@@ -373,7 +374,6 @@ const InputPage = ({
           + 연락 정보 추가하기
         </AddItem>
       </SectionWrapper>
-
       {data?.body?.map((bodyItem, bodyItemIdx) => {
         return (
           <SectionWrapper key={bodyItemIdx}>
@@ -711,7 +711,6 @@ const InputPage = ({
           </SectionWrapper>
         );
       })}
-
       <AddSection
         onClick={() => {
           setData({

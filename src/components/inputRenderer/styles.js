@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { color } from "@/app/styles";
+import { HEADER_HEIGHT } from "@/styles";
 
 const DefaultInput = styled.input`
   font-size: 1rem;
@@ -25,11 +26,13 @@ const DefaultInput = styled.input`
 `;
 
 const Page = styled.div`
+  position: relative;
+
   font-size: 1rem;
   line-height: 1.4;
 
   width: 100%;
-  padding: 3rem 10%;
+  padding: calc(3rem + ${HEADER_HEIGHT}) 10% 3rem 10%;
 
   display: flex;
   flex-direction: column;

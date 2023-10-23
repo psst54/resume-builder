@@ -2,15 +2,20 @@
 
 import styled from "@emotion/styled";
 import { color } from "@/app/styles";
+import { HEADER_HEIGHT } from "@/styles";
 
 const Container = styled.div`
-  width: 100%;
+  position: fixed;
+  top: ${HEADER_HEIGHT};
+  left: 0;
+
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: flex-end;
 
   padding: 1rem 1rem 0 1rem;
+
+  z-index: 12;
 `;
 
 const buttonStyle = {
@@ -40,7 +45,7 @@ const A = styled.a`
   text-decoration: none;
 `;
 
-const InputHeader = ({ url, fileName, saveResume, deleteResume }) => {
+const ActionPanel = ({ url, fileName, saveResume, deleteResume }) => {
   return (
     <Container>
       <button
@@ -66,4 +71,4 @@ const InputHeader = ({ url, fileName, saveResume, deleteResume }) => {
   );
 };
 
-export default InputHeader;
+export default ActionPanel;
