@@ -203,13 +203,6 @@ function App() {
 
       <Body>
         <InputContainer>
-          {/* <InputHeader
-            url={instance.url}
-            fileName={`${data?.header?.title}.pdf`}
-            saveResume={saveResume}
-            deleteResume={deleteResume}
-          /> */}
-
           <InputPage
             data={data}
             setData={setData}
@@ -217,6 +210,10 @@ function App() {
             setMainColor={setMainColor}
             resumeTitle={resumeTitle}
             setResumeTitle={setResumeTitle}
+            onSave={saveResume}
+            onDelete={deleteResume}
+            fileUrl={instance.url}
+            fileName={`${data?.header?.title}.pdf`}
           />
         </InputContainer>
 

@@ -45,24 +45,24 @@ const A = styled.a`
   text-decoration: none;
 `;
 
-const ActionPanel = ({ url, fileName, saveResume, deleteResume }) => {
+const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
   return (
     <Container>
       <button
         css={buttonStyle}
         onClick={() => {
-          saveResume();
+          onSave();
         }}
       >
         저장하기
       </button>
-      <A style={{ padding: "1rem" }} href={url} download={fileName}>
+      <A style={{ padding: "1rem" }} href={fileUrl} download={fileName}>
         pdf로 다운로드
       </A>
       <button
         css={[buttonStyle, importantButton]}
         onClick={() => {
-          deleteResume();
+          onDelete();
         }}
       >
         삭제하기

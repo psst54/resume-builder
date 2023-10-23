@@ -61,6 +61,10 @@ const InputPage = ({
   setMainColor,
   resumeTitle,
   setResumeTitle,
+  onSave,
+  onDelete,
+  fileUrl,
+  fileName,
 }) => {
   const setHeader = ({ field, value }) => {
     const newData = { ...data };
@@ -303,7 +307,12 @@ const InputPage = ({
 
   return (
     <Page>
-      <ActionPanel />
+      <ActionPanel
+        onSave={onSave}
+        onDelete={onDelete}
+        fileUrl={fileUrl}
+        fileName={fileName}
+      />
 
       <SectionWrapper>
         <TitleInput
