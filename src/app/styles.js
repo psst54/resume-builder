@@ -1,5 +1,4 @@
 const color = {
-  white: "#fff",
   primary: {
     standard: "#003FC7",
     active: "#001FB0",

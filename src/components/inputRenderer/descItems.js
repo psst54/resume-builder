@@ -74,12 +74,14 @@ const AddButton = styled.button`
 `;
 
 const DescItems = ({
+  data,
+  setData,
   descItem,
   idxObj,
-  addDescItem,
-  deleteDescItem,
-  editDescItem,
-  editDescLink,
+  onAddDescItem,
+  onDeleteDescItem,
+  onChangeDescItem,
+  onChangeDescLink,
 }) => {
   const type = descItem.type;
   const isTag = type === "tag";
@@ -109,7 +111,9 @@ const DescItems = ({
                     setEditingIdx(undefined);
                   }}
                   onChange={(event) => {
-                    editDescItem({
+                    onChangeDescItem({
+                      data,
+                      setData,
                       idxObj: {
                         ...idxObj,
                         targetIdx: itemIdx,
@@ -122,7 +126,9 @@ const DescItems = ({
                 <DeleteTagItemButton
                   src="/deleteLeft.svg"
                   onClick={() => {
-                    deleteDescItem({
+                    onDeleteDescItem({
+                      data,
+                      setData,
                       idxObj: {
                         ...idxObj,
                         targetIdx: itemIdx,
@@ -134,7 +140,9 @@ const DescItems = ({
             ))}
             <AddButton
               onClick={() => {
-                addDescItem({
+                onAddDescItem({
+                  data,
+                  setData,
                   idxObj,
                 });
               }}
@@ -151,11 +159,8 @@ const DescItems = ({
               value={descItem.title}
               placeholder="이력서에 표시될 내용을 입력해주세요"
               setValue={(event) => {
-                editDescLink({
-                  idxObj: {
-                    ...idxObj,
-                    field: "title",
-                  },
+                onChangeDescLink({
+                  idxObj: { data, setData, ...idxObj, field: "title" },
                   value: event.target.value,
                 });
               }}
@@ -165,8 +170,10 @@ const DescItems = ({
               value={descItem.url}
               placeholder="페이지의 URL을 입력해주세요"
               setValue={(event) => {
-                editDescLink({
+                onChangeDescLink({
                   idxObj: {
+                    data,
+                    setData,
                     ...idxObj,
                     field: "url",
                   },

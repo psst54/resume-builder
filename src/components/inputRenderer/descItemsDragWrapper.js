@@ -24,13 +24,15 @@ const itemTypeData = [
 ];
 
 const DescItemsDragWrapper = ({
+  data,
+  setData,
   contentItem,
   idxObj,
-  setDescItemType,
-  addDescItem,
-  deleteDescItem,
-  editDescItem,
-  editDescLink,
+  onChangeDescItemType,
+  onAddDescItem,
+  onDeleteDescItem,
+  onChangeDescItem,
+  onChangeDescLink,
 }) => {
   return (
     <DndProvider backend={HTML5Backend}>
@@ -40,17 +42,21 @@ const DescItemsDragWrapper = ({
             <Selector
               idxObj={{ ...idxObj, descItemIdx }}
               selected={descItem.type}
-              data={itemTypeData}
-              setData={setDescItemType}
+              options={itemTypeData}
+              data={data}
+              setData={setData}
+              onChange={onChangeDescItemType}
               isTitle={true}
             />
             <DescItems
+              data={data}
+              setData={setData}
               descItem={descItem}
               idxObj={{ ...idxObj, descItemIdx }}
-              addDescItem={addDescItem}
-              deleteDescItem={deleteDescItem}
-              editDescItem={editDescItem}
-              editDescLink={editDescLink}
+              onAddDescItem={onAddDescItem}
+              onDeleteDescItem={onDeleteDescItem}
+              onChangeDescItem={onChangeDescItem}
+              onChangeDescLink={onChangeDescLink}
             />
           </InputContainer>
         );

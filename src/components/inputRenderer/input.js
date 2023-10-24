@@ -38,8 +38,10 @@ const Input = ({
           <Selector
             idxObj={selectorData.idxObj}
             selected={selectorData.selected}
-            data={selectorData.data}
-            setData={selectorData.setFunc}
+            options={selectorData.data}
+            data={data}
+            setData={setData}
+            onChange={selectorData.setFunc}
             isTitle={true}
           />
         )}

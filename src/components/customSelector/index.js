@@ -11,21 +11,23 @@ import {
 const Selector = ({
   idxObj,
   selected,
+  options,
   data,
   setData,
+  onChange,
   isTitle,
   isDragging,
   mainColor,
 }) => {
   const [isOpen, setIsOpen] = react.useState(false);
 
-  const selectedItem = data.filter((datum) => datum.value === selected);
+  const selectedItem = options.filter((option) => option.value === selected);
 
   return (
     <Wrapper isTitle={isTitle}>
       <Box
         onClick={() => {
-          if (data) setIsOpen(true);
+          if (options) setIsOpen(true);
         }}
         isTitle={isTitle}
         isDragging={isDragging}
@@ -50,16 +52,21 @@ const Selector = ({
             }}
           />
           <OptionContainer>
-            {data.map((datum, datumIndex) => {
+            {options.map((option, optionIndex) => {
               return (
                 <Option
-                  key={datumIndex}
+                  key={optionIndex}
                   onClick={() => {
-                    setData({ idxObj, selectedValue: datum.value });
+                    onChange({
+                      data,
+                      setData,
+                      idxObj,
+                      selectedValue: option.value,
+                    });
                     setIsOpen(false);
                   }}
                 >
-                  {datum.title}
+                  {option.title}
                 </Option>
               );
             })}

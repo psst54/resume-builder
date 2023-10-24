@@ -9,7 +9,6 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { setSignOut } from "@features/userSlice";
 
 import InputPage from "@components/inputRenderer/mainPage";
-import InputHeader from "@components/inputRenderer/inputHeader";
 import PDFPage from "@components/pdfRenderer/mainPage";
 import PDFPreViewer from "@components/pdfPreViewer";
 import { supabase } from "@libs/supabase";
@@ -204,13 +203,6 @@ function App() {
 
       <Body>
         <InputContainer>
-          <InputHeader
-            url={instance.url}
-            fileName={`${data?.header?.title}.pdf`}
-            saveResume={saveResume}
-            deleteResume={deleteResume}
-          />
-
           <InputPage
             data={data}
             setData={setData}
@@ -218,6 +210,10 @@ function App() {
             setMainColor={setMainColor}
             resumeTitle={resumeTitle}
             setResumeTitle={setResumeTitle}
+            onSave={saveResume}
+            onDelete={deleteResume}
+            fileUrl={instance.url}
+            fileName={`${data?.header?.title}.pdf`}
           />
         </InputContainer>
 
