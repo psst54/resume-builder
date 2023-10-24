@@ -1,10 +1,26 @@
-export const emptyTemplate = {
-  header: {},
+import { ResumeContent, ContactItem } from "@/types/resume";
+
+export const contactItemTemplate: ContactItem = {
+  type: "phone",
+  text: "",
+  id: () => {
+    return new Date().getTime();
+  },
+};
+
+export const emptyTemplate: ResumeContent = {
+  header: {
+    title: "새 이력서",
+    name: "새 이력서",
+    position: "",
+    quote: "",
+    contactItems: [],
+  },
   body: [
     {
       title: "Section Title",
       type: "text",
-      desc: "작성을 시작해보세요.",
+      content: [{ text: "작성을 시작해보세요." }],
     },
   ],
 };
@@ -15,7 +31,7 @@ export const basicTemplate = {
     {
       title: "Summary",
       type: "text",
-      desc: "작성을 시작해보세요.",
+      content: [{ text: "작성을 시작해보세요." }],
     },
     {
       title: "Work Experience",

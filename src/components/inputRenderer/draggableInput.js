@@ -23,6 +23,8 @@ const ImgWrapper = styled.div`
 `;
 
 const Input = ({
+  data,
+  setData,
   type,
   title,
   value,
@@ -105,8 +107,10 @@ const Input = ({
           <Selector
             idxObj={selectorData.idxObj}
             selected={selectorData.selected}
-            data={selectorData.data}
-            setData={selectorData.setFunc}
+            options={selectorData.data}
+            data={data}
+            setData={setData}
+            onChange={selectorData.setFunc}
             isTitle={true}
             isDragging={isDragging}
             mainColor={mainColor}

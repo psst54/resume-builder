@@ -30,6 +30,32 @@ import TitleInput from "./titleInput";
 import ColorSelector from "./colorSelector";
 import DescItemsDragWrapper from "./descItemsDragWrapper";
 
+import {
+  onChangeHeader,
+  onAddContactItem,
+  onChangeSectionType,
+  onMoveUp,
+  onMoveDown,
+  onChangeContentItem,
+  onAddContentItem,
+  onToggleUseEndDate,
+  onChangeDescItemType,
+  onAddDescItem,
+  onDeleteDescItem,
+  onChangeDescItem,
+  onChangeDescLink,
+} from "./updateFunction";
+
+const basicInformationData = [
+  { title: "이름", value: "name", placeholder: "Gildong Hong" },
+  { title: "직책", value: "position", placeholder: "FRONTEND DEVELOPER" },
+  {
+    title: "한마디",
+    value: "quote",
+    placeholder: '"한마디는 빈칸으로 둘 수 있습니다."',
+  },
+];
+
 const sectionTypeData = [
   {
     title: "텍스트",
@@ -66,245 +92,6 @@ const InputPage = ({
   fileUrl,
   fileName,
 }) => {
-  const setHeader = ({ field, value }) => {
-    const newData = { ...data };
-    newData.header[field] = value;
-    setData(newData);
-  };
-
-  const setContentItem = ({ idxObj, field, value }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  if (oldContentItemIdx === idxObj.contentItemIdx) {
-                    const newContentItem = { ...oldContentItem };
-                    newContentItem[field] = value;
-                    return newContentItem;
-                  } else {
-                    return oldContentItem;
-                  }
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const toggleUseEndDate = ({ idxObj }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        useEndDate: oldContentItem.useEndDate ? false : true,
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const setSectionType = ({ idxObj, selectedValue }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? { ...oldDatum, type: selectedValue }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const setDescItemType = ({ idxObj, selectedValue }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        descItems: oldContentItem.descItems.map(
-                          (oldDescItem, oldDescItemIdx) => {
-                            return oldDescItemIdx === idxObj.descItemIdx
-                              ? {
-                                  ...oldDescItem,
-                                  type: selectedValue,
-                                }
-                              : oldDescItem;
-                          }
-                        ),
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const addDescItem = ({ idxObj }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        descItems: oldContentItem.descItems.map(
-                          (oldDescItem, oldDescItemIdx) => {
-                            return oldDescItemIdx === idxObj.descItemIdx
-                              ? {
-                                  ...oldDescItem,
-                                  items: oldDescItem.items.concat(""),
-                                }
-                              : oldDescItem;
-                          }
-                        ),
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const deleteDescItem = ({ idxObj }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        descItems: oldContentItem.descItems.map(
-                          (oldDescItem, oldDescItemIdx) => {
-                            return oldDescItemIdx === idxObj.descItemIdx
-                              ? {
-                                  ...oldDescItem,
-                                  items: oldDescItem.items.filter(
-                                    (item, itemIdx) =>
-                                      itemIdx !== idxObj.targetIdx
-                                  ),
-                                }
-                              : oldDescItem;
-                          }
-                        ),
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const editDescItem = ({ idxObj, value }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        descItems: oldContentItem.descItems.map(
-                          (oldDescItem, oldDescItemIdx) => {
-                            return oldDescItemIdx === idxObj.descItemIdx
-                              ? {
-                                  ...oldDescItem,
-                                  items: oldDescItem.items.map(
-                                    (item, itemIdx) =>
-                                      itemIdx === idxObj.targetIdx
-                                        ? value
-                                        : item
-                                  ),
-                                }
-                              : oldDescItem;
-                          }
-                        ),
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
-  const editDescLink = ({ idxObj, value }) => {
-    setData({
-      ...data,
-      body: data.body.map((oldDatum, oldDatumIdx) => {
-        return oldDatumIdx === idxObj.bodyItemIdx
-          ? {
-              ...oldDatum,
-              content: oldDatum.content.map(
-                (oldContentItem, oldContentItemIdx) => {
-                  return oldContentItemIdx === idxObj.contentItemIdx
-                    ? {
-                        ...oldContentItem,
-                        descItems: oldContentItem.descItems.map(
-                          (oldDescItem, oldDescItemIdx) => {
-                            return oldDescItemIdx === idxObj.descItemIdx
-                              ? {
-                                  ...oldDescItem,
-                                  title:
-                                    idxObj.field === "title"
-                                      ? value
-                                      : oldDescItem.title,
-                                  url:
-                                    idxObj.field === "url"
-                                      ? value
-                                      : oldDescItem.url,
-                                }
-                              : oldDescItem;
-                          }
-                        ),
-                      }
-                    : oldContentItem;
-                }
-              ),
-            }
-          : oldDatum;
-      }),
-    });
-  };
-
   return (
     <Page>
       <ActionPanel
@@ -333,51 +120,28 @@ const InputPage = ({
           <SectionBorder />
         </SectionTitleContainer>
 
-        <Input
-          type="text"
-          title="이름"
-          value={data?.header?.name}
-          placeholder="Gildong Hong"
-          setValue={(event) => {
-            setHeader({ field: "name", value: event.target.value });
-          }}
-        />
-        <Input
-          type="text"
-          title="직책"
-          value={data?.header?.position}
-          placeholder="FRONTEND DEVELOPER"
-          setValue={(event) => {
-            setHeader({ field: "position", value: event.target.value });
-          }}
-        />
-        <Input
-          type="text"
-          title="한마디"
-          value={data?.header?.quote}
-          placeholder='"한마디는 빈칸으로 둘 수 있습니다."'
-          setValue={(event) => {
-            setHeader({ field: "quote", value: event.target.value });
-          }}
-        />
+        {basicInformationData.map((datum) => (
+          <Input
+            type="text"
+            title={datum.title}
+            value={data.header ? data.header[datum.value] : null}
+            placeholder={datum.placeholder}
+            setValue={(event) => {
+              onChangeHeader({
+                data,
+                setData,
+                field: datum.value,
+                value: event.target.value,
+              });
+            }}
+          />
+        ))}
 
         <ContactItems data={data} setData={setData} mainColor={mainColor} />
 
         <AddItem
           onClick={() => {
-            setData({
-              ...data,
-              header: {
-                ...data.header,
-                contactItems: data.header?.contactItems
-                  ? data.header.contactItems.concat({
-                      type: "phone",
-                      text: "",
-                      id: new Date().getTime(),
-                    })
-                  : [{ type: "phone", text: "", id: new Date().getTime() }],
-              },
-            });
+            onAddContactItem({ data, setData });
           }}
         >
           + 연락 정보 추가하기
@@ -398,13 +162,7 @@ const InputPage = ({
                 <SectionIcon
                   src="/upCircle.svg"
                   onClick={() => {
-                    const oldBody = [...data.body];
-                    oldBody[bodyItemIdx] = data.body[bodyItemIdx - 1];
-                    oldBody[bodyItemIdx - 1] = data.body[bodyItemIdx];
-                    setData({
-                      ...data,
-                      body: oldBody,
-                    });
+                    onMoveUp({ data, setData, index: bodyItemIdx });
                   }}
                 />
               )}
@@ -413,13 +171,7 @@ const InputPage = ({
                   src="/upCircle.svg"
                   down={true}
                   onClick={() => {
-                    const oldBody = [...data.body];
-                    oldBody[bodyItemIdx] = data.body[bodyItemIdx + 1];
-                    oldBody[bodyItemIdx + 1] = data.body[bodyItemIdx];
-                    setData({
-                      ...data,
-                      body: oldBody,
-                    });
+                    onMoveDown({ data, setData, index: bodyItemIdx });
                   }}
                 />
               )}
@@ -439,8 +191,10 @@ const InputPage = ({
             <Selector
               idxObj={{ bodyItemIdx }}
               selected={bodyItem.type}
-              data={sectionTypeData}
-              setData={setSectionType}
+              options={sectionTypeData}
+              data={data}
+              setData={setData}
+              onChange={onChangeSectionType}
             />
 
             <InputContainer>
@@ -460,87 +214,93 @@ const InputPage = ({
               />
             </InputContainer>
 
-            {bodyItem.type === "text" && (
-              <InputContainer>
-                <InputTitle>내용</InputTitle>
-                <Textarea
-                  value={bodyItem.desc}
-                  onChange={(event) => {
-                    setData({
-                      ...data,
-                      body: data.body.map((oldDatum, oldDatumIdx) => {
-                        return oldDatumIdx === bodyItemIdx
-                          ? { ...oldDatum, desc: event.target.value }
-                          : oldDatum;
-                      }),
-                    });
-                  }}
-                />
-              </InputContainer>
-            )}
+            {bodyItem.type === "text" &&
+              bodyItem?.content?.map((contentItem, contentItemIdx) => (
+                <InputContainer>
+                  <InputTitle>내용</InputTitle>
+                  <Textarea
+                    value={contentItem.text}
+                    onChange={(event) => {
+                      onChangeContentItem({
+                        data,
+                        setData,
+                        idxObj: { bodyItemIdx, contentItemIdx },
+                        field: "text",
+                        value: event.target.value,
+                      });
+                    }}
+                  />
+                </InputContainer>
+              ))}
 
             {bodyItem.type === "short" &&
-              bodyItem?.content?.map((contentItem, contentItemIdx) => {
-                return (
-                  <SectionItemContainer>
-                    <InputContainer>
-                      <InputTitle>일자</InputTitle>
-                      <LargeInput
-                        value={contentItem.year}
-                        onChange={(event) => {
-                          setContentItem({
-                            idxObj: { bodyItemIdx, contentItemIdx },
-                            field: "year",
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    </InputContainer>
+              bodyItem?.content?.map((contentItem, contentItemIdx) => (
+                <SectionItemContainer>
+                  <InputContainer>
+                    <InputTitle>일자</InputTitle>
+                    <LargeInput
+                      value={contentItem.year}
+                      onChange={(event) => {
+                        onChangeContentItem({
+                          data,
+                          setData,
+                          idxObj: { bodyItemIdx, contentItemIdx },
+                          field: "year",
+                          value: event.target.value,
+                        });
+                      }}
+                    />
+                  </InputContainer>
 
-                    <InputContainer>
-                      <InputTitle>역할</InputTitle>
-                      <LargeInput
-                        value={contentItem.position}
-                        onChange={(event) => {
-                          setContentItem({
-                            idxObj: { bodyItemIdx, contentItemIdx },
-                            field: "position",
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    </InputContainer>
+                  <InputContainer>
+                    <InputTitle>역할</InputTitle>
+                    <LargeInput
+                      value={contentItem.position}
+                      onChange={(event) => {
+                        onChangeContentItem({
+                          data,
+                          setData,
+                          idxObj: { bodyItemIdx, contentItemIdx },
+                          field: "position",
+                          value: event.target.value,
+                        });
+                      }}
+                    />
+                  </InputContainer>
 
-                    <InputContainer>
-                      <InputTitle>활동명</InputTitle>
-                      <LargeInput
-                        value={contentItem.subscription}
-                        onChange={(event) => {
-                          setContentItem({
-                            idxObj: { bodyItemIdx, contentItemIdx },
-                            field: "subscription",
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    </InputContainer>
+                  <InputContainer>
+                    <InputTitle>활동명</InputTitle>
+                    <LargeInput
+                      value={contentItem.subscription}
+                      onChange={(event) => {
+                        onChangeContentItem({
+                          data,
+                          setData,
+                          idxObj: { bodyItemIdx, contentItemIdx },
+                          field: "subscription",
+                          value: event.target.value,
+                        });
+                      }}
+                    />
+                  </InputContainer>
 
-                    <InputContainer>
-                      <InputTitle>위치</InputTitle>
-                      <LargeInput
-                        value={contentItem.location}
-                        onChange={(event) => {
-                          setContentItem({
-                            idxObj: { bodyItemIdx, contentItemIdx },
-                            field: "location",
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    </InputContainer>
-                  </SectionItemContainer>
-                );
-              })}
+                  <InputContainer>
+                    <InputTitle>위치</InputTitle>
+                    <LargeInput
+                      value={contentItem.location}
+                      onChange={(event) => {
+                        onChangeContentItem({
+                          data,
+                          setData,
+                          idxObj: { bodyItemIdx, contentItemIdx },
+                          field: "location",
+                          value: event.target.value,
+                        });
+                      }}
+                    />
+                  </InputContainer>
+                </SectionItemContainer>
+              ))}
 
             {bodyItem.type === "long" &&
               bodyItem?.content?.map((contentItem, contentItemIdx) => {
@@ -551,7 +311,9 @@ const InputPage = ({
                       <LargeInput
                         value={contentItem.title}
                         onChange={(event) => {
-                          setContentItem({
+                          onChangeContentItem({
+                            data,
+                            setData,
                             idxObj: { bodyItemIdx, contentItemIdx },
                             field: "title",
                             value: event.target.value,
@@ -564,7 +326,9 @@ const InputPage = ({
                       <LargeInput
                         value={contentItem.position}
                         onChange={(event) => {
-                          setContentItem({
+                          onChangeContentItem({
+                            data,
+                            setData,
                             idxObj: { bodyItemIdx, contentItemIdx },
                             field: "position",
                             value: event.target.value,
@@ -577,7 +341,9 @@ const InputPage = ({
                       <LargeInput
                         value={contentItem.location}
                         onChange={(event) => {
-                          setContentItem({
+                          onChangeContentItem({
+                            data,
+                            setData,
                             idxObj: { bodyItemIdx, contentItemIdx },
                             field: "location",
                             value: event.target.value,
@@ -592,7 +358,9 @@ const InputPage = ({
                           <DateInput
                             value={contentItem.start}
                             onChange={(event) => {
-                              setContentItem({
+                              onChangeContentItem({
+                                data,
+                                setData,
                                 idxObj: { bodyItemIdx, contentItemIdx },
                                 field: "start",
                                 value: event.target.value,
@@ -606,7 +374,9 @@ const InputPage = ({
                               <DateInput
                                 value={contentItem.end}
                                 onChange={(event) => {
-                                  setContentItem({
+                                  onChangeContentItem({
+                                    data,
+                                    setData,
                                     idxObj: { bodyItemIdx, contentItemIdx },
                                     field: "end",
                                     value: event.target.value,
@@ -620,7 +390,9 @@ const InputPage = ({
 
                         <CheckBoxWrapper
                           onClick={() => {
-                            toggleUseEndDate({
+                            onToggleUseEndDate({
+                              data,
+                              setData,
                               idxObj: { bodyItemIdx, contentItemIdx },
                             });
                           }}
@@ -639,51 +411,25 @@ const InputPage = ({
                       </DateInputContainer>
                     </InputContainer>
                     <DescItemsDragWrapper
+                      data={data}
+                      setData={setData}
                       contentItem={contentItem}
                       idxObj={{
                         bodyItemIdx,
                         contentItemIdx,
                       }}
-                      setDescItemType={setDescItemType}
-                      addDescItem={addDescItem}
-                      deleteDescItem={deleteDescItem}
-                      editDescItem={editDescItem}
-                      editDescLink={editDescLink}
+                      onChangeDescItemType={onChangeDescItemType}
+                      onAddDescItem={onAddDescItem}
+                      onDeleteDescItem={onDeleteDescItem}
+                      onChangeDescItem={onChangeDescItem}
+                      onChangeDescLink={onChangeDescLink}
                     />
                     <AddItem
                       onClick={() => {
-                        setData({
-                          ...data,
-                          body: data.body.map((oldDatum, oldDatumIdx) => {
-                            return oldDatumIdx === bodyItemIdx
-                              ? {
-                                  ...oldDatum,
-                                  content: oldDatum.content.map(
-                                    (oldContentItem, oldContentItemIdx) => {
-                                      return oldContentItemIdx ===
-                                        contentItemIdx
-                                        ? {
-                                            ...oldContentItem,
-                                            descItems: oldContentItem.descItems
-                                              ? oldContentItem.descItems.concat(
-                                                  {
-                                                    type: "list",
-                                                    items: [],
-                                                  }
-                                                )
-                                              : [
-                                                  {
-                                                    type: "list",
-                                                    items: [],
-                                                  },
-                                                ],
-                                          }
-                                        : oldContentItem;
-                                    }
-                                  ),
-                                }
-                              : oldDatum;
-                          }),
+                        onAddContentItem({
+                          data,
+                          setData,
+                          idxObj: { bodyItemIdx, contentItemIdx },
                         });
                       }}
                     >

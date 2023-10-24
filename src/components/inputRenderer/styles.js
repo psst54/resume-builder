@@ -39,7 +39,7 @@ const Page = styled.div`
   gap: 2rem;
 
   @media (max-width: 800px) {
-    padding: 2rem 1rem;
+    padding: calc(3rem + ${ACTION_PANEL_HEIGHT}) 1rem 2rem 1rem;
   }
 `;
 
