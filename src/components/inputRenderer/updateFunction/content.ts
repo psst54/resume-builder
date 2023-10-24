@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ResumeContent } from "@/types/resume";
+import { ResumeContent, DescItem, LongSectionContent } from "@/types/resume";
 
 export function onChangeContentItem({
   data,
@@ -37,7 +37,12 @@ export function onChangeContentItem({
   });
 }
 
-const DescItemTemplate = { type: "list", items: [], title: "", url: "" };
+const DescItemTemplate: DescItem = {
+  type: "list",
+  items: [],
+  title: "",
+  url: "",
+};
 
 export function onAddContentItem({
   data,
@@ -57,12 +62,14 @@ export function onAddContentItem({
             content: oldDatum.content.map(
               (oldContentItem, oldContentItemIdx) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
-                  ? {
+                  ? ({
                       ...oldContentItem,
                       descItems: oldContentItem.descItems
-                        ? oldContentItem.descItems.concat(DescItemTemplate)
+                        ? (oldContentItem.descItems as DescItem[]).concat(
+                            DescItemTemplate
+                          )
                         : [DescItemTemplate],
-                    }
+                    } as LongSectionContent)
                   : oldContentItem;
               }
             ),
@@ -90,10 +97,10 @@ export function onToggleUseEndDate({
             content: oldDatum.content.map(
               (oldContentItem, oldContentItemIdx) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
-                  ? {
+                  ? ({
                       ...oldContentItem,
                       useEndDate: oldContentItem.useEndDate ? false : true,
-                    }
+                    } as LongSectionContent)
                   : oldContentItem;
               }
             ),

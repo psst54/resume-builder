@@ -10,10 +10,11 @@ export type SectionType = "text" | "long" | "short";
 export type DescItemType = "tag" | "list" | "link";
 
 export interface DescItem {
+  [key: string]: DescItemType | string | string[];
   type: DescItemType;
   items: string[];
-  title: "";
-  url: "";
+  title: string;
+  url: string;
 }
 
 //----------------------------------------

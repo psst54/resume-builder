@@ -1,5 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
-import { ResumeContent, DescItemType } from "@/types/resume";
+import {
+  ResumeContent,
+  LongSectionContent,
+  DescItemType,
+  DescItem,
+} from "@/types/resume";
 
 export function onChangeDescItemType({
   data,
@@ -18,13 +23,13 @@ export function onChangeDescItemType({
       return oldDatumIdx === idxObj.bodyItemIdx
         ? {
             ...oldDatum,
-            content: oldDatum.content.map(
+            content: (oldDatum.content as LongSectionContent[]).map(
               (oldContentItem, oldContentItemIdx: number) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
                   ? {
                       ...oldContentItem,
-                      descItems: oldContentItem.descItems.map(
-                        (oldDescItem, oldDescItemIdx: number) => {
+                      descItems: (oldContentItem.descItems as DescItem[]).map(
+                        (oldDescItem: DescItem, oldDescItemIdx: number) => {
                           return oldDescItemIdx === idxObj.descItemIdx
                             ? {
                                 ...oldDescItem,
@@ -32,7 +37,7 @@ export function onChangeDescItemType({
                               }
                             : oldDescItem;
                         }
-                      ),
+                      ) as DescItem[],
                     }
                   : oldContentItem;
               }
@@ -58,12 +63,12 @@ export function onAddDescItem({
       return oldDatumIdx === idxObj.bodyItemIdx
         ? {
             ...oldDatum,
-            content: oldDatum.content.map(
+            content: (oldDatum.content as LongSectionContent[]).map(
               (oldContentItem, oldContentItemIdx: number) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
                   ? {
                       ...oldContentItem,
-                      descItems: oldContentItem.descItems.map(
+                      descItems: (oldContentItem.descItems as DescItem[]).map(
                         (oldDescItem, oldDescItemIdx: number) => {
                           return oldDescItemIdx === idxObj.descItemIdx
                             ? {
@@ -103,19 +108,18 @@ export function onDeleteDescItem({
       return oldDatumIdx === idxObj.bodyItemIdx
         ? {
             ...oldDatum,
-            content: oldDatum.content.map(
+            content: (oldDatum.content as LongSectionContent[]).map(
               (oldContentItem, oldContentItemIdx) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
                   ? {
                       ...oldContentItem,
-                      descItems: oldContentItem.descItems.map(
-                        (oldDescItem, oldDescItemIdx) => {
+                      descItems: (oldContentItem.descItems as DescItem[]).map(
+                        (oldDescItem: DescItem, oldDescItemIdx: number) => {
                           return oldDescItemIdx === idxObj.descItemIdx
                             ? {
                                 ...oldDescItem,
                                 items: oldDescItem.items.filter(
-                                  (item, itemIdx) =>
-                                    itemIdx !== idxObj.targetIdx
+                                  (_, itemIdx) => itemIdx !== idxObj.targetIdx
                                 ),
                               }
                             : oldDescItem;
@@ -153,13 +157,13 @@ export function onChangeDescItem({
       return oldDatumIdx === idxObj.bodyItemIdx
         ? {
             ...oldDatum,
-            content: oldDatum.content.map(
+            content: (oldDatum.content as LongSectionContent[]).map(
               (oldContentItem, oldContentItemIdx) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
                   ? {
                       ...oldContentItem,
-                      descItems: oldContentItem.descItems.map(
-                        (oldDescItem, oldDescItemIdx) => {
+                      descItems: (oldContentItem.descItems as DescItem[]).map(
+                        (oldDescItem: DescItem, oldDescItemIdx: number) => {
                           return oldDescItemIdx === idxObj.descItemIdx
                             ? {
                                 ...oldDescItem,
@@ -202,13 +206,13 @@ export function onChangeDescLink({
       return oldDatumIdx === idxObj.bodyItemIdx
         ? {
             ...oldDatum,
-            content: oldDatum.content.map(
+            content: (oldDatum.content as LongSectionContent[]).map(
               (oldContentItem, oldContentItemIdx) => {
                 return oldContentItemIdx === idxObj.contentItemIdx
                   ? {
                       ...oldContentItem,
-                      descItems: oldContentItem.descItems.map(
-                        (oldDescItem, oldDescItemIdx) => {
+                      descItems: (oldContentItem.descItems as DescItem[]).map(
+                        (oldDescItem: DescItem, oldDescItemIdx: number) => {
                           return oldDescItemIdx === idxObj.descItemIdx
                             ? {
                                 ...oldDescItem,
