@@ -4,6 +4,10 @@ import styled from "@emotion/styled";
 import { color } from "@/app/styles";
 import { HEADER_HEIGHT } from "@/styles";
 
+import SaveIcon from "@/assets/SaveIcon";
+import DownloadIcon from "@/assets/DownloadIcon";
+import DeleteIcon from "@/assets/DeleteIcon";
+
 const Container = styled.div`
   position: fixed;
   top: ${HEADER_HEIGHT};
@@ -19,15 +23,17 @@ const Container = styled.div`
 `;
 
 const buttonStyle = {
-  background: "transparent",
-  padding: "1rem",
-  border: "2px solid " + color.gray.standard,
-  borderRadius: "0.8rem",
+  background: color.black.standard,
+  width: "3rem",
+  height: "3rem",
 
-  fontSize: "1rem",
+  border: "2px solid " + color.black.standard,
+  borderRadius: "100%",
+
   cursor: "pointer",
 };
 const importantButton = {
+  background: color.invalid,
   border: "2px solid " + color.invalid,
 
   color: color.invalid,
@@ -35,12 +41,6 @@ const importantButton = {
 };
 
 const A = styled.a`
-  background: transparent;
-  padding: 1rem;
-  border: 2px solid ${color.gray.standard};
-  border-radius: 0.8rem;
-
-  font-size: 1rem;
   color: black;
   text-decoration: none;
 `;
@@ -54,18 +54,20 @@ const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
           onSave();
         }}
       >
-        저장하기
+        <SaveIcon size="1.5rem" color={color.white.standard} />
       </button>
-      <A style={{ padding: "1rem" }} href={fileUrl} download={fileName}>
-        pdf로 다운로드
-      </A>
+      <button css={buttonStyle}>
+        <A href={fileUrl} download={fileName}>
+          <DownloadIcon size="1.5rem" color={color.white.standard} />
+        </A>
+      </button>
       <button
         css={[buttonStyle, importantButton]}
         onClick={() => {
           onDelete();
         }}
       >
-        삭제하기
+        <DeleteIcon size="1.5rem" color={color.white.standard} />
       </button>
     </Container>
   );
