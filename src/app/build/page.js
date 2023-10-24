@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 
-import react from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import useDebounce from "@/hooks/useDebounce";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -47,38 +48,20 @@ function App() {
     }
   };
 
-  const [data, setData] = react.useState({});
-  const [resumeId, setResumeId] = react.useState(null);
-  const [resumeTitle, setResumeTitle] = react.useState("");
-  const [mainColor, setMainColor] = react.useState("#003FC7");
+  const [data, setData] = useState({});
+  const [resumeId, setResumeId] = useState(null);
+  const [resumeTitle, setResumeTitle] = useState("");
+  const [mainColor, setMainColor] = useState("#003FC7");
 
-  const [pdfComponent, setPdfComponent] = react.useState(
+  const [pdfComponent, setPdfComponent] = useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
   const [instance, updateInstance] = usePDF({
     document: pdfComponent,
   });
-  const [cnt, setCnt] = react.useState(0);
-  const canvasRef = react.useRef(null);
-  const [maxPageNumber, setMaxPageNumber] = react.useState(1);
-  const [pageNumber, setPageNumber] = react.useState(1);
-
-  const renderCanvasWithTimer = () => {
-    setCnt((oldCnt) => {
-      return oldCnt + 1;
-    });
-
-    setTimeout(() => {
-      setCnt((oldCnt) => {
-        if (oldCnt === 1) {
-          renderCanvas({ pageNumber: pageNumber });
-          return oldCnt - 1;
-        } else {
-          return oldCnt - 1;
-        }
-      });
-    }, 1000);
-  };
+  const canvasRef = useRef(null);
+  const [maxPageNumber, setMaxPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const renderCanvas = async ({ pageNumber }) => {
     const canvas = canvasRef.current;
@@ -166,7 +149,7 @@ function App() {
     }
   };
 
-  react.useEffect(() => {
+  useEffect(() => {
     loadData().then((res) => {
       setData(res.content);
       setResumeId(res.id);
@@ -175,25 +158,25 @@ function App() {
     });
   }, []);
 
-  react.useEffect(() => {
+  useEffect(() => {
     setPdfComponent(<PDFPage data={data} mainColor={mainColor} />);
   }, [data, mainColor]);
 
-  react.useEffect(() => {
+  useEffect(() => {
     updateInstance({
       document: pdfComponent,
     });
   }, [pdfComponent]);
 
-  react.useEffect(() => {
-    renderCanvasWithTimer();
-  }, [instance]);
+  useDebounce(
+    () => {
+      renderCanvas({ pageNumber: pageNumber });
+    },
+    [instance, pageNumber],
+    1000
+  );
 
-  react.useEffect(() => {
-    renderCanvas({ pageNumber: pageNumber });
-  }, [pageNumber]);
-
-  react.useEffect(() => {
+  useEffect(() => {
     refreshSession(supabase, dispatch, setSignOut, router);
   }, []);
 
