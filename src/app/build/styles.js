@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 
 const Page = styled.div`
   min-height: 100vh;

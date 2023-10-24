@@ -1,5 +1,5 @@
 import { StyleSheet } from "@react-pdf/renderer";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 
 const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------

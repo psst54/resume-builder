@@ -1,7 +1,7 @@
 import react from "react";
 
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import Input from "./input";
 
 const Wrapper = styled.div`
