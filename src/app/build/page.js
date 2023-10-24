@@ -125,7 +125,7 @@ function App() {
 
   const saveResume = async () => {
     try {
-      const { data: upsertData, error: upsertError } = await supabase
+      const { error: upsertError } = await supabase
         .from("resume")
         .update([
           {
@@ -152,7 +152,7 @@ function App() {
     if (!result) return;
 
     try {
-      const { data: upsertData, error: upsertError } = await supabase
+      const { error: upsertError } = await supabase
         .from("resume")
         .delete()
         .eq("id", resumeId);
