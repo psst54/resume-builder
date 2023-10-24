@@ -25,6 +25,8 @@ const DefaultInput = styled.input`
   }
 `;
 
+const margin = "2rem";
+
 const Page = styled.div`
   position: relative;
 
@@ -32,14 +34,14 @@ const Page = styled.div`
   line-height: 1.4;
 
   width: 100%;
-  padding: calc(3rem + ${ACTION_PANEL_HEIGHT}) 10% 3rem 10%;
+  padding: 3rem 2rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
 
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   @media (max-width: 800px) {
-    padding: calc(3rem + ${ACTION_PANEL_HEIGHT}) 1rem 2rem 1rem;
+    padding: 2rem 1rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
   }
 `;
 
@@ -82,8 +84,6 @@ const AddSection = styled.button`
   width: 100%;
   height: 5rem;
   background: transparent;
-  
-  margin-top: 2rem;
 
   border: 2px solid ${color.lightGray.standard};
   border-radius: 1rem;

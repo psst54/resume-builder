@@ -2,7 +2,6 @@
 
 import styled from "@emotion/styled";
 import { color } from "@/app/styles";
-import { HEADER_HEIGHT } from "@/styles";
 
 import SaveIcon from "@/assets/SaveIcon";
 import DownloadIcon from "@/assets/DownloadIcon";
@@ -10,15 +9,15 @@ import DeleteIcon from "@/assets/DeleteIcon";
 
 const Container = styled.div`
   position: fixed;
-  top: ${HEADER_HEIGHT};
-  left: 0;
+  bottom: 1rem;
+  right: 0;
+  margin-right: 1rem;
 
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 
   padding: 1rem 1rem 0 1rem;
-
   z-index: 12;
 `;
 
