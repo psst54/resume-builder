@@ -159,6 +159,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    refreshSession(supabase, dispatch, setSignOut);
+  }, []);
+
+  useEffect(() => {
     setPdfComponent(<PDFPage data={data} mainColor={mainColor} />);
   }, [data, mainColor]);
 
@@ -175,10 +179,6 @@ function App() {
     [instance, pageNumber],
     1000
   );
-
-  useEffect(() => {
-    refreshSession(supabase, dispatch, setSignOut, router);
-  }, []);
 
   return (
     <Page>
