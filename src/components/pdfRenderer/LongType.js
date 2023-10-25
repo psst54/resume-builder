@@ -71,6 +71,9 @@ const longTypeStyles = StyleSheet.create({
   dateText: {
     color: color.gray.standard,
   },
+  link: {
+    flexGrow: 0,
+  },
 });
 
 const LongType = ({ data, mainColor }) => {
@@ -141,12 +144,23 @@ const LongType = ({ data, mainColor }) => {
 
               if (descItem.type === "link")
                 return (
-                  <Link
-                    style={[styles.disableLinkStyle, { color: mainColor }]}
-                    src={descItem.url}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                    }}
                   >
-                    {descItem.title}
-                  </Link>
+                    <Link
+                      style={[
+                        styles.disableLinkStyle,
+                        longTypeStyles.link,
+                        { color: mainColor },
+                      ]}
+                      src={descItem.url}
+                    >
+                      {descItem.title}
+                    </Link>
+                  </div>
                 );
             })}
           </div>

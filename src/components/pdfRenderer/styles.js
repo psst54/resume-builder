@@ -55,7 +55,10 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   contactItemIcon: { width: 8, height: 8 },
-  disableLinkStyle: { color: color.primary.standard, textDecoration: "none" },
+  disableLinkStyle: {
+    color: color.primary.standard,
+    textDecoration: "none",
+  },
 
   quote: {
     marginTop: 10,
