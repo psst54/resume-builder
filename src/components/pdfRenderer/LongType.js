@@ -38,7 +38,11 @@ const longTypeStyles = StyleSheet.create({
 
     lineHeight: 1.4,
   },
-  sectionItem: { wordBreak: "keep-all" },
+  sectionItem: {
+    display: "flex",
+    flexDirection: "column",
+    wordBreak: "keep-all",
+  },
   sectionPositionText: {
     color: color.gray.standard,
     fontSize: 9,
@@ -132,12 +136,24 @@ const LongType = ({ data, mainColor }) => {
                   <div key={descItemIdx} style={longTypeStyles.sectionItems}>
                     {descItem.items &&
                       descItem.items.map((listItem, listItemIdx) => (
-                        <Text
-                          key={listItemIdx}
-                          style={longTypeStyles.sectionItem}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
                         >
-                          • {listItem}
-                        </Text>
+                          <Text
+                            key={listItemIdx}
+                            style={longTypeStyles.sectionItem}
+                          >
+                            •{" "}
+                          </Text>
+                          <div>
+                            {listItem.split("\\n").map((line) => (
+                              <Text>{line}</Text>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                   </div>
                 );
