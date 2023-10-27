@@ -52,7 +52,7 @@ export default function Home() {
   ]);
 
   react.useEffect(() => {
-    refreshSession(supabase, dispatch, setSignOut, null);
+    refreshSession(supabase, dispatch, setSignOut);
   }, []);
 
   return (
