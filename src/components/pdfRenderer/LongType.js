@@ -137,17 +137,13 @@ const LongType = ({ data, mainColor }) => {
                     {descItem.items &&
                       descItem.items.map((listItem, listItemIdx) => (
                         <div
+                          key={listItemIdx}
                           style={{
                             display: "flex",
                             flexDirection: "row",
                           }}
                         >
-                          <Text
-                            key={listItemIdx}
-                            style={longTypeStyles.sectionItem}
-                          >
-                            •{" "}
-                          </Text>
+                          <Text style={longTypeStyles.sectionItem}>• </Text>
                           <div>
                             {listItem.split("\\n").map((line) => (
                               <Text>{line}</Text>
@@ -176,6 +172,24 @@ const LongType = ({ data, mainColor }) => {
                     >
                       {descItem.title}
                     </Link>
+                  </div>
+                );
+
+              if (descItem.type === "markdown")
+                return (
+                  <div key={descItemIdx} style={longTypeStyles.sectionItems}>
+                    {descItem.items &&
+                      descItem.items.map((listItem, listItemIdx) => (
+                        <div
+                          key={listItemIdx}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Text>{listItem}</Text>
+                        </div>
+                      ))}
                   </div>
                 );
             })}

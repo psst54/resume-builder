@@ -102,7 +102,8 @@ const DescItems = ({
   if (
     descItem.type === "list" ||
     descItem.type === "tag" ||
-    descItem.type === "link"
+    descItem.type === "link" ||
+    descItem.type === "markdown"
   )
     return (
       <Wrapper isTag={isTag}>
@@ -251,6 +252,54 @@ const DescItems = ({
                 });
               }}
             />
+          </>
+        )}
+
+        {descItem.type === "markdown" && (
+          <>
+            {descItem.items?.map((item, itemIdx) => {
+              return (
+                <ItemWrapper isTag={isTag}>
+                  <TextArea
+                    isFocused={editingIdx === itemIdx}
+                    value={item}
+                    onFocus={() => {
+                      setEditingIdx(itemIdx);
+                    }}
+                    onBlur={() => {
+                      setEditingIdx(undefined);
+                    }}
+                    onChange={(event) => {
+                      onChangeDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                        value: event.target.value,
+                      });
+                    }}
+                  >
+                    {item}
+                  </TextArea>
+
+                  <DeleteTagItemButton
+                    src="/deleteLeft.svg"
+                    onClick={() => {
+                      onDeleteDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                      });
+                    }}
+                  />
+                </ItemWrapper>
+              );
+            })}
           </>
         )}
       </Wrapper>
