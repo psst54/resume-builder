@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import { ACTION_PANEL_HEIGHT } from "@/styles";
 
 const DefaultInput = styled.input`

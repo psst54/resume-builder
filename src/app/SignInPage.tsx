@@ -3,7 +3,7 @@
 import react from "react";
 import styled from "@emotion/styled";
 
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 

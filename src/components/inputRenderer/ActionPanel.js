@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 
 import SaveIcon from "@/assets/SaveIcon";
 import DownloadIcon from "@/assets/DownloadIcon";

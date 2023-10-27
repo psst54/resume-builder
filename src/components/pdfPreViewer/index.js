@@ -10,14 +10,20 @@ const Container = styled.div`
 `;
 
 const PageButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2rem;
+  height: 2rem;
+
   background: transparent;
   border: 1px solid black;
-  border-radius: 0.4rem;
-  padding: 0.2rem 0.8rem;
-
-  cursor: pointer;
+  border-radius: 100%;
 
   font-size: 1.2rem;
+
+  cursor: pointer;
 `;
 const PageNumber = styled.p`
   width: 5rem;

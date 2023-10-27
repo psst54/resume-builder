@@ -1,7 +1,7 @@
 import react from "react";
 
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import Input from "./input";
 
 const Wrapper = styled.div`
@@ -26,8 +26,7 @@ const ItemWrapper = styled.div`
   min-width: 7rem;
 `;
 const ItemInput = styled.input`
-  width: ${({ isTag, len }) =>
-    isTag ? `calc(min(${len * 0.8}rem, 100%))` : "100%"};
+  width: ${({ len }) => `calc(min(${len * 0.8}rem, 100%))`};
   min-width: 7rem;
 
   font-size: 1rem;
@@ -37,8 +36,20 @@ const ItemInput = styled.input`
 
   border: 2px solid ${color.lightGray.standard};
   border-radius: 0.6rem;
+`;
+const TextArea = styled.textarea`
+  width: 100%;
+  background: ${({ isFocused }) =>
+    isFocused ? "transparent" : color.lightGray.standard};
+  padding: 0.2rem 2rem 0.2rem 1rem;
 
-  ${({ isTag }) => (isTag ? "" : "justify-content: space-between;")}
+  font-size: 1rem;
+
+  border: 2px solid ${color.lightGray.standard};
+  border-radius: 0.6rem;
+  justify-content: space-between;
+
+  resize: vertical;
 `;
 
 const DeleteTagItemButton = styled.img`
@@ -95,7 +106,7 @@ const DescItems = ({
   )
     return (
       <Wrapper isTag={isTag}>
-        {(descItem.type === "tag" || descItem.type === "list") && (
+        {descItem.type === "tag" && (
           <>
             {descItem.items?.map((item, itemIdx) => (
               <ItemWrapper len={item.length} isTag={isTag}>
@@ -138,6 +149,65 @@ const DescItems = ({
                 />
               </ItemWrapper>
             ))}
+            <AddButton
+              onClick={() => {
+                onAddDescItem({
+                  data,
+                  setData,
+                  idxObj,
+                });
+              }}
+            >
+              추가하기
+            </AddButton>
+          </>
+        )}
+
+        {descItem.type === "list" && (
+          <>
+            {descItem.items?.map((item, itemIdx) => {
+              return (
+                <ItemWrapper isTag={isTag}>
+                  <TextArea
+                    isFocused={editingIdx === itemIdx}
+                    value={item}
+                    onFocus={() => {
+                      setEditingIdx(itemIdx);
+                    }}
+                    onBlur={() => {
+                      setEditingIdx(undefined);
+                    }}
+                    onChange={(event) => {
+                      onChangeDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                        value: event.target.value,
+                      });
+                    }}
+                  >
+                    {item}
+                  </TextArea>
+
+                  <DeleteTagItemButton
+                    src="/deleteLeft.svg"
+                    onClick={() => {
+                      onDeleteDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                      });
+                    }}
+                  />
+                </ItemWrapper>
+              );
+            })}
             <AddButton
               onClick={() => {
                 onAddDescItem({

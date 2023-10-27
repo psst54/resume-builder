@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import { HEADER_HEIGHT } from "@/styles";
 
 import HomeIcon from "@assets/HomeIcon";

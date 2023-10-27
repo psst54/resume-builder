@@ -1,9 +1,4 @@
-export const refreshSession = async (
-  supabase,
-  dispatch,
-  setSignOut,
-  router
-) => {
+export const refreshSession = async (supabase, dispatch, setSignOut) => {
   try {
     const { error } = await supabase.auth.refreshSession();
     if (error) throw Error();

@@ -1,5 +1,5 @@
 import { StyleSheet } from "@react-pdf/renderer";
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 
 const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------
@@ -55,7 +55,10 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   contactItemIcon: { width: 8, height: 8 },
-  disableLinkStyle: { color: color.primary.standard, textDecoration: "none" },
+  disableLinkStyle: {
+    color: color.primary.standard,
+    textDecoration: "none",
+  },
 
   quote: {
     marginTop: 10,

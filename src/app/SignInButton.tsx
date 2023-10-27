@@ -6,7 +6,7 @@ import { setSignIn } from "@features/userSlice";
 
 import { supabase } from "@libs/supabase";
 
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 
 const buttonStyle = {
   width: "18rem",

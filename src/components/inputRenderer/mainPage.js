@@ -71,6 +71,25 @@ const sectionTypeData = [
   },
 ];
 
+const shortSectionData = [
+  {
+    title: "일자",
+    field: "year",
+  },
+  {
+    title: "역할",
+    field: "position",
+  },
+  {
+    title: "활동명",
+    field: "subscription",
+  },
+  {
+    title: "위치",
+    field: "location",
+  },
+];
+
 const emptySectionTemplate = {
   title: "",
   type: "text",
@@ -236,69 +255,25 @@ const InputPage = ({
             {bodyItem.type === "short" &&
               bodyItem?.content?.map((contentItem, contentItemIdx) => (
                 <SectionItemContainer>
-                  <InputContainer>
-                    <InputTitle>일자</InputTitle>
-                    <LargeInput
-                      value={contentItem.year}
-                      onChange={(event) => {
-                        onChangeContentItem({
-                          data,
-                          setData,
-                          idxObj: { bodyItemIdx, contentItemIdx },
-                          field: "year",
-                          value: event.target.value,
-                        });
-                      }}
-                    />
-                  </InputContainer>
-
-                  <InputContainer>
-                    <InputTitle>역할</InputTitle>
-                    <LargeInput
-                      value={contentItem.position}
-                      onChange={(event) => {
-                        onChangeContentItem({
-                          data,
-                          setData,
-                          idxObj: { bodyItemIdx, contentItemIdx },
-                          field: "position",
-                          value: event.target.value,
-                        });
-                      }}
-                    />
-                  </InputContainer>
-
-                  <InputContainer>
-                    <InputTitle>활동명</InputTitle>
-                    <LargeInput
-                      value={contentItem.subscription}
-                      onChange={(event) => {
-                        onChangeContentItem({
-                          data,
-                          setData,
-                          idxObj: { bodyItemIdx, contentItemIdx },
-                          field: "subscription",
-                          value: event.target.value,
-                        });
-                      }}
-                    />
-                  </InputContainer>
-
-                  <InputContainer>
-                    <InputTitle>위치</InputTitle>
-                    <LargeInput
-                      value={contentItem.location}
-                      onChange={(event) => {
-                        onChangeContentItem({
-                          data,
-                          setData,
-                          idxObj: { bodyItemIdx, contentItemIdx },
-                          field: "location",
-                          value: event.target.value,
-                        });
-                      }}
-                    />
-                  </InputContainer>
+                  {shortSectionData.map(
+                    (shortSectionDatum, shortSectionDatumIdx) => (
+                      <InputContainer key={shortSectionDatumIdx}>
+                        <InputTitle>{shortSectionDatum.title}</InputTitle>
+                        <LargeInput
+                          value={contentItem[shortSectionDatum.field]}
+                          onChange={(event) => {
+                            onChangeContentItem({
+                              data,
+                              setData,
+                              idxObj: { bodyItemIdx, contentItemIdx },
+                              field: shortSectionDatum.field,
+                              value: event.target.value,
+                            });
+                          }}
+                        />
+                      </InputContainer>
+                    )
+                  )}
                 </SectionItemContainer>
               ))}
 

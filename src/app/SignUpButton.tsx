@@ -2,7 +2,7 @@
 
 import { supabase } from "@libs/supabase";
 
-import { color } from "@/app/styles";
+import { color } from "@/styles/color";
 import {
   checkEmail,
   checkPasswordLength,
