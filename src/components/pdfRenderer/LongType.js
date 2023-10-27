@@ -1,5 +1,6 @@
 import { Text, StyleSheet, Link } from "@react-pdf/renderer";
 import { styles, color } from "./styles";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const longTypeStyles = StyleSheet.create({
   sectionContentWrapper: {
@@ -184,10 +185,10 @@ const LongType = ({ data, mainColor }) => {
                           key={listItemIdx}
                           style={{
                             display: "flex",
-                            flexDirection: "row",
+                            flexDirection: "column",
                           }}
                         >
-                          <Text>{listItem}</Text>
+                          <MarkdownRenderer content={listItem} />
                         </div>
                       ))}
                   </div>
