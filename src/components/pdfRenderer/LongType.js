@@ -188,7 +188,10 @@ const LongType = ({ data, mainColor }) => {
                             flexDirection: "column",
                           }}
                         >
-                          <MarkdownRenderer content={listItem} />
+                          <MarkdownRenderer
+                            content={listItem}
+                            mainColor={mainColor}
+                          />
                         </div>
                       ))}
                   </div>
