@@ -29,7 +29,7 @@ const longTypeStyles = StyleSheet.create({
     flexBasis: 0,
     flexGrow: 1,
   },
-  contentTitle: { fontSize: 12, fontWeight: 500 },
+  contentTitle: { fontSize: 12, fontWeight: 600 },
   sectionItems: {
     width: "100%",
 
