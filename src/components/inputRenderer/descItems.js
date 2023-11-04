@@ -1,4 +1,4 @@
-import react from "react";
+import { useEffect, useState } from "react";
 
 import styled from "@emotion/styled";
 import { color } from "@/styles/color";
@@ -97,7 +97,43 @@ const DescItems = ({
   const type = descItem.type;
   const isTag = type === "tag";
 
-  const [editingIdx, setEditingIdx] = react.useState(undefined);
+  const [editingIdx, setEditingIdx] = useState(undefined);
+  const [selectedTextareaData, setSelectedTextareaData] = useState({});
+
+  useEffect(() => {
+    const textarea = document.getElementById("allowTab");
+
+    if (!textarea) return;
+
+    function handelTab(event) {
+      if (event.key === "Tab") {
+        event.preventDefault();
+
+        const target = event.target;
+
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+
+        const text = target.value;
+        const newText = text.substring(0, start) + "\t" + text.substring(end);
+
+        onChangeDescItem({
+          data,
+          setData,
+          idxObj: selectedTextareaData,
+          value: newText,
+        });
+      }
+    }
+
+    textarea.addEventListener("keydown", handelTab);
+
+    const cleanup = () => {
+      textarea.removeEventListener("keydown", handelTab);
+    };
+
+    return cleanup;
+  }, [descItem.type, selectedTextareaData]);
 
   if (
     descItem.type === "list" ||
@@ -106,7 +142,7 @@ const DescItems = ({
     descItem.type === "markdown"
   )
     return (
-      <Wrapper isTag={isTag}>
+      <Wrapper isTag={isTag} id="allowTab">
         {descItem.type === "tag" && (
           <>
             {descItem.items?.map((item, itemIdx) => (
@@ -265,6 +301,10 @@ const DescItems = ({
                     value={item}
                     onFocus={() => {
                       setEditingIdx(itemIdx);
+                      setSelectedTextareaData({
+                        ...idxObj,
+                        targetIdx: itemIdx,
+                      });
                     }}
                     onBlur={() => {
                       setEditingIdx(undefined);
