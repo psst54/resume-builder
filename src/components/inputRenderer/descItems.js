@@ -26,7 +26,8 @@ const ItemWrapper = styled.div`
   min-width: 7rem;
 `;
 const ItemInput = styled.input`
-  width: ${({ len }) => `calc(min(${len * 0.8}rem, 100%))`};
+  width: ${({ isTag, len }) =>
+    isTag ? `calc(min(${len * 0.8}rem, 100%))` : "100%"};
   min-width: 7rem;
 
   font-size: 1rem;
@@ -36,6 +37,7 @@ const ItemInput = styled.input`
 
   border: 2px solid ${color.lightGray.standard};
   border-radius: 0.6rem;
+  ${({ isTag }) => (isTag ? "" : "justify-content: space-between;")}
 `;
 const TextArea = styled.textarea`
   width: 100%;
@@ -204,8 +206,9 @@ const DescItems = ({
           <>
             {descItem.items?.map((item, itemIdx) => {
               return (
-                <ItemWrapper isTag={isTag}>
-                  <TextArea
+                <ItemWrapper isTag={false}>
+                  <ItemInput
+                    isTag={false}
                     isFocused={editingIdx === itemIdx}
                     value={item}
                     onFocus={() => {
@@ -225,9 +228,7 @@ const DescItems = ({
                         value: event.target.value,
                       });
                     }}
-                  >
-                    {item}
-                  </TextArea>
+                  />
 
                   <DeleteTagItemButton
                     src="/deleteLeft.svg"
