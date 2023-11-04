@@ -126,7 +126,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
           let arr = [];
           let index = 0;
           let flag = true;
-          props.children.forEach((child) => {
+          props?.children?.forEach((child) => {
             if (
               typeof child === "string" ||
               child.key.includes("a") ||
