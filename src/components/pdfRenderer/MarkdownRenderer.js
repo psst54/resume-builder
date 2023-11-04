@@ -54,54 +54,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
                     }}
                   >
                     <Text style={{ flexShrink: 0 }}>• </Text>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      {child}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        },
-        ol(props) {
-          if (typeof props.children === "string") {
-            if (props.children !== "\n") return <Text>{props.children}</Text>;
-            return <></>;
-          }
-          return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {props?.children?.map((child) => {
-                if (typeof child === "string") {
-                  if (child !== "\n")
-                    return (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <Text style={{ flexShrink: 0 }}>• </Text>
-                        <Text>{child}</Text>
-                      </div>
-                    );
-                  return <></>;
-                }
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      paddingLeft: 2,
-                      paddingTop: 0.2,
-                      paddingBottom: 0.2,
-                    }}
-                  >
-                    <Text style={{ flexShrink: 0 }}>• </Text>
+                    {/* <Text style={{ flexShrink: 0 }}>{child}</Text> */}
                     <div
                       style={{
                         display: "flex",
@@ -123,10 +76,15 @@ export default function MarkdownRenderer({ content, mainColor }) {
             return <></>;
           }
 
+          if (!Array.isArray(props.children)) {
+            return props.children;
+          }
+
           let arr = [];
           let index = 0;
           let flag = true;
-          props?.children?.forEach((child) => {
+
+          props.children.forEach((child) => {
             if (
               typeof child === "string" ||
               child.key.includes("a") ||

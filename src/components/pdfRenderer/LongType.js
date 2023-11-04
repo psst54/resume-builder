@@ -181,18 +181,11 @@ const LongType = ({ data, mainColor }) => {
                   <div key={descItemIdx} style={longTypeStyles.sectionItems}>
                     {descItem.items &&
                       descItem.items.map((listItem, listItemIdx) => (
-                        <div
+                        <MarkdownRenderer
                           key={listItemIdx}
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
-                        >
-                          <MarkdownRenderer
-                            content={listItem}
-                            mainColor={mainColor}
-                          />
-                        </div>
+                          content={listItem}
+                          mainColor={mainColor}
+                        />
                       ))}
                   </div>
                 );
