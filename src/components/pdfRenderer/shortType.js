@@ -25,6 +25,7 @@ const shortTypeStyles = StyleSheet.create({
   },
   honorInfo: {
     wordBreak: "keep-all",
+    fontWeight: 300,
   },
   positionText: { fontWeight: 600 },
 

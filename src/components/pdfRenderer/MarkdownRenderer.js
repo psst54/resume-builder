@@ -38,7 +38,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
                     return (
                       <div style={{ display: "flex", flexDirection: "row" }}>
                         <Text style={{ flexShrink: 0 }}>• </Text>
-                        <Text>{child}</Text>
+                        <Text style={{ fontWeight: 300 }}>{child}</Text>
                       </div>
                     );
                   return <></>;
@@ -118,7 +118,8 @@ export default function MarkdownRenderer({ content, mainColor }) {
         },
         li(props) {
           if (typeof props.children === "string") {
-            if (props.children !== "\n") return <Text>{props.children}</Text>;
+            if (props.children !== "\n")
+              return <Text style={{ fontWeight: 300 }}>{props.children}</Text>;
             return <></>;
           }
 
@@ -168,7 +169,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
                     }}
                   >
                     {item.arr.map((str) => (
-                      <Text>{str}</Text>
+                      <Text style={{ fontWeight: 300 }}>{str}</Text>
                     ))}
                   </div>
                 ) : (
@@ -186,7 +187,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
           );
         },
         p(props) {
-          return <Text>{props.children}</Text>;
+          return <Text style={{ fontWeight: 300 }}>{props.children}</Text>;
         },
         strong(props) {
           return <Text style={{ fontWeight: 900 }}>{props.children}</Text>;
