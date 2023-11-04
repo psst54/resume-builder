@@ -93,6 +93,7 @@ const shortSectionData = [
 const emptySectionTemplate = {
   title: "",
   type: "text",
+  content: [{ text: "" }],
 };
 const emptyContentTemplate = {
   title: "",
