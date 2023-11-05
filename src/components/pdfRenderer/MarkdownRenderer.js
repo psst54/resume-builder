@@ -12,13 +12,13 @@ export default function MarkdownRenderer({ content, mainColor }) {
     <Markdown
       components={{
         h1(props) {
-          return <Text style={makrdownStyles.h1}>{props.children}</Text>;
+          return <Text style={makrdownStyles.h1} {...props} />;
         },
         h2(props) {
-          return <Text style={makrdownStyles.h2}>{props.children}</Text>;
+          return <Text style={makrdownStyles.h2} {...props} />;
         },
         h3(props) {
-          return <Text style={makrdownStyles.h3}>{props.children}</Text>;
+          return <Text style={makrdownStyles.h3} {...props} />;
         },
         ul(props) {
           if (typeof props.children === "string") {
@@ -36,13 +36,22 @@ export default function MarkdownRenderer({ content, mainColor }) {
                 if (typeof child === "string") {
                   if (child !== "\n")
                     return (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          paddingLeft: 2,
+                          paddingTop: 0.2,
+                          paddingBottom: 0.2,
+                        }}
+                      >
                         <Text style={{ flexShrink: 0 }}>• </Text>
                         <Text style={{ fontWeight: 300 }}>{child}</Text>
                       </div>
                     );
                   return <></>;
                 }
+
                 return (
                   <div
                     style={{
@@ -54,7 +63,6 @@ export default function MarkdownRenderer({ content, mainColor }) {
                     }}
                   >
                     <Text style={{ flexShrink: 0 }}>• </Text>
-                    {/* <Text style={{ flexShrink: 0 }}>{child}</Text> */}
                     <div
                       style={{
                         display: "flex",
@@ -145,19 +153,17 @@ export default function MarkdownRenderer({ content, mainColor }) {
           );
         },
         p(props) {
-          return <Text style={{ fontWeight: 300 }}>{props.children}</Text>;
+          return <Text style={{ fontWeight: 300 }} {...props} />;
         },
         strong(props) {
-          return <Text style={{ fontWeight: 900 }}>{props.children}</Text>;
+          return <Text style={{ fontWeight: 900 }} {...props} />;
         },
         a(props) {
           return (
             <Link
               style={{ color: mainColor, textDecoration: "none" }}
-              href={props.href}
-            >
-              {props.children}
-            </Link>
+              {...props}
+            />
           );
         },
       }}
