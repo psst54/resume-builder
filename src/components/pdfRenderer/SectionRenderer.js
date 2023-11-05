@@ -29,8 +29,6 @@ const rendererStyles = StyleSheet.create({
 });
 
 const SectionRenderer = ({ data, mainColor }) => {
-  console.log(data);
-
   return (
     <View style={rendererStyles.section} wrap>
       <div style={rendererStyles.sectionHeader}>

@@ -81,11 +81,11 @@ export default function MarkdownRenderer({ content, mainColor }) {
           if (typeof props.children === "string") {
             if (props.children !== "\n")
               return <Text style={{ fontWeight: 300 }}>{props.children}</Text>;
-            return <></>;
+            return <Text></Text>;
           }
 
           if (!Array.isArray(props.children)) {
-            return props.children;
+            return <Text>{props.children}</Text>;
           }
 
           let arr = [];
