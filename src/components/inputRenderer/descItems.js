@@ -41,6 +41,8 @@ const ItemInput = styled.input`
 `;
 const TextArea = styled.textarea`
   width: 100%;
+  height: 10rem;
+
   background: ${({ isFocused }) =>
     isFocused ? "transparent" : color.lightGray.standard};
   padding: 0.2rem 2rem 0.2rem 1rem;
