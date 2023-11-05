@@ -53,8 +53,6 @@ const ColorSelector = ({ mainColor, setMainColor }) => {
 
   const [isOpen, setIsOpen] = react.useState(false);
 
-  // return <div>wefwe</div>;
-
   return (
     <>
       <SectionTitleContainer>

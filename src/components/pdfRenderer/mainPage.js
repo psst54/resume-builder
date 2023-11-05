@@ -87,6 +87,11 @@ Font.register({
   ],
 });
 
+Font.registerEmojiSource({
+  format: "png",
+  url: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/",
+});
+
 const PDFPage = ({ data, mainColor }) => {
   const monthData = [
     "JANUARY",
@@ -115,7 +120,7 @@ const PDFPage = ({ data, mainColor }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <div style={styles.pageWrapper}>
+        <View style={styles.pageWrapper} wrap>
           <div style={styles.header}>
             {data?.header?.name ? (
               <Text style={styles.userName}>
@@ -179,7 +184,7 @@ const PDFPage = ({ data, mainColor }) => {
               <Text style={styles.quote}>{data?.header?.quote}</Text>
             )}
           </div>
-          <div style={styles.sections}>
+          <View style={styles.sections}>
             {data &&
               data.body &&
               data.body.map((datum, datumIdx) => (
@@ -189,8 +194,8 @@ const PDFPage = ({ data, mainColor }) => {
                   mainColor={mainColor}
                 />
               ))}
-          </div>
-        </div>
+          </View>
+        </View>
 
         <View style={styles.footer} fixed>
           <Text style={styles.pageNumber}>

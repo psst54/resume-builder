@@ -1,5 +1,6 @@
-import { Text, StyleSheet, Link } from "@react-pdf/renderer";
+import { View, Text, StyleSheet, Link } from "@react-pdf/renderer";
 import { styles, color } from "./styles";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const longTypeStyles = StyleSheet.create({
   sectionContentWrapper: {
@@ -82,9 +83,13 @@ const longTypeStyles = StyleSheet.create({
 
 const LongType = ({ data, mainColor }) => {
   return (
-    <div style={longTypeStyles.sectionContentWrapper}>
+    <View style={longTypeStyles.sectionContentWrapper}>
       {data?.content?.map((content, contentIdx) => (
-        <div key={contentIdx} style={longTypeStyles.sectionContent}>
+        <View
+          key={contentIdx}
+          style={longTypeStyles.sectionContent}
+          wrap={false}
+        >
           <div style={longTypeStyles.sectionMain}>
             <div style={longTypeStyles.titleSection}>
               <div style={longTypeStyles.titleText}>
@@ -137,17 +142,13 @@ const LongType = ({ data, mainColor }) => {
                     {descItem.items &&
                       descItem.items.map((listItem, listItemIdx) => (
                         <div
+                          key={listItemIdx}
                           style={{
                             display: "flex",
                             flexDirection: "row",
                           }}
                         >
-                          <Text
-                            key={listItemIdx}
-                            style={longTypeStyles.sectionItem}
-                          >
-                            •{" "}
-                          </Text>
+                          <Text style={longTypeStyles.sectionItem}>• </Text>
                           <div>
                             {listItem.split("\\n").map((line) => (
                               <Text>{line}</Text>
@@ -178,11 +179,25 @@ const LongType = ({ data, mainColor }) => {
                     </Link>
                   </div>
                 );
+
+              if (descItem.type === "markdown")
+                return (
+                  <div key={descItemIdx} style={longTypeStyles.sectionItems}>
+                    {descItem.items &&
+                      descItem.items.map((listItem, listItemIdx) => (
+                        <MarkdownRenderer
+                          key={listItemIdx}
+                          content={listItem}
+                          mainColor={mainColor}
+                        />
+                      ))}
+                  </div>
+                );
             })}
           </div>
-        </div>
+        </View>
       ))}
-    </div>
+    </View>
   );
 };
 

@@ -30,7 +30,7 @@ const rendererStyles = StyleSheet.create({
 
 const SectionRenderer = ({ data, mainColor }) => {
   return (
-    <View style={rendererStyles.section} wrap={false}>
+    <View style={rendererStyles.section} wrap>
       <div style={rendererStyles.sectionHeader}>
         <Text style={rendererStyles.sectionTitle}>
           <Text style={{ color: mainColor }}>{data?.title?.slice(0, 3)}</Text>

@@ -1,6 +1,3 @@
-import styled from "@emotion/styled";
-import { color } from "@/styles/color";
-
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -20,6 +17,10 @@ const itemTypeData = [
   {
     title: "링크",
     value: "link",
+  },
+  {
+    title: "마크다운",
+    value: "markdown",
   },
 ];
 

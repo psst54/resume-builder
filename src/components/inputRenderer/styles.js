@@ -141,7 +141,7 @@ const InputTitle = styled.h3`
   display: flex;
   flex-basis: 8rem;
   flex-shrink: 0;
-  padding-top: 0.4rem; // 높이 맞추기용
+  padding-top: 0.4rem;
 
   @media (max-width: 1200px) {
     flex-basis: 0;

@@ -1,4 +1,4 @@
-import react from "react";
+import { useEffect, useState } from "react";
 
 import styled from "@emotion/styled";
 import { color } from "@/styles/color";
@@ -26,7 +26,8 @@ const ItemWrapper = styled.div`
   min-width: 7rem;
 `;
 const ItemInput = styled.input`
-  width: ${({ len }) => `calc(min(${len * 0.8}rem, 100%))`};
+  width: ${({ isTag, len }) =>
+    isTag ? `calc(min(${len * 0.8}rem, 100%))` : "100%"};
   min-width: 7rem;
 
   font-size: 1rem;
@@ -36,9 +37,12 @@ const ItemInput = styled.input`
 
   border: 2px solid ${color.lightGray.standard};
   border-radius: 0.6rem;
+  ${({ isTag }) => (isTag ? "" : "justify-content: space-between;")}
 `;
 const TextArea = styled.textarea`
   width: 100%;
+  height: 10rem;
+
   background: ${({ isFocused }) =>
     isFocused ? "transparent" : color.lightGray.standard};
   padding: 0.2rem 2rem 0.2rem 1rem;
@@ -97,15 +101,52 @@ const DescItems = ({
   const type = descItem.type;
   const isTag = type === "tag";
 
-  const [editingIdx, setEditingIdx] = react.useState(undefined);
+  const [editingIdx, setEditingIdx] = useState(undefined);
+  const [selectedTextareaData, setSelectedTextareaData] = useState({});
+
+  useEffect(() => {
+    const textarea = document.getElementById("allowTab");
+
+    if (!textarea) return;
+
+    function handelTab(event) {
+      if (event.key === "Tab") {
+        event.preventDefault();
+
+        const target = event.target;
+
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+
+        const text = target.value;
+        const newText = text.substring(0, start) + "\t" + text.substring(end);
+
+        onChangeDescItem({
+          data,
+          setData,
+          idxObj: selectedTextareaData,
+          value: newText,
+        });
+      }
+    }
+
+    textarea.addEventListener("keydown", handelTab);
+
+    const cleanup = () => {
+      textarea.removeEventListener("keydown", handelTab);
+    };
+
+    return cleanup;
+  }, [descItem.type, selectedTextareaData]);
 
   if (
     descItem.type === "list" ||
     descItem.type === "tag" ||
-    descItem.type === "link"
+    descItem.type === "link" ||
+    descItem.type === "markdown"
   )
     return (
-      <Wrapper isTag={isTag}>
+      <Wrapper isTag={isTag} id="allowTab">
         {descItem.type === "tag" && (
           <>
             {descItem.items?.map((item, itemIdx) => (
@@ -167,8 +208,9 @@ const DescItems = ({
           <>
             {descItem.items?.map((item, itemIdx) => {
               return (
-                <ItemWrapper isTag={isTag}>
-                  <TextArea
+                <ItemWrapper isTag={false}>
+                  <ItemInput
+                    isTag={false}
                     isFocused={editingIdx === itemIdx}
                     value={item}
                     onFocus={() => {
@@ -188,9 +230,7 @@ const DescItems = ({
                         value: event.target.value,
                       });
                     }}
-                  >
-                    {item}
-                  </TextArea>
+                  />
 
                   <DeleteTagItemButton
                     src="/deleteLeft.svg"
@@ -251,6 +291,58 @@ const DescItems = ({
                 });
               }}
             />
+          </>
+        )}
+
+        {descItem.type === "markdown" && (
+          <>
+            {descItem.items?.map((item, itemIdx) => {
+              return (
+                <ItemWrapper isTag={isTag}>
+                  <TextArea
+                    isFocused={editingIdx === itemIdx}
+                    value={item}
+                    onFocus={() => {
+                      setEditingIdx(itemIdx);
+                      setSelectedTextareaData({
+                        ...idxObj,
+                        targetIdx: itemIdx,
+                      });
+                    }}
+                    onBlur={() => {
+                      setEditingIdx(undefined);
+                    }}
+                    onChange={(event) => {
+                      onChangeDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                        value: event.target.value,
+                      });
+                    }}
+                  >
+                    {item}
+                  </TextArea>
+
+                  <DeleteTagItemButton
+                    src="/deleteLeft.svg"
+                    onClick={() => {
+                      onDeleteDescItem({
+                        data,
+                        setData,
+                        idxObj: {
+                          ...idxObj,
+                          targetIdx: itemIdx,
+                        },
+                      });
+                    }}
+                  />
+                </ItemWrapper>
+              );
+            })}
           </>
         )}
       </Wrapper>
