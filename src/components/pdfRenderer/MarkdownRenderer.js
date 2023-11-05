@@ -1,7 +1,7 @@
 import { Text, StyleSheet, Link } from "@react-pdf/renderer";
 import Markdown from "react-markdown";
 
-const makrdownStyles = StyleSheet.create({
+const markdownStyles = StyleSheet.create({
   h1: { fontSize: 16, fontWeight: 800 },
   h2: { fontSize: 14, fontWeight: 700 },
   h3: { fontSize: 12, fontWeight: 600 },
@@ -12,13 +12,13 @@ export default function MarkdownRenderer({ content, mainColor }) {
     <Markdown
       components={{
         h1(props) {
-          return <Text style={makrdownStyles.h1} {...props} />;
+          return <Text style={markdownStyles.h1} {...props} />;
         },
         h2(props) {
-          return <Text style={makrdownStyles.h2} {...props} />;
+          return <Text style={markdownStyles.h2} {...props} />;
         },
         h3(props) {
-          return <Text style={makrdownStyles.h3} {...props} />;
+          return <Text style={markdownStyles.h3} {...props} />;
         },
         ul(props) {
           if (typeof props.children === "string") {
