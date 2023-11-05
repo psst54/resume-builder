@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Link } from "@react-pdf/renderer";
+import { View, Text, StyleSheet, Link } from "@react-pdf/renderer";
 import { styles, color } from "./styles";
 import MarkdownRenderer from "./MarkdownRenderer";
 
@@ -83,9 +83,13 @@ const longTypeStyles = StyleSheet.create({
 
 const LongType = ({ data, mainColor }) => {
   return (
-    <div style={longTypeStyles.sectionContentWrapper}>
+    <View style={longTypeStyles.sectionContentWrapper}>
       {data?.content?.map((content, contentIdx) => (
-        <div key={contentIdx} style={longTypeStyles.sectionContent}>
+        <View
+          key={contentIdx}
+          style={longTypeStyles.sectionContent}
+          wrap={false}
+        >
           <div style={longTypeStyles.sectionMain}>
             <div style={longTypeStyles.titleSection}>
               <div style={longTypeStyles.titleText}>
@@ -191,9 +195,9 @@ const LongType = ({ data, mainColor }) => {
                 );
             })}
           </div>
-        </div>
+        </View>
       ))}
-    </div>
+    </View>
   );
 };
 

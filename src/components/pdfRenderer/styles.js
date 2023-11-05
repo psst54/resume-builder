@@ -22,7 +22,11 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     paddingRight: 50,
   },
-  sections: { display: "flex", flexDirection: "column", gap: 20 },
+  sections: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
 
   // header--------------------------------------------------------------------------
 
