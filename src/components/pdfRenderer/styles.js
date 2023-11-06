@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
   contactItemIcon: { width: 8, height: 8 },
   disableLinkStyle: {
     color: color.primary.standard,
-    textDecoration: "none",
   },
 
   quote: {

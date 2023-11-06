@@ -159,12 +159,7 @@ export default function MarkdownRenderer({ content, mainColor }) {
           return <Text style={{ fontWeight: 900 }} {...props} />;
         },
         a(props) {
-          return (
-            <Link
-              style={{ color: mainColor, textDecoration: "none" }}
-              {...props}
-            />
-          );
+          return <Link style={{ color: mainColor }} {...props} />;
         },
       }}
     >
