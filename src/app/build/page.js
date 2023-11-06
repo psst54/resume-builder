@@ -196,7 +196,7 @@ function App() {
             onSave={saveResume}
             onDelete={deleteResume}
             fileUrl={instance.url}
-            fileName={`${data?.header?.title}.pdf`}
+            fileName={`${resumeTitle}.pdf`}
           />
         </InputContainer>
 
