@@ -167,16 +167,13 @@ const LongType = ({ data, mainColor }) => {
                       alignItems: "flex-start",
                     }}
                   >
-                    <Link
-                      style={[
-                        styles.disableLinkStyle,
-                        longTypeStyles.link,
-                        { color: mainColor },
-                      ]}
-                      src={descItem.url}
-                    >
-                      {descItem.title}
-                    </Link>
+                    style=
+                    {[
+                      styles.disableLinkStyle,
+                      longTypeStyles.link,
+                      { color: mainColor },
+                    ]}
+                    src={descItem.url}>{descItem.title}
                   </div>
                 );
 
