@@ -30,13 +30,14 @@ const buttonStyle = {
 export default function SignInButton({ signInData }: { signInData: any }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
   const signIn = async () => {
-    const email = signInData.filter(
+    const email = signInData.find(
       (signInDatum: any) => signInDatum.field === "email"
-    )[0].value;
-    const password = signInData.filter(
+    ).value;
+    const password = signInData.find(
       (signInDatum: any) => signInDatum.field === "password"
-    )[0].value;
+    ).value;
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({

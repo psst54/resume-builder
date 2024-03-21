@@ -207,18 +207,18 @@ export default function Home({
                   marginLeft: "1rem",
 
                   color: checkPasswordLength({
-                    password: signUpData.filter(
+                    password: signUpData.find(
                       (signUpDatum: any) => signUpDatum.field === "password"
-                    )[0].value,
+                    ).value,
                   })
                     ? color.valid
                     : color.invalid,
                 }}
               >
                 {checkPasswordLength({
-                  password: signUpData.filter(
+                  password: signUpData.find(
                     (signUpDatum: any) => signUpDatum.field === "password"
-                  )[0].value,
+                  ).value,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (
@@ -235,26 +235,26 @@ export default function Home({
                   marginLeft: "1rem",
 
                   color: checkConfirmPassword({
-                    password: signUpData.filter(
+                    password: signUpData.find(
                       (signUpDatum: any) => signUpDatum.field === "password"
-                    )[0].value,
-                    confirmPassword: signUpData.filter(
+                    ).value,
+                    confirmPassword: signUpData.find(
                       (signUpDatum: any) =>
                         signUpDatum.field === "confirmPassword"
-                    )[0].value,
+                    ).value,
                   })
                     ? color.valid
                     : color.invalid,
                 }}
               >
                 {checkConfirmPassword({
-                  password: signUpData.filter(
+                  password: signUpData.find(
                     (signUpDatum: any) => signUpDatum.field === "password"
-                  )[0].value,
-                  confirmPassword: signUpData.filter(
+                  ).value,
+                  confirmPassword: signUpData.find(
                     (signUpDatum: any) =>
                       signUpDatum.field === "confirmPassword"
-                  )[0].value,
+                  ).value,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (

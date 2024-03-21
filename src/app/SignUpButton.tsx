@@ -30,15 +30,15 @@ const buttonStyle = {
 
 export default function SignUpButton({ signUpData }: { signUpData: any }) {
   const signUp = async () => {
-    const email = signUpData.filter(
+    const email = signUpData.find(
       (signUpDatum: any) => signUpDatum.field === "email"
-    )[0].value;
-    const password = signUpData.filter(
+    ).value;
+    const password = signUpData.find(
       (signUpDatum: any) => signUpDatum.field === "password"
-    )[0].value;
-    const confirmPassword = signUpData.filter(
+    ).value;
+    const confirmPassword = signUpData.find(
       (signUpDatum: any) => signUpDatum.field === "confirmPassword"
-    )[0].value;
+    ).value;
 
     if (!checkEmail({ email })) {
       alert("이메일 주소가 올바른지 확인해주세요");
