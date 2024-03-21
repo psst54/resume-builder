@@ -11,24 +11,16 @@ import { supabase } from "@libs/supabase";
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
-import { getRelativeTime } from "@utils/getRelativeTime";
+import Card, { resumeCard } from "@/components/Card";
 
-const resumeCard = {
-  display: "flex",
-  flexDirection: "column" as "column",
-
-  width: "100%",
-  height: "10rem",
-  padding: "2rem 3rem",
-  background: color.white.standard,
-  border: "none",
-  borderRadius: "1.2rem",
-
-  cursor: "pointer",
-};
 const secondaryCard = {
   background: color.lightGray.standard,
   border: "3px solid " + color.white.standard,
+};
+const CardTitle = {
+  margin: "auto",
+  fontSize: "1.2rem",
+  wordBreak: "keep-all" as const,
 };
 
 export default function Home() {
@@ -64,11 +56,12 @@ export default function Home() {
           modified_at: new Date(),
           main_color: "#003FC7",
         })
-        .select();
+        .select()
+        .single();
 
       if (error) throw new Error();
 
-      return data[0].id;
+      return data.id;
     } catch (err) {
       alert("새로 이력서를 만들지 못했습니다");
       return null;
@@ -105,22 +98,9 @@ export default function Home() {
             <Link
               key={resumeDatumIdx}
               href={`/build?resumeId=${resumeDatum?.id}`}
-              css={{ width: "100%", textDecoration: "none" }}
+              css={{ textDecoration: "none", color: color.black.standard }}
             >
-              <button css={resumeCard}>
-                <h2
-                  css={{
-                    fontSize: "1.2rem",
-                    wordBreak: "keep-all",
-                    textAlign: "left",
-                  }}
-                >
-                  {resumeDatum?.title}
-                </h2>
-                <p css={{ color: color.gray.standard }}>
-                  마지막 수정 {getRelativeTime(resumeDatum?.modified_at)}
-                </p>
-              </button>
+              <Card data={resumeDatum} />
             </Link>
           ))}
           <button
@@ -133,15 +113,7 @@ export default function Home() {
               }
             }}
           >
-            <h2
-              css={{
-                margin: "auto",
-                fontSize: "1.2rem",
-                wordBreak: "keep-all",
-              }}
-            >
-              처음부터 시작하기
-            </h2>
+            <h2 css={CardTitle}>처음부터 시작하기</h2>
           </button>
           <button
             css={[resumeCard, secondaryCard]}
@@ -153,15 +125,7 @@ export default function Home() {
               }
             }}
           >
-            <h2
-              css={{
-                margin: "auto",
-                fontSize: "1.2rem",
-                wordBreak: "keep-all",
-              }}
-            >
-              템플릿으로 시작하기
-            </h2>
+            <h2 css={CardTitle}>템플릿으로 시작하기</h2>
           </button>
         </div>
       </div>
