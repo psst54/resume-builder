@@ -13,11 +13,21 @@ import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
 import Card, { resumeCard } from "@/components/Card";
 
+const grid = {
+  display: "grid",
+  gap: "1rem",
+  width: "100%",
+  gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
+
+  padding: "2rem",
+};
+const resetLinkStyle = { textDecoration: "none", color: color.black.standard };
+
 const secondaryCard = {
   background: color.lightGray.standard,
   border: "3px solid " + color.white.standard,
 };
-const CardTitle = {
+const cardTitle = {
   margin: "auto",
   fontSize: "1.2rem",
   wordBreak: "keep-all" as const,
@@ -84,21 +94,12 @@ export default function Home() {
           background: color.lightGray.standard,
         }}
       >
-        <div
-          css={{
-            display: "grid",
-            gap: "1rem",
-            width: "100%",
-            gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
-
-            padding: "2rem",
-          }}
-        >
+        <div css={grid}>
           {resumeData?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
             <Link
               key={resumeDatumIdx}
               href={`/build?resumeId=${resumeDatum?.id}`}
-              css={{ textDecoration: "none", color: color.black.standard }}
+              css={resetLinkStyle}
             >
               <Card data={resumeDatum} />
             </Link>
@@ -113,7 +114,7 @@ export default function Home() {
               }
             }}
           >
-            <h2 css={CardTitle}>처음부터 시작하기</h2>
+            <h2 css={cardTitle}>처음부터 시작하기</h2>
           </button>
           <button
             css={[resumeCard, secondaryCard]}
@@ -125,7 +126,7 @@ export default function Home() {
               }
             }}
           >
-            <h2 css={CardTitle}>템플릿으로 시작하기</h2>
+            <h2 css={cardTitle}>템플릿으로 시작하기</h2>
           </button>
         </div>
       </div>

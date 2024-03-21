@@ -18,19 +18,18 @@ export const resumeCard = {
   cursor: "pointer",
 };
 
-const CardTitle = {
+const cardTitle = {
   fontSize: "1.2rem",
   wordBreak: "keep-all" as const,
   textAlign: "left" as const,
 };
+const dateText = { color: color.gray.standard };
 
 export default function Card({ data }: { data: Resume }) {
   return (
     <div css={resumeCard}>
-      <h2 css={CardTitle}>{data.title}</h2>
-      <p css={{ color: color.gray.standard }}>
-        마지막 수정 {getRelativeTime(data?.modified_at)}
-      </p>
+      <h2 css={cardTitle}>{data.title}</h2>
+      <p css={dateText}>마지막 수정 {getRelativeTime(data?.modified_at)}</p>
     </div>
   );
 }

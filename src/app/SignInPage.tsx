@@ -4,6 +4,7 @@ import react from "react";
 import styled from "@emotion/styled";
 
 import { color } from "@/styles/color";
+import { size } from "@/styles/size";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 
@@ -235,9 +236,9 @@ export default function Home({
                 {checkPasswordLength({
                   password: inputData.password,
                 }) ? (
-                  <CheckIcon size={"1rem"} color={color.valid} />
+                  <CheckIcon size={size.icon.small} color={color.valid} />
                 ) : (
-                  <XIcon size={"1rem"} color={color.invalid} />
+                  <XIcon size={size.icon.small} color={color.invalid} />
                 )}
                 6자리 이상
               </div>
@@ -261,9 +262,9 @@ export default function Home({
                   password: inputData.password,
                   confirmPassword: inputData.confirmPassword,
                 }) ? (
-                  <CheckIcon size={"1rem"} color={color.valid} />
+                  <CheckIcon size={size.icon.small} color={color.valid} />
                 ) : (
-                  <XIcon size={"1rem"} color={color.invalid} />
+                  <XIcon size={size.icon.small} color={color.invalid} />
                 )}
                 비밀번호 일치함
               </div>
