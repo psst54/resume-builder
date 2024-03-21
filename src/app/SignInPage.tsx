@@ -7,8 +7,8 @@ import { color } from "@/styles/color";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 
-import SignInButton from "../components/SignInButton";
-import SignUpButton from "../components/SignUpButton";
+import SignInButton from "@components/SignInButton";
+import SignUpButton from "@components/SignUpButton";
 
 import {
   checkPasswordLength,
