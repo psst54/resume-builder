@@ -11,6 +11,7 @@ import { supabase } from "@libs/supabase";
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
+import { getRelativeTime } from "./utils/timer";
 
 const resumeCard = {
   display: "flex",
@@ -80,31 +81,6 @@ export default function Home() {
     });
   }, []);
 
-  const timeForToday = (value: Date) => {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60
-    );
-    if (betweenTime < 1) return "방금 전";
-    if (betweenTime < 60) {
-      return `${betweenTime} 분 전`;
-    }
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour} 시간 전`;
-    }
-
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay} 일 전`;
-    }
-
-    return `${Math.floor(betweenTimeDay / 365)} 년 전`;
-  };
-
   return (
     <div>
       <Header />
@@ -142,7 +118,7 @@ export default function Home() {
                   {resumeDatum?.title}
                 </h2>
                 <p css={{ color: color.gray.standard }}>
-                  마지막 수정 {timeForToday(resumeDatum?.modified_at)}
+                  마지막 수정 {getRelativeTime(resumeDatum?.modified_at)}
                 </p>
               </button>
             </Link>
