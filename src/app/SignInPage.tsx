@@ -7,8 +7,8 @@ import { color } from "@/styles/color";
 import CheckIcon from "@assets/CheckIcon";
 import XIcon from "@assets//XIcon";
 
-import SignInButton from "./SignInButton";
-import SignUpButton from "./SignUpButton";
+import SignInButton from "../components/SignInButton";
+import SignUpButton from "../components/SignUpButton";
 
 import {
   checkPasswordLength,
@@ -89,16 +89,43 @@ const CheckPasswordContainer = styled.div`
   gap: 0.2rem;
 `;
 
+const signInData = [
+  { label: "이메일", field: "email", placeholder: "" },
+  {
+    label: "비밀번호",
+    field: "password",
+
+    placeholder: "",
+    type: "password",
+  },
+];
+
+const signUpData = [
+  {
+    label: "이메일",
+    field: "email",
+    placeholder: "sample@example.com",
+  },
+  {
+    label: "비밀번호",
+    field: "password",
+    placeholder: "6자리 이상",
+    type: "password",
+  },
+  {
+    label: "비밀번호 확인",
+    field: "confirmPassword",
+    placeholder: "비밀번호를 다시 입력주세요",
+    type: "password",
+  },
+];
+
 export default function Home({
-  signInData,
-  setSignInData,
-  signUpData,
-  setSignUpData,
+  inputData,
+  setInputData,
 }: {
-  signInData: any[];
-  setSignInData: Function;
-  signUpData: any[];
-  setSignUpData: Function;
+  inputData: any;
+  setInputData: any;
 }) {
   const [isSignIn, setIsSignIn] = react.useState(true);
 
@@ -158,20 +185,16 @@ export default function Home({
                   css={Input}
                   value={signInDatum.value}
                   onChange={(event) => {
-                    const newSignInData = signInData.map((oldDatum) =>
-                      oldDatum.field === signInDatum.field
-                        ? { ...oldDatum, value: event?.target?.value }
-                        : oldDatum
-                    );
-
-                    setSignInData(newSignInData);
+                    const newInputData = { ...inputData };
+                    newInputData[signInDatum.field] = event.target.value;
+                    setInputData(newInputData);
                   }}
                   type={signInDatum?.type}
                 />
               </div>
             ))}
 
-            <SignInButton signInData={signInData} />
+            <SignInButton inputData={inputData} />
           </>
         )}
 
@@ -184,13 +207,9 @@ export default function Home({
                   css={Input}
                   value={signUpDatum.value}
                   onChange={(event) => {
-                    const newSignUpData = signUpData.map((oldDatum: any) =>
-                      oldDatum.field === signUpDatum.field
-                        ? { ...oldDatum, value: event?.target?.value }
-                        : oldDatum
-                    );
-
-                    setSignUpData(newSignUpData);
+                    const newInputData = { ...inputData };
+                    newInputData[signUpDatum.field] = event.target.value;
+                    setInputData(newInputData);
                   }}
                   type={signUpDatum?.type}
                 />
@@ -207,18 +226,14 @@ export default function Home({
                   marginLeft: "1rem",
 
                   color: checkPasswordLength({
-                    password: signUpData.find(
-                      (signUpDatum: any) => signUpDatum.field === "password"
-                    ).value,
+                    password: inputData.password,
                   })
                     ? color.valid
                     : color.invalid,
                 }}
               >
                 {checkPasswordLength({
-                  password: signUpData.find(
-                    (signUpDatum: any) => signUpDatum.field === "password"
-                  ).value,
+                  password: inputData.password,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (
@@ -235,26 +250,16 @@ export default function Home({
                   marginLeft: "1rem",
 
                   color: checkConfirmPassword({
-                    password: signUpData.find(
-                      (signUpDatum: any) => signUpDatum.field === "password"
-                    ).value,
-                    confirmPassword: signUpData.find(
-                      (signUpDatum: any) =>
-                        signUpDatum.field === "confirmPassword"
-                    ).value,
+                    password: inputData.password,
+                    confirmPassword: inputData.confirmPassword,
                   })
                     ? color.valid
                     : color.invalid,
                 }}
               >
                 {checkConfirmPassword({
-                  password: signUpData.find(
-                    (signUpDatum: any) => signUpDatum.field === "password"
-                  ).value,
-                  confirmPassword: signUpData.find(
-                    (signUpDatum: any) =>
-                      signUpDatum.field === "confirmPassword"
-                  ).value,
+                  password: inputData.password,
+                  confirmPassword: inputData.confirmPassword,
                 }) ? (
                   <CheckIcon size={"1rem"} color={color.valid} />
                 ) : (
@@ -264,7 +269,7 @@ export default function Home({
               </div>
             </CheckPasswordContainer>
 
-            <SignUpButton signUpData={signUpData} />
+            <SignUpButton inputData={inputData} />
           </>
         )}
       </SignInButtonWrapper>

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import react from "react";
+import react, { useState } from "react";
 
 import SignInPage from "./SignInPage";
 import MainPage from "./MainPage";
@@ -17,39 +17,11 @@ export default function Home() {
     "true";
   const dispatch = useAppDispatch();
 
-  const [signInData, setSignInData] = react.useState([
-    { label: "이메일", field: "email", value: "", placeholder: "" },
-    {
-      label: "비밀번호",
-      field: "password",
-      value: "",
-      placeholder: "",
-      type: "password",
-    },
-  ]);
-
-  const [signUpData, setSignUpData] = react.useState([
-    {
-      label: "이메일",
-      field: "email",
-      value: "",
-      placeholder: "sample@example.com",
-    },
-    {
-      label: "비밀번호",
-      field: "password",
-      value: "",
-      placeholder: "6자리 이상",
-      type: "password",
-    },
-    {
-      label: "비밀번호 확인",
-      field: "confirmPassword",
-      value: "",
-      placeholder: "비밀번호를 다시 입력주세요",
-      type: "password",
-    },
-  ]);
+  const [inputData, setInputData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   react.useEffect(() => {
     refreshSession(supabase, dispatch, setSignOut);
@@ -59,12 +31,7 @@ export default function Home() {
     <>
       {isSignedIn && <MainPage />}
       {!isSignedIn && (
-        <SignInPage
-          signInData={signInData}
-          setSignInData={setSignInData}
-          signUpData={signUpData}
-          setSignUpData={setSignUpData}
-        />
+        <SignInPage inputData={inputData} setInputData={setInputData} />
       )}
     </>
   );
