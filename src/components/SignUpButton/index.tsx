@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { signUp } from "@/app/utils/signUp";
+import { signUp } from "@utils/signUp";
 import { buttonStyle } from "@/styles/signInButton";
 
 export default function SignUpButton({ inputData }: { inputData: any }) {

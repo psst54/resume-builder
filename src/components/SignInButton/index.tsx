@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 
 import { buttonStyle } from "@/styles/signInButton";
-import { signIn } from "@/app/utils/signIn";
+import { signIn } from "@utils/signIn";
 
 export default function SignInButton({ inputData }: { inputData: any }) {
   const router = useRouter();
