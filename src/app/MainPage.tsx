@@ -11,7 +11,7 @@ import { supabase } from "@libs/supabase";
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
-import { getRelativeTime } from "./utils/timer";
+import { getRelativeTime } from "./utils/getRelativeTime";
 
 const resumeCard = {
   display: "flex",

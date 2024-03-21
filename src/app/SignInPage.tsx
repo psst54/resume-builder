@@ -13,7 +13,7 @@ import SignUpButton from "../components/SignUpButton";
 import {
   checkPasswordLength,
   checkConfirmPassword,
-} from "@libs/singUpValidation";
+} from "@/app/utils/singUpValidation";
 
 const breakpoints = [768];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);

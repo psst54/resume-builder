@@ -3,7 +3,7 @@ import {
   checkEmail,
   checkPasswordLength,
   checkConfirmPassword,
-} from "@libs/singUpValidation";
+} from "@/app/utils/singUpValidation";
 
 export async function signUp(data) {
   const email = data.email;
