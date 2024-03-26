@@ -26,7 +26,8 @@
       "@libs/*": ["./src/libs/*"],
       "@redux/*": ["./src/redux/*"],
       "@features/*": ["./src/features/*"],
-      "@type/*": ["./src/types/*"]
+      "@type/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": [

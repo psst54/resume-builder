@@ -11,23 +11,26 @@ import { supabase } from "@libs/supabase";
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
+import Card, { resumeCard } from "@/components/Card";
 
-const resumeCard = {
-  display: "flex",
-  flexDirection: "column" as "column",
-
+const grid = {
+  display: "grid",
+  gap: "1rem",
   width: "100%",
-  height: "10rem",
-  padding: "2rem 3rem",
-  background: color.white.standard,
-  border: "none",
-  borderRadius: "1.2rem",
+  gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
 
-  cursor: "pointer",
+  padding: "2rem",
 };
+const resetLinkStyle = { textDecoration: "none", color: color.black.standard };
+
 const secondaryCard = {
   background: color.lightGray.standard,
   border: "3px solid " + color.white.standard,
+};
+const cardTitle = {
+  margin: "auto",
+  fontSize: "1.2rem",
+  wordBreak: "keep-all" as const,
 };
 
 export default function Home() {
@@ -63,11 +66,12 @@ export default function Home() {
           modified_at: new Date(),
           main_color: "#003FC7",
         })
-        .select();
+        .select()
+        .single();
 
       if (error) throw new Error();
 
-      return data[0].id;
+      return data.id;
     } catch (err) {
       alert("새로 이력서를 만들지 못했습니다");
       return null;
@@ -80,31 +84,6 @@ export default function Home() {
     });
   }, []);
 
-  const timeForToday = (value: Date) => {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60
-    );
-    if (betweenTime < 1) return "방금 전";
-    if (betweenTime < 60) {
-      return `${betweenTime} 분 전`;
-    }
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour} 시간 전`;
-    }
-
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay} 일 전`;
-    }
-
-    return `${Math.floor(betweenTimeDay / 365)} 년 전`;
-  };
-
   return (
     <div>
       <Header />
@@ -115,36 +94,14 @@ export default function Home() {
           background: color.lightGray.standard,
         }}
       >
-        <div
-          css={{
-            display: "grid",
-            gap: "1rem",
-            width: "100%",
-            gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
-
-            padding: "2rem",
-          }}
-        >
+        <div css={grid}>
           {resumeData?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
             <Link
               key={resumeDatumIdx}
               href={`/build?resumeId=${resumeDatum?.id}`}
-              css={{ width: "100%", textDecoration: "none" }}
+              css={resetLinkStyle}
             >
-              <button css={resumeCard}>
-                <h2
-                  css={{
-                    fontSize: "1.2rem",
-                    wordBreak: "keep-all",
-                    textAlign: "left",
-                  }}
-                >
-                  {resumeDatum?.title}
-                </h2>
-                <p css={{ color: color.gray.standard }}>
-                  마지막 수정 {timeForToday(resumeDatum?.modified_at)}
-                </p>
-              </button>
+              <Card data={resumeDatum} />
             </Link>
           ))}
           <button
@@ -157,15 +114,7 @@ export default function Home() {
               }
             }}
           >
-            <h2
-              css={{
-                margin: "auto",
-                fontSize: "1.2rem",
-                wordBreak: "keep-all",
-              }}
-            >
-              처음부터 시작하기
-            </h2>
+            <h2 css={cardTitle}>처음부터 시작하기</h2>
           </button>
           <button
             css={[resumeCard, secondaryCard]}
@@ -177,15 +126,7 @@ export default function Home() {
               }
             }}
           >
-            <h2
-              css={{
-                margin: "auto",
-                fontSize: "1.2rem",
-                wordBreak: "keep-all",
-              }}
-            >
-              템플릿으로 시작하기
-            </h2>
+            <h2 css={cardTitle}>템플릿으로 시작하기</h2>
           </button>
         </div>
       </div>

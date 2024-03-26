@@ -27,7 +27,7 @@ import Selector from "../customSelector";
 import Input from "./input";
 import ContactItems from "./contactItems";
 import TitleInput from "./titleInput";
-import ColorSelector from "./colorSelector";
+import ColorSelector from "./ColorSelector";
 import DescItemsDragWrapper from "./descItemsDragWrapper";
 
 import {
