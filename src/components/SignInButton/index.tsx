@@ -5,8 +5,9 @@ import { useAppDispatch } from "@/redux/hooks";
 
 import { buttonStyle } from "@/styles/signInButton";
 import { signIn } from "@utils/signIn";
+import { InputData } from "@/app/page";
 
-export default function SignInButton({ inputData }: { inputData: any }) {
+export default function SignInButton({ inputData }: { inputData: InputData }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 

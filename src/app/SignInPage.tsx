@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import react from "react";
+import react, { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
 
 import { color } from "@/styles/color";
@@ -15,6 +15,7 @@ import {
   checkPasswordLength,
   checkConfirmPassword,
 } from "@utils/singUpValidation";
+import { InputData } from "./page";
 
 const breakpoints = [768];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -125,8 +126,8 @@ export default function Home({
   inputData,
   setInputData,
 }: {
-  inputData: any;
-  setInputData: any;
+  inputData: InputData;
+  setInputData: Dispatch<SetStateAction<InputData>>;
 }) {
   const [isSignIn, setIsSignIn] = react.useState(true);
 
@@ -187,7 +188,12 @@ export default function Home({
                   value={signInDatum.value}
                   onChange={(event) => {
                     const newInputData = { ...inputData };
-                    newInputData[signInDatum.field] = event.target.value;
+                    newInputData[
+                      signInDatum.field as
+                        | "email"
+                        | "password"
+                        | "confirmPassword"
+                    ] = event.target.value;
                     setInputData(newInputData);
                   }}
                   type={signInDatum?.type}
@@ -209,7 +215,12 @@ export default function Home({
                   value={signUpDatum.value}
                   onChange={(event) => {
                     const newInputData = { ...inputData };
-                    newInputData[signUpDatum.field] = event.target.value;
+                    newInputData[
+                      signUpDatum.field as
+                        | "email"
+                        | "password"
+                        | "confirmPassword"
+                    ] = event.target.value;
                     setInputData(newInputData);
                   }}
                   type={signUpDatum?.type}

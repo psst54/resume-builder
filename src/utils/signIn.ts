@@ -1,7 +1,13 @@
 import { setSignIn } from "@features/userSlice";
 import { supabase } from "@libs/supabase";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { Dispatch } from "react";
 
-export async function signIn(data: any, router, dispatch) {
+export async function signIn(
+  data: any,
+  router: AppRouterInstance,
+  dispatch: Dispatch<any>
+) {
   const email = data.email;
   const password = data.password;
 

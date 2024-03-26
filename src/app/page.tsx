@@ -11,6 +11,12 @@ import { setSignOut } from "@features/userSlice";
 import { supabase } from "@libs/supabase";
 import { refreshSession } from "@libs/refreshSession";
 
+export interface InputData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export default function Home() {
   const isSignedIn =
     useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===

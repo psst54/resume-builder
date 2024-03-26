@@ -2,8 +2,9 @@
 
 import { signUp } from "@utils/signUp";
 import { buttonStyle } from "@/styles/signInButton";
+import { InputData } from "@/app/page";
 
-export default function SignUpButton({ inputData }: { inputData: any }) {
+export default function SignUpButton({ inputData }: { inputData: InputData }) {
   return (
     <button
       css={buttonStyle}
