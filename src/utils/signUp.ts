@@ -1,3 +1,4 @@
+import { InputData } from "@/app/page";
 import { supabase } from "@libs/supabase";
 import {
   checkEmail,
@@ -5,7 +6,7 @@ import {
   checkConfirmPassword,
 } from "@utils/singUpValidation";
 
-export async function signUp(data) {
+export async function signUp(data: InputData) {
   const email = data.email;
   const password = data.password;
   const confirmPassword = data.confirmPassword;
