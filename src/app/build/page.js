@@ -24,8 +24,8 @@ function App() {
   console.error = () => {}; // todo : fix error
   const router = useRouter();
   const searchParams = useSearchParams();
-  const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
-  const dispatch = useAppDispatch();
+  const uid = "1";
+  const dispatch = null;
 
   const loadData = async () => {
     try {
@@ -157,7 +157,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    refreshSession(supabase, dispatch, setSignOut);
+    // refreshSession(supabase, dispatch, setSignOut);
   }, []);
 
   useEffect(() => {

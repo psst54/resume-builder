@@ -8,7 +8,8 @@ export interface InputData {
 }
 
 export default function Home() {
-  const isSignedIn = "true";
+  const isSignedIn = true;
+
   // const isSignedIn =
   //   useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===
   //   "true";
