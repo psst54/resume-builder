@@ -6,8 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
 
 import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { setSignOut } from "@features/userSlice";
 
 import InputPage from "@components/inputRenderer/mainPage";
 import PDFPage from "@components/pdfRenderer/mainPage";

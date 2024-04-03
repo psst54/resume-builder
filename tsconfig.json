@@ -24,7 +24,6 @@
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
       "@libs/*": ["./src/libs/*"],
-      "@redux/*": ["./src/redux/*"],
       "@features/*": ["./src/features/*"],
       "@type/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"]

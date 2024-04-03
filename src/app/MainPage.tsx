@@ -4,7 +4,6 @@ import react from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { color } from "@/styles/color";
-// import { useAppSelector } from "@/redux/hooks";
 
 import { supabase } from "@libs/supabase";
 
