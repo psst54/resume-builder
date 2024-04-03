@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import react, { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 
 import { color } from "@/styles/color";
@@ -15,7 +15,6 @@ import {
   checkPasswordLength,
   checkConfirmPassword,
 } from "@utils/singUpValidation";
-import { InputData } from "./page";
 
 const breakpoints = [768];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -122,14 +121,14 @@ const signUpData = [
   },
 ];
 
-export default function Home({
-  inputData,
-  setInputData,
-}: {
-  inputData: InputData;
-  setInputData: Dispatch<SetStateAction<InputData>>;
-}) {
-  const [isSignIn, setIsSignIn] = react.useState(true);
+export default function Home() {
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  const [inputData, setInputData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   return (
     <Container>

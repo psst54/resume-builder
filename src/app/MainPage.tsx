@@ -4,7 +4,7 @@ import react from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { color } from "@/styles/color";
-import { useAppSelector } from "@/redux/hooks";
+// import { useAppSelector } from "@/redux/hooks";
 
 import { supabase } from "@libs/supabase";
 
@@ -35,7 +35,8 @@ const cardTitle = {
 
 export default function Home() {
   const [resumeData, setResumenData] = react.useState<Resume[] | null>(null);
-  const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
+  // const uid = useAppSelector((state) => state.userReducer.resume_builder_id);
+  const uid = "1";
   const router = useRouter();
 
   const getResumes = async () => {
@@ -43,7 +44,6 @@ export default function Home() {
       const { data, error } = await supabase
         .from("resume")
         .select()
-        .eq("uid", uid)
         .order("modified_at", { ascending: false });
 
       if (error) throw new Error();
