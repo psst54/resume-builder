@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { color } from "@/styles/color";
 
-import { supabase } from "@libs/supabase";
-
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import Header from "@components/Header";
@@ -56,21 +54,19 @@ export default function Home() {
 
   const makeNewResume = async ({ useTemplate }: { useTemplate: boolean }) => {
     try {
-      const { data, error } = await supabase
-        .from("resume")
-        .insert({
-          title: useTemplate ? "템플릿으로 시작하기" : "빈 이력서",
-          content: useTemplate ? basicTemplate : emptyTemplate,
-          uid: uid,
-          modified_at: new Date(),
-          main_color: "#003FC7",
-        })
-        .select()
-        .single();
-
-      if (error) throw new Error();
-
-      return data.id;
+      // const { data, error } = await supabase
+      //   .from("resume")
+      //   .insert({
+      //     title: useTemplate ? "템플릿으로 시작하기" : "빈 이력서",
+      //     content: useTemplate ? basicTemplate : emptyTemplate,
+      //     uid: uid,
+      //     modified_at: new Date(),
+      //     main_color: "#003FC7",
+      //   })
+      //   .select()
+      //   .single();
+      // if (error) throw new Error();
+      // return data.id;
     } catch (err) {
       alert("새로 이력서를 만들지 못했습니다");
       return null;

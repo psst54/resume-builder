@@ -10,7 +10,7 @@ import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
 import InputPage from "@components/inputRenderer/mainPage";
 import PDFPage from "@components/pdfRenderer/mainPage";
 import PDFPreViewer from "@components/pdfPreViewer";
-import { supabase } from "@libs/supabase";
+// import { supabase } from "@libs/supabase";
 import { refreshSession } from "@libs/refreshSession";
 
 import axios from "axios";
@@ -29,17 +29,14 @@ function App() {
 
   const loadData = async () => {
     try {
-      const id = searchParams.get("resumeId");
-
-      const { data, error } = await supabase
-        .from("resume")
-        .select()
-        .match({ id, uid });
-
-      if (error) throw new Error();
-      if (data.length === 0) throw new Error();
-
-      return data[0];
+      // const id = searchParams.get("resumeId");
+      // const { data, error } = await supabase
+      //   .from("resume")
+      //   .select()
+      //   .match({ id, uid });
+      // if (error) throw new Error();
+      // if (data.length === 0) throw new Error();
+      // return data[0];
     } catch (e) {
       alert("이력서를 불러오지 못했습니다.");
       router.push("/");

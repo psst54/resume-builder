@@ -1,4 +1,4 @@
-import { supabase } from "@libs/supabase";
+// import { supabase } from "@libs/supabase";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 export async function signIn(data: any, router: AppRouterInstance) {
@@ -6,12 +6,12 @@ export async function signIn(data: any, router: AppRouterInstance) {
   const password = data.password;
 
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // });
 
-    if (error) throw new Error("로그인 실패");
+    // if (error) throw new Error("로그인 실패");
     // dispatch(setSignIn(data?.user?.id));
     router.push("/");
   } catch (e) {

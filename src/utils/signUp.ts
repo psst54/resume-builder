@@ -1,5 +1,5 @@
 import { InputData } from "@/app/page";
-import { supabase } from "@libs/supabase";
+// import { supabase } from "@libs/supabase";
 import {
   checkEmail,
   checkPasswordLength,
@@ -27,16 +27,16 @@ export async function signUp(data: InputData) {
   }
 
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    // const { data, error } = await supabase.auth.signUp({
+    //   email,
+    //   password,
+    // });
 
     alert(
       "이메일 주소로 인증 메일이 발송되었어요.\n메일을 인증하고 로그인해주세요!"
     );
 
-    if (error) throw new Error("회원가입 실패");
+    // if (error) throw new Error("회원가입 실패");
   } catch (e) {
     alert("회원가입에 실패했습니다.\n잠시 뒤에 다시 시도해주세요");
   }

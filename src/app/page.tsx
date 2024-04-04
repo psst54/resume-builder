@@ -1,5 +1,8 @@
 import SignInPage from "./SignInPage";
 import MainPage from "./MainPage";
+import { redirect } from "next/navigation";
+import { signout } from "./login/actions";
+import { createClient } from "@/utils/supabase/server";
 
 export interface InputData {
   email: string;
@@ -7,22 +10,12 @@ export interface InputData {
   confirmPassword: string;
 }
 
-export default function Home() {
-  const isSignedIn = true;
+export default async function Home() {
+  const supabase = createClient();
 
-  // const isSignedIn =
-  //   useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===
-  //   "true";
-  // const dispatch = useAppDispatch();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // react.useEffect(() => {
-  //   refreshSession(supabase, dispatch, setSignOut);
-  // }, []);
-
-  return (
-    <>
-      {isSignedIn && <MainPage />}
-      {!isSignedIn && <SignInPage />}
-    </>
-  );
+  return <MainPage />;
 }
