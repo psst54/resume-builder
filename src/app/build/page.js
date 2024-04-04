@@ -5,13 +5,11 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
 
-import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.es.js";
+import { Document, usePDF } from "@react-pdf/renderer";
 
 import InputPage from "@components/inputRenderer/mainPage";
 import PDFPage from "@components/pdfRenderer/mainPage";
 import PDFPreViewer from "@components/pdfPreViewer";
-// import { supabase } from "@libs/supabase";
-import { refreshSession } from "@libs/refreshSession";
 
 import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
@@ -19,24 +17,24 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 import { Page, Body, InputContainer, ViewerContainer } from "./styles";
 import Header from "@components/Header";
+import { createClient } from "@/utils/supabase/client";
 
 function App() {
   console.error = () => {}; // todo : fix error
   const router = useRouter();
   const searchParams = useSearchParams();
-  const uid = "1";
-  const dispatch = null;
 
   const loadData = async () => {
     try {
-      // const id = searchParams.get("resumeId");
-      // const { data, error } = await supabase
-      //   .from("resume")
-      //   .select()
-      //   .match({ id, uid });
-      // if (error) throw new Error();
-      // if (data.length === 0) throw new Error();
-      // return data[0];
+      const supabase = createClient();
+      const id = searchParams.get("resumeId");
+      const { data, error } = await supabase
+        .from("resume")
+        .select()
+        .eq("id", id);
+      if (error) throw new Error();
+      if (data.length === 0) throw new Error();
+      return data[0];
     } catch (e) {
       alert("이력서를 불러오지 못했습니다.");
       router.push("/");
@@ -51,9 +49,7 @@ function App() {
   const [pdfComponent, setPdfComponent] = useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
-  const [instance, updateInstance] = usePDF({
-    document: pdfComponent,
-  });
+  const [instance, updateInstance] = usePDF(pdfComponent);
   const canvasRef = useRef(null);
   const [maxPageNumber, setMaxPageNumber] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
@@ -154,18 +150,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // refreshSession(supabase, dispatch, setSignOut);
-  }, []);
-
-  useEffect(() => {
     setPdfComponent(<PDFPage data={data} mainColor={mainColor} />);
   }, [data, mainColor]);
 
   useEffect(() => {
-    updateInstance({
-      document: pdfComponent,
-    });
-  }, [pdfComponent]);
+    updateInstance(pdfComponent);
+  }, [updateInstance, pdfComponent]);
 
   useDebounce(
     () => {

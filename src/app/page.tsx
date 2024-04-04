@@ -10,9 +10,22 @@ export interface InputData {
 export default async function Home() {
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const getResumeList = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("resume")
+        .select()
+        .order("modified_at", { ascending: false });
 
-  return <MainPage />;
+      if (error) throw new Error();
+
+      return data;
+    } catch (err) {
+      return null;
+    }
+  };
+
+  const resumeList = await getResumeList();
+
+  return <MainPage resumeList={resumeList} />;
 }
