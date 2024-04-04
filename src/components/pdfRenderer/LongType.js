@@ -185,11 +185,12 @@ const LongType = ({ data, mainColor }) => {
                   <div key={descItemIdx} style={longTypeStyles.sectionItems}>
                     {descItem.items &&
                       descItem.items.map((listItem, listItemIdx) => (
-                        <MarkdownRenderer
-                          key={listItemIdx}
-                          content={listItem}
-                          mainColor={mainColor}
-                        />
+                        <></>
+                        // <MarkdownRenderer
+                        //   key={listItemIdx}
+                        //   content={listItem}
+                        //   mainColor={mainColor}
+                        // />
                       ))}
                   </div>
                 );

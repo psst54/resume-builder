@@ -126,6 +126,7 @@ const ContactItems = ({ data, setData, mainColor }) => {
 
           return (
             <DraggableInput
+              key={contactItemIdx}
               data={data}
               setData={setData}
               type="select"

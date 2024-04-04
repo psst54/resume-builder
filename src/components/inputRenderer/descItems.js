@@ -150,7 +150,7 @@ const DescItems = ({
         {descItem.type === "tag" && (
           <>
             {descItem.items?.map((item, itemIdx) => (
-              <ItemWrapper len={item.length} isTag={isTag}>
+              <ItemWrapper key={itemIdx} len={item.length} isTag={isTag}>
                 <ItemInput
                   isTag={isTag}
                   isFocused={editingIdx === itemIdx}
@@ -208,7 +208,7 @@ const DescItems = ({
           <>
             {descItem.items?.map((item, itemIdx) => {
               return (
-                <ItemWrapper isTag={false}>
+                <ItemWrapper key={itemIdx} isTag={false}>
                   <ItemInput
                     isTag={false}
                     isFocused={editingIdx === itemIdx}
@@ -298,7 +298,7 @@ const DescItems = ({
           <>
             {descItem.items?.map((item, itemIdx) => {
               return (
-                <ItemWrapper isTag={isTag}>
+                <ItemWrapper key={itemIdx} isTag={isTag}>
                   <TextArea
                     isFocused={editingIdx === itemIdx}
                     value={item}

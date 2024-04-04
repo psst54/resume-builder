@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
 
-import { Document, usePDF } from "@react-pdf/renderer";
+import { usePDF } from "@react-pdf/renderer";
 
 import InputPage from "@components/inputRenderer/mainPage";
 import PDFPage from "@components/pdfRenderer/mainPage";
@@ -20,7 +20,7 @@ import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
 
 function App() {
-  console.error = () => {}; // todo : fix error
+  // console.error = () => {}; // todo : fix error
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -53,6 +53,10 @@ function App() {
   const canvasRef = useRef(null);
   const [maxPageNumber, setMaxPageNumber] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
+
+  useEffect(() => {
+    console.log("instance", instance);
+  }, [instance]);
 
   const renderCanvas = async ({ pageNumber }) => {
     const canvas = canvasRef.current;

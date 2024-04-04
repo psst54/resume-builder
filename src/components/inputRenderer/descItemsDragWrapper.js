@@ -39,7 +39,7 @@ const DescItemsDragWrapper = ({
     <DndProvider backend={HTML5Backend}>
       {contentItem?.descItems?.map((descItem, descItemIdx) => {
         return (
-          <InputContainer>
+          <InputContainer key={descItemIdx}>
             <Selector
               idxObj={{ ...idxObj, descItemIdx }}
               selected={descItem.type}
