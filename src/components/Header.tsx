@@ -30,7 +30,9 @@ export default function Header() {
         <HomeIcon size="2rem" color={color.black.standard} />
       </Link>
       <HeaderTtile>Resume Builder</HeaderTtile>
-      <div></div>
+      <form action="/auth/signout" method="post">
+        <button type="submit">로그아웃</button>
+      </form>
     </HeaderContainer>
   );
 }
