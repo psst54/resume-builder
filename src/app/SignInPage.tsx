@@ -132,51 +132,7 @@ export default function Home() {
 
   return (
     <Container>
-      <div>
-        <h1
-          css={{ fontSize: "2rem", marginBottom: "1rem", paddingTop: "10vh" }}
-        >
-          Awesome Resume Builder
-        </h1>
-        <p
-          css={{
-            width: "fit-content",
-            marginBottom: "2rem",
-
-            color: color.primary.standard,
-            fontSize: "1.2rem",
-            fontWeight: 800,
-            wordBreak: "keep-all",
-
-            [mq[0]]: {
-              display: "none",
-            },
-          }}
-        >
-          * PC 혹은 충분히 넓은 화면에서 사용하시는 것을 추천드려요!
-        </p>
-      </div>
-
       <SignInButtonWrapper>
-        <div css={{ display: "flex" }}>
-          <button
-            css={[ToggleButton, isSignIn && SelectedToggleButton]}
-            onClick={() => {
-              setIsSignIn(true);
-            }}
-          >
-            로그인
-          </button>
-          <button
-            css={[ToggleButton, !isSignIn && SelectedToggleButton]}
-            onClick={() => {
-              setIsSignIn(false);
-            }}
-          >
-            회원가입
-          </button>
-        </div>
-
         {isSignIn && (
           <>
             {signInData.map((signInDatum: any, signInDatumIdx: number) => (
