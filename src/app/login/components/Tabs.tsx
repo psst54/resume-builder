@@ -3,7 +3,10 @@
 import { ReactElement, useState } from "react";
 import { color } from "@/styles/color";
 
-const tabHeader = { display: "flex", marginBottom: "1rem" };
+const tabHeader = {
+  display: "flex",
+  marginBottom: "1rem",
+};
 const tabItem = {
   flexGrow: 1,
   background: "transparent",
@@ -33,7 +36,7 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
 
   return (
     <div>
-      <div css={{ tabHeader }}>
+      <div css={tabHeader}>
         {children.map((tab, index) => {
           return (
             <div
