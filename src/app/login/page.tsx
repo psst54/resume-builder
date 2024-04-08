@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 
-import SignInForm from "./components/SignInForm";
-import SignUpForm from "./components/SignUpForm";
-import Tab from "./components/Tab";
-import Tabs from "./components/Tabs";
+import Tabs from "@/components/Tabs";
+import Tab from "@/components/Tab";
+import SignInForm from "./forms/SignInForm";
+import SignUpForm from "./forms/SignUpForm";
 import { container, title, pageSizeAlert, formContainer } from "./styles";
 
 export default function Page() {

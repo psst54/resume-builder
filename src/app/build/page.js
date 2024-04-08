@@ -54,10 +54,6 @@ function App() {
   const [maxPageNumber, setMaxPageNumber] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    console.log("instance", instance);
-  }, [instance]);
-
   const renderCanvas = async ({ pageNumber }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");

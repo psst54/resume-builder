@@ -3,18 +3,15 @@ export const checkEmail = ({ email }: { email: string }) => {
   return emailPattern.test(email);
 };
 
-export const checkPasswordLength = ({ password }: { password: string }) => {
-  return password !== "" && password.length >= 6;
+export const MIN_PASSWORD_LENGTH = 6;
+
+export const checkPasswordLength = (password: string) => {
+  return password.length >= MIN_PASSWORD_LENGTH;
 };
 
-export const checkConfirmPassword = ({
-  password,
-  confirmPassword,
-}: {
-  password: string;
-  confirmPassword: string;
-}) => {
-  return (
-    password !== "" && confirmPassword !== "" && password === confirmPassword
-  );
+export const checkConfirmPassword = (
+  password: string,
+  confirmPassword: string
+) => {
+  return password === confirmPassword;
 };
