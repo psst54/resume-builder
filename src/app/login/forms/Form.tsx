@@ -33,11 +33,12 @@ export default function Form({
   return (
     <form css={formWrapper} ref={formRef}>
       <div css={inputListWrapper}>
-        {data.map((field: any, index: number) => (
+        {data.map((field: Field, index: number) => (
           <div key={index}>
             <p>{field.label}</p>
             <input
               id={field.field}
+              name={field.field}
               type={field?.type}
               placeholder={field.placeholder}
               autoComplete={field?.autoComplete}
