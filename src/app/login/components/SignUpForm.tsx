@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { signup } from "./actions";
+import { signup } from "../actions";
 import {
   formWrapper,
   inputBox,
   inputListWrapper,
   submitButton,
-} from "./styles";
+} from "../styles";
 
 export default function SignUpForm() {
   const fields = [

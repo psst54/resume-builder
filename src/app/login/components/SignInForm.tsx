@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { signin } from "./actions";
+import { signin } from "../actions";
 import {
   formWrapper,
   inputBox,
   inputListWrapper,
   submitButton,
-} from "./styles";
+} from "../styles";
 
 export default function SignInForm() {
   const fields = [

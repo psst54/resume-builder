@@ -33,7 +33,7 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
 
   return (
     <div>
-      <div css={tabHeader}>
+      <div css={{ tabHeader }}>
         {children.map((tab, index) => {
           return (
             <div
