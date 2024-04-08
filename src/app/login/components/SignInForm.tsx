@@ -35,6 +35,7 @@ export default function SignInForm() {
               type={field?.type}
               required
               css={inputBox}
+              placeholder={field.placeholder}
             />
           </div>
         ))}

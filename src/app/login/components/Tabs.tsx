@@ -37,18 +37,17 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
   return (
     <div>
       <div css={tabHeader}>
-        {children.map((tab, index) => {
-          return (
-            <div
-              css={[tabItem, index === selectedIndex && selectedTabItem]}
-              onClick={() => {
-                setSelectedIndex(index);
-              }}
-            >
-              {tab.props.label}
-            </div>
-          );
-        })}
+        {children.map((tab, index) => (
+          <button
+            key={index}
+            css={[tabItem, index === selectedIndex && selectedTabItem]}
+            onClick={() => {
+              setSelectedIndex(index);
+            }}
+          >
+            {tab.props.label}
+          </button>
+        ))}
       </div>
 
       {children[selectedIndex]}
