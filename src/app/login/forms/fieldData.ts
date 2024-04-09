@@ -6,7 +6,7 @@ export interface Field {
   autoComplete?: string;
 }
 
-export const signInForm: Field[] = [
+export const signInFieldList: Field[] = [
   {
     label: "이메일",
     field: "email",
@@ -23,7 +23,7 @@ export const signInForm: Field[] = [
   },
 ];
 
-export const signUpForm: Field[] = [
+export const signUpFieldList: Field[] = [
   {
     label: "이메일",
     field: "email",

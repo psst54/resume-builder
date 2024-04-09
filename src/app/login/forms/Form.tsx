@@ -1,19 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import type { RefObject } from "react";
-import { COLOR } from "@/styles/color";
 import {
   formWrapper,
   inputBox,
   inputListWrapper,
   submitButton,
+  warngingMessage,
 } from "./styles";
 import type { Field } from "./fieldData";
-
-const warngingMessage = {
-  color: COLOR.INVALID,
-  fontSize: "0.8rem",
-};
 
 export default function Form({
   data,

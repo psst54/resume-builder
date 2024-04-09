@@ -35,3 +35,8 @@ export const submitButton = {
     background: COLOR.PRIMARY.ACTIVE,
   },
 };
+
+export const warngingMessage = {
+  color: COLOR.INVALID,
+  fontSize: "0.8rem",
+};

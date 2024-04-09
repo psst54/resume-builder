@@ -9,7 +9,7 @@ import {
   checkPasswordLength,
 } from "@/utils/singUpValidation";
 import Form from "./Form";
-import { signUpForm } from "./fieldData";
+import { signUpFieldList } from "./fieldData";
 
 export default function SignUpForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -41,7 +41,7 @@ export default function SignUpForm() {
       formRef={formRef}
       onChange={handleChange}
       warningMessageList={warningMessageList}
-      data={signUpForm}
+      data={signUpFieldList}
       onSubmit={signup}
       buttonText="회원가입"
     />
