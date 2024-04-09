@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { ReactElement, useState } from "react";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 const tabHeader = {
   display: "flex",
@@ -12,22 +12,22 @@ const tabItem = {
   background: "transparent",
   padding: "0.5rem 2rem",
   border: "none",
-  borderBottom: `2px solid ${color.lightGray.standard}`,
+  borderBottom: `2px solid ${COLOR.LIGHT_GRAY.STANDARD}`,
 
   cursor: "pointer",
 
   "&:hover": {
-    background: color.white.hover,
+    background: COLOR.white.HOVER,
   },
 
   "&:active": {
-    background: color.white.active,
+    background: COLOR.white.ACTIVE,
   },
 };
 
 const selectedTabItem = {
-  borderBottom: `2px solid ${color.primary.standard}`,
-  color: color.primary.standard,
+  borderBottom: `2px solid ${COLOR.PRIMARY.STANDARD}`,
+  color: COLOR.PRIMARY.STANDARD,
   fontWeight: "bold",
 };
 

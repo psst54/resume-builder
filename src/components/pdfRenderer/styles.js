@@ -1,5 +1,5 @@
 import { StyleSheet } from "@react-pdf/renderer";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     wordBreak: "keep-all",
 
-    backgroundColor: color.white.standard,
+    backgroundColor: COLOR.white.STANDARD,
   },
   pageWrapper: {
     paddingLeft: 50,
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
   },
 
   userName: {
-    color: color.gray.standard,
+    color: COLOR.GRAY.STANDARD,
     fontSize: 32,
     fontWeight: 300,
   },
   userNameBold: {
-    color: color.darkGray,
+    color: COLOR.darkGray,
     fontWeight: 900,
   },
   contactText: {
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
   },
   contactItemIcon: { width: 8, height: 8 },
   disableLinkStyle: {
-    color: color.primary.standard,
+    color: COLOR.PRIMARY.STANDARD,
   },
 
   quote: {
     marginTop: 10,
 
-    color: color.darkGray,
+    color: COLOR.darkGray,
     fontSize: 12,
   },
 
@@ -87,17 +87,17 @@ const styles = StyleSheet.create({
   },
   pageNumber: {
     fontSize: 9,
-    color: color.gray.standard,
+    color: COLOR.GRAY.STANDARD,
   },
 
   // common--------------------------------------------------------------------------
 
   locationText: {
-    color: color.primary.standarad,
+    color: COLOR.PRIMARY.standarad,
     fontSize: 9,
     fontWeight: 200,
     flexShrink: 0,
   },
 });
 
-export { styles, color };
+export { styles, COLOR };

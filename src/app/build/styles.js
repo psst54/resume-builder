@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 const Page = styled.div`
   min-height: 100vh;
@@ -25,7 +25,7 @@ const InputContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color.gray.standard};
+    background: ${COLOR.GRAY.STANDARD};
     width: 0.8rem;
     border-radius: 0.2rem;
   }
@@ -39,7 +39,7 @@ const InputContainer = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background: ${color.gray.standard};
+      background: ${COLOR.GRAY.STANDARD};
       width: 0.6rem;
       border-radius: 0.2rem;
     }
@@ -54,7 +54,7 @@ const ViewerContainer = styled.div`
 
   display: flex;
 
-  background: ${color.lightGray.standard};
+  background: ${COLOR.LIGHT_GRAY.STANDARD};
 
   ::-webkit-scrollbar {
     background: transparent;
@@ -62,7 +62,7 @@ const ViewerContainer = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color.gray.standard};
+    background: ${COLOR.GRAY.STANDARD};
     width: 0.8rem;
     border-radius: 0.2rem;
   }

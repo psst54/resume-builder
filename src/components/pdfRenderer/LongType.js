@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Link } from "@react-pdf/renderer";
-import { styles, color } from "./styles";
+import { styles, COLOR } from "./styles";
 import MarkdownRenderer from "./MarkdownRenderer";
 
 const longTypeStyles = StyleSheet.create({
@@ -45,7 +45,7 @@ const longTypeStyles = StyleSheet.create({
     wordBreak: "keep-all",
   },
   sectionPositionText: {
-    color: color.gray.standard,
+    color: COLOR.GRAY.STANDARD,
     fontSize: 9,
     fontWeight: 300,
   },
@@ -56,7 +56,7 @@ const longTypeStyles = StyleSheet.create({
     flexWrap: "wrap",
   },
   techStackItem: {
-    backgroundColor: color.lightGray.standard,
+    backgroundColor: COLOR.LIGHT_GRAY.STANDARD,
     lineHeight: 1.4,
     fontWeight: 300,
 
@@ -74,7 +74,7 @@ const longTypeStyles = StyleSheet.create({
     fontWeight: 300,
   },
   dateText: {
-    color: color.gray.standard,
+    color: COLOR.GRAY.STANDARD,
   },
   link: {
     flexGrow: 0,

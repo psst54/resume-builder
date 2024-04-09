@@ -1,25 +1,23 @@
-const color = {
-  primary: {
-    standard: "#003FC7",
-    active: "#001FB0",
+export const COLOR = {
+  PRIMARY: {
+    STANDARD: "#003FC7",
+    ACTIVE: "#001FB0",
   },
-  gray: {
-    standard: "#676A6F",
-    hover: "#515F77",
+  GRAY: {
+    STANDARD: "#676A6F",
+    HOVER: "#515F77",
   },
-  lightGray: {
-    standard: "#E2E6EF",
-    hover: "#C0C8D9",
+  LIGHT_GRAY: {
+    STANDARD: "#E2E6EF",
+    HOVER: "#C0C8D9",
   },
 
-  ultraGray: "#F2F4F7",
-  inputBorder: "#ccc",
+  ULTRA_GRAY: "#F2F4F7",
+  INPUT_BORDER: "#ccc",
 
-  white: { standard: "#fff", hover: "#f3f3f3", active: "#eee" },
-  black: { standard: "#000", hover: "#000", active: "#000" },
+  white: { STANDARD: "#fff", HOVER: "#f3f3f3", ACTIVE: "#eee" },
+  black: { STANDARD: "#000", HOVER: "#000", ACTIVE: "#000" },
 
-  valid: "#23DC3D",
-  invalid: "red",
+  VALID: "#23DC3D",
+  INVALID: "red",
 };
-
-export { color };

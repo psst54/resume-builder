@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
-import { RefObject } from "react";
-import { color } from "@/styles/color";
+import type { RefObject } from "react";
+import { COLOR } from "@/styles/color";
 import {
   formWrapper,
   inputBox,
   inputListWrapper,
   submitButton,
-} from "../styles";
+} from "./styles";
 import type { Field } from "./fieldData";
 
 const warngingMessage = {
-  color: color.invalid,
+  color: COLOR.INVALID,
   fontSize: "0.8rem",
 };
 

@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 import { Resume } from "@type/resume";
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
@@ -18,11 +18,11 @@ const grid = {
 
   padding: "2rem",
 };
-const resetLinkStyle = { textDecoration: "none", color: color.black.standard };
+const resetLinkStyle = { textDecoration: "none", color: COLOR.black.STANDARD };
 
 const secondaryCard = {
-  background: color.lightGray.standard,
-  border: "3px solid " + color.white.standard,
+  background: COLOR.LIGHT_GRAY.STANDARD,
+  border: "3px solid " + COLOR.white.STANDARD,
 };
 const cardTitle = {
   margin: "auto",
@@ -65,7 +65,7 @@ export default function Home({ resumeList }) {
       <div
         css={{
           height: "calc(100vh - 4rem)",
-          background: color.lightGray.standard,
+          background: COLOR.LIGHT_GRAY.STANDARD,
         }}
       >
         <div css={grid}>

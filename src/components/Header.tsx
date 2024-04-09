@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 import { HEADER_HEIGHT } from "@/styles";
 
 import HomeIcon from "@assets/HomeIcon";
@@ -14,7 +14,7 @@ const HeaderContainer = styled.div`
   background-color: #fff;
   padding: 0 2rem;
 
-  border-bottom: 2px solid ${color.lightGray.standard};
+  border-bottom: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
 
   z-index: 11;
 `;
@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <HeaderContainer>
       <Link href="/">
-        <HomeIcon size="2rem" color={color.black.standard} />
+        <HomeIcon size="2rem" color={COLOR.black.STANDARD} />
       </Link>
       <HeaderTtile>Resume Builder</HeaderTtile>
       <form action="/auth/signout" method="post">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 import Input from "./input";
 
 const Wrapper = styled.div`
@@ -32,10 +32,10 @@ const ItemInput = styled.input`
 
   font-size: 1rem;
   background: ${({ isFocused }) =>
-    isFocused ? "transparent" : color.lightGray.standard};
+    isFocused ? "transparent" : COLOR.LIGHT_GRAY.STANDARD};
   padding: 0.2rem 2rem 0.2rem 1rem;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.6rem;
   ${({ isTag }) => (isTag ? "" : "justify-content: space-between;")}
 `;
@@ -44,12 +44,12 @@ const TextArea = styled.textarea`
   height: 10rem;
 
   background: ${({ isFocused }) =>
-    isFocused ? "transparent" : color.lightGray.standard};
+    isFocused ? "transparent" : COLOR.LIGHT_GRAY.STANDARD};
   padding: 0.2rem 2rem 0.2rem 1rem;
 
   font-size: 1rem;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.6rem;
   justify-content: space-between;
 
@@ -80,7 +80,7 @@ const AddButton = styled.button`
   background: transparent;
   padding: 0.2rem 1rem;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.6rem;
 
   &:hover {

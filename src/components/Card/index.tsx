@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { getRelativeTime } from "@utils/getRelativeTime";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 import { Resume } from "@/types/resume";
 
 export const resumeCard = {
@@ -11,7 +11,7 @@ export const resumeCard = {
   width: "100%",
   height: "10rem",
   padding: "2rem 3rem",
-  background: color.white.standard,
+  background: COLOR.white.STANDARD,
   border: "none",
   borderRadius: "1.2rem",
 
@@ -23,7 +23,7 @@ const cardTitle = {
   wordBreak: "keep-all" as const,
   textAlign: "left" as const,
 };
-const dateText = { color: color.gray.standard };
+const dateText = { color: COLOR.GRAY.STANDARD };
 
 export default function Card({ data }: { data: Resume }) {
   return (
