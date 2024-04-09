@@ -1,56 +1,54 @@
 /** @jsxImportSource @emotion/react */
 
-import { ReactElement, useState } from "react";
-import { COLOR } from "@/styles/color";
-
-const tabHeader = {
-  display: "flex",
-  marginBottom: "1rem",
-};
-const tabItem = {
-  flexGrow: 1,
-  background: "transparent",
-  padding: "0.5rem 2rem",
-  border: "none",
-  borderBottom: `2px solid ${COLOR.LIGHT_GRAY.STANDARD}`,
-
-  cursor: "pointer",
-
-  "&:hover": {
-    background: COLOR.white.HOVER,
-  },
-
-  "&:active": {
-    background: COLOR.white.ACTIVE,
-  },
-};
-
-const selectedTabItem = {
-  borderBottom: `2px solid ${COLOR.PRIMARY.STANDARD}`,
-  color: COLOR.PRIMARY.STANDARD,
-  fontWeight: "bold",
-};
+import { ReactElement, useEffect, useRef, useState } from "react";
+import { indicator, selectedTabItem, tabHeader, tabItem } from "./style";
 
 export default function Tabs({ children }: { children: ReactElement[] }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const selectedRef = useRef<HTMLButtonElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selectedRef.current || !headerRef.current || !indicatorRef.current) {
+      return;
+    }
+
+    const selectedHeaderPosition = selectedRef.current.getBoundingClientRect();
+    const headerPosition = headerRef.current.getBoundingClientRect();
+
+    const newPosition = {
+      left: selectedHeaderPosition.left - headerPosition.left,
+      width: selectedHeaderPosition.width,
+    };
+
+    const indicator = indicatorRef.current;
+    indicator.style.left = newPosition.left + "px";
+    indicator.style.width = newPosition.width + "px";
+  }, [selectedTabIndex]);
 
   return (
     <div>
-      <div css={tabHeader}>
-        {children.map((tab, index) => (
-          <button
-            key={index}
-            css={[tabItem, index === selectedIndex && selectedTabItem]}
-            onClick={() => {
-              setSelectedIndex(index);
-            }}
-          >
-            {tab.props.label}
-          </button>
-        ))}
+      <div ref={headerRef} css={tabHeader}>
+        {children.map((tab, index) => {
+          const isSelected = index === selectedTabIndex;
+          return (
+            <button
+              key={index}
+              css={[tabItem, isSelected && selectedTabItem]}
+              onClick={() => {
+                setSelectedTabIndex(index);
+              }}
+              ref={isSelected ? selectedRef : null}
+            >
+              {tab.props.label}
+            </button>
+          );
+        })}
+        <div ref={indicatorRef} css={indicator} />
       </div>
 
-      {children[selectedIndex]}
+      {children[selectedTabIndex]}
     </div>
   );
 }

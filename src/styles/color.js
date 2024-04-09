@@ -1,6 +1,6 @@
 export const COLOR = {
   PRIMARY: {
-    STANDARD: "#003FC7",
+    STANDARD: "#0044d6",
     ACTIVE: "#001FB0",
   },
   GRAY: {
