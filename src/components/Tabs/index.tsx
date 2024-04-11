@@ -9,7 +9,7 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
   const selectedRef = useRef<HTMLButtonElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  function moveIndicator() {
     if (!selectedRef.current || !headerRef.current || !indicatorRef.current) {
       return;
     }
@@ -25,6 +25,10 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
     const indicator = indicatorRef.current;
     indicator.style.left = newPosition.left + "px";
     indicator.style.width = newPosition.width + "px";
+  }
+
+  useEffect(() => {
+    moveIndicator();
   }, [selectedTabIndex]);
 
   return (
@@ -47,7 +51,6 @@ export default function Tabs({ children }: { children: ReactElement[] }) {
         })}
         <div ref={indicatorRef} css={indicator} />
       </div>
-
       {children[selectedTabIndex]}
     </div>
   );
