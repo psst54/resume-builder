@@ -37,6 +37,7 @@ export default function Form({
               type={field?.type}
               placeholder={field.placeholder}
               autoComplete={field?.autoComplete}
+              minLength={field?.minLength}
               onChange={() => {
                 if (onChange) {
                   onChange();
@@ -59,7 +60,11 @@ export default function Form({
         </div>
       )}
 
-      <button css={submitButton} formAction={onSubmit}>
+      <button
+        css={submitButton}
+        formAction={onSubmit}
+        disabled={warningMessageList.length > 0}
+      >
         {buttonText}
       </button>
     </form>

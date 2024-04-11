@@ -5,13 +5,24 @@ export const checkEmail = ({ email }: { email: string }) => {
 
 export const MIN_PASSWORD_LENGTH = 6;
 
-export const checkPasswordLength = (password: string) => {
-  return password.length >= MIN_PASSWORD_LENGTH;
-};
+export function checkPasswordLength({ password }: { password?: string }) {
+  if (!password) {
+    return false;
+  }
 
-export const checkConfirmPassword = (
-  password: string,
-  confirmPassword: string
-) => {
+  return password.length >= MIN_PASSWORD_LENGTH;
+}
+
+export function checkConfirmPassword({
+  password,
+  confirmPassword,
+}: {
+  password?: string;
+  confirmPassword?: string;
+}) {
+  if (!password || !confirmPassword) {
+    return false;
+  }
+
   return password === confirmPassword;
-};
+}

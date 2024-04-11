@@ -4,6 +4,7 @@ export interface Field {
   placeholder: string;
   type: string;
   autoComplete?: string;
+  minLength?: number;
 }
 
 export const signInFieldList: Field[] = [
@@ -20,6 +21,7 @@ export const signInFieldList: Field[] = [
     placeholder: "6자리 이상",
     type: "password",
     autoComplete: "current-password",
+    minLength: 6,
   },
 ];
 
@@ -37,6 +39,7 @@ export const signUpFieldList: Field[] = [
     placeholder: "6자리 이상",
     type: "password",
     autoComplete: "new-password",
+    minLength: 6,
   },
   {
     label: "비밀번호 확인",
@@ -44,5 +47,6 @@ export const signUpFieldList: Field[] = [
     placeholder: "비밀번호를 다시 입력해주세요",
     type: "password",
     autoComplete: "new-password",
+    minLength: 6,
   },
 ];

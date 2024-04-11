@@ -5,6 +5,7 @@ export const COLOR = {
   },
   GRAY: {
     STANDARD: "#676A6F",
+    LIGHT: "#B0B3B8",
     HOVER: "#515F77",
   },
   LIGHT_GRAY: {

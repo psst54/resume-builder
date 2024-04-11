@@ -34,6 +34,11 @@ export const submitButton = {
   "&:active": {
     background: COLOR.PRIMARY.ACTIVE,
   },
+
+  "&:disabled": {
+    background: COLOR.GRAY.LIGHT,
+    cursor: "not-allowed",
+  },
 };
 
 export const warngingMessage = {
