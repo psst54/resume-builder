@@ -1,0 +1,24 @@
+import { COLOR } from "@/styles/color";
+
+export const grid = {
+  display: "grid",
+  gap: "1rem",
+  width: "100%",
+  gridTemplateColumns: "repeat(auto-fill, minmax(15rem, auto))",
+
+  padding: "2rem",
+};
+export const resetLinkStyle = {
+  textDecoration: "none",
+  color: COLOR.black.STANDARD,
+};
+
+export const secondaryCard = {
+  background: COLOR.LIGHT_GRAY.STANDARD,
+  border: "3px solid " + COLOR.white.STANDARD,
+};
+export const cardTitle = {
+  margin: "auto",
+  fontSize: "1.2rem",
+  wordBreak: "keep-all" as const,
+};
