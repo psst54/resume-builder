@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { COLOR } from "@/styles/color";
-import { ACTION_PANEL_HEIGHT } from "@/styles";
+import { SIZE } from "@/styles/size";
 
 const DefaultInput = styled.input`
   font-size: 1rem;
@@ -34,14 +34,14 @@ const Page = styled.div`
   line-height: 1.4;
 
   width: 100%;
-  padding: 3rem 2rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
+  padding: 3rem 2rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
 
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   @media (max-width: 800px) {
-    padding: 2rem 1rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
+    padding: 2rem 1rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
   }
 `;
 
