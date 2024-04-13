@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 
-import { useRef, useState, useEffect, use } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -15,7 +15,7 @@ import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-import { Page, Body, InputContainer, ViewerContainer } from "./styles";
+import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
 
@@ -166,11 +166,11 @@ function App() {
   );
 
   return (
-    <Page>
+    <div css={container}>
       <Header />
 
-      <Body>
-        <InputContainer>
+      <div css={body}>
+        <div css={inputArea}>
           <InputPage
             data={data}
             setData={setData}
@@ -183,18 +183,18 @@ function App() {
             fileUrl={instance.url}
             fileName={`${resumeTitle}.pdf`}
           />
-        </InputContainer>
+        </div>
 
-        <ViewerContainer>
+        <div css={previewArea}>
           <PDFPreViewer
             canvasRef={canvasRef}
             pageNumber={pageNumber}
             maxPageNumber={maxPageNumber}
             setPageNumber={setPageNumber}
           />
-        </ViewerContainer>
-      </Body>
-    </Page>
+        </div>
+      </div>
+    </div>
   );
 }
 
