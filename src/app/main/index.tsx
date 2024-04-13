@@ -9,7 +9,7 @@ import type { Resume } from "@type/resume";
 
 import { createResume } from "@/utils/supabase/createResume";
 import Header from "@components/Header";
-import Card, { resumeCard } from "@/components/Card";
+import Card from "@/components/Card";
 import {
   cardTitle,
   container,
@@ -18,6 +18,7 @@ import {
   secondaryCard,
 } from "./style";
 import { createClient } from "@/utils/supabase/client";
+import { resumeCard } from "@/components/Card/styles";
 
 const newResumeOptions = [
   { useTemplate: false, buttonTitle: "처음부터 시작하기" },
