@@ -22,11 +22,11 @@ const Container = styled.div`
 `;
 
 const buttonStyle = {
-  background: COLOR.black.STANDARD,
+  background: COLOR.BLACK.STANDARD,
   width: "3rem",
   height: "3rem",
 
-  border: "2px solid " + COLOR.black.STANDARD,
+  border: "2px solid " + COLOR.BLACK.STANDARD,
   borderRadius: "100%",
 
   cursor: "pointer",
@@ -53,11 +53,11 @@ const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
           onSave();
         }}
       >
-        <SaveIcon size="1.5rem" color={COLOR.white.STANDARD} />
+        <SaveIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
       </button>
       <button css={buttonStyle}>
         <A href={fileUrl} download={fileName}>
-          <DownloadIcon size="1.5rem" color={COLOR.white.STANDARD} />
+          <DownloadIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
         </A>
       </button>
       <button
@@ -66,7 +66,7 @@ const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
           onDelete();
         }}
       >
-        <DeleteIcon size="1.5rem" color={COLOR.white.STANDARD} />
+        <DeleteIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
       </button>
     </Container>
   );

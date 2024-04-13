@@ -17,8 +17,8 @@ export const COLOR = {
   ULTRA_GRAY: "#F2F4F7",
   INPUT_BORDER: "#ccc",
 
-  white: { STANDARD: "#fff", HOVER: "#f3f3f3", ACTIVE: "#eee" },
-  black: { STANDARD: "#000", HOVER: "#000", ACTIVE: "#000" },
+  WHITE: { STANDARD: "#fff", HOVER: "#f3f3f3", ACTIVE: "#eee" },
+  BLACK: { STANDARD: "#000", HOVER: "#000", ACTIVE: "#000" },
 
   VALID: "#23DC3D",
   INVALID: "red",

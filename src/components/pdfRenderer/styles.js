@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
     wordBreak: "keep-all",
 
-    backgroundColor: COLOR.white.STANDARD,
+    backgroundColor: COLOR.WHITE.STANDARD,
   },
   pageWrapper: {
     paddingLeft: 50,

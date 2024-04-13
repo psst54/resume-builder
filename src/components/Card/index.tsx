@@ -11,7 +11,7 @@ export const resumeCard = {
   width: "100%",
   height: "10rem",
   padding: "2rem 3rem",
-  background: COLOR.white.STANDARD,
+  background: COLOR.WHITE.STANDARD,
   border: "none",
   borderRadius: "1.2rem",
 

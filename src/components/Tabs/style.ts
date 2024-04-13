@@ -15,11 +15,11 @@ export const tabItem = {
   cursor: "pointer",
 
   "&:hover": {
-    background: COLOR.white.HOVER,
+    background: COLOR.WHITE.HOVER,
   },
 
   "&:active": {
-    background: COLOR.white.ACTIVE,
+    background: COLOR.WHITE.ACTIVE,
   },
 };
 

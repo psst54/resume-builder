@@ -24,7 +24,7 @@ export const submitButton = {
   padding: "0.75rem",
 
   background: COLOR.PRIMARY.STANDARD,
-  color: COLOR.white.STANDARD,
+  color: COLOR.WHITE.STANDARD,
 
   border: "none",
   borderRadius: "0.75rem",

@@ -6,7 +6,7 @@ export const buttonStyle = {
   marginTop: "2rem",
 
   background: COLOR.PRIMARY.STANDARD,
-  color: COLOR.white.STANDARD,
+  color: COLOR.WHITE.STANDARD,
   fontWeight: 500,
 
   border: "none",

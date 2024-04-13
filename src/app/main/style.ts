@@ -15,12 +15,12 @@ export const grid = {
 };
 export const resetLinkStyle = {
   textDecoration: "none",
-  color: COLOR.black.STANDARD,
+  color: COLOR.BLACK.STANDARD,
 };
 
 export const secondaryCard = {
   background: COLOR.LIGHT_GRAY.STANDARD,
-  border: "3px solid " + COLOR.white.STANDARD,
+  border: "3px solid " + COLOR.WHITE.STANDARD,
 };
 export const cardTitle = {
   margin: "auto",

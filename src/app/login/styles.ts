@@ -40,7 +40,7 @@ export const formContainer = {
   height: "fit-content",
   padding: "3rem",
   paddingTop: "1.5rem",
-  background: COLOR.white.STANDARD,
+  background: COLOR.WHITE.STANDARD,
 
   borderRadius: "1rem",
 };
