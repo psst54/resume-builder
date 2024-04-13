@@ -9,11 +9,16 @@ export async function createResume(
   useTemplate: boolean
 ) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      throw new Error();
+    }
+
     const { data, error } = await supabase
       .from(RESUME_TABLE)
       .insert({
