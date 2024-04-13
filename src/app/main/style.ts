@@ -1,5 +1,10 @@
 import { COLOR } from "@/styles/color";
 
+export const container = {
+  background: COLOR.LIGHT_GRAY.STANDARD,
+  minHeight: "100dvh",
+};
+
 export const grid = {
   display: "grid",
   gap: "1rem",

@@ -2,6 +2,7 @@ export const COLOR = {
   PRIMARY: {
     STANDARD: "#0044d6",
     ACTIVE: "#001FB0",
+    RESUME: "#003FC7",
   },
   GRAY: {
     STANDARD: "#676A6F",

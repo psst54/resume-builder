@@ -1,16 +1,15 @@
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { COLOR } from "@/styles/color";
-import { HEADER_HEIGHT } from "@/styles";
-
 import HomeIcon from "@assets/HomeIcon";
+import { SIZE } from "@/styles/size";
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  height: ${HEADER_HEIGHT};
+  height: ${SIZE.HEADER_HEIGHT};
   background-color: #fff;
   padding: 0 2rem;
 
