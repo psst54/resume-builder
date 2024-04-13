@@ -17,6 +17,7 @@ import {
   resetLinkStyle,
   secondaryCard,
 } from "./style";
+import { createClient } from "@/utils/supabase/client";
 
 const newResumeOptions = [
   { useTemplate: false, buttonTitle: "처음부터 시작하기" },
@@ -45,9 +46,7 @@ export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
           <button
             css={[resumeCard, secondaryCard]}
             onClick={async () => {
-              const id = await createResume({
-                useTemplate: option.useTemplate,
-              });
+              const id = await createResume(createClient, option.useTemplate);
 
               if (id) {
                 router.refresh();

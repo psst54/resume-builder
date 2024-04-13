@@ -1,10 +1,13 @@
 import { COLOR } from "@/styles/color";
-import { createClient } from "@/utils/supabase/client";
 
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
-const RESUME_TABLE = "resume";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { RESUME_TABLE } from "./constant";
 
-export async function createResume({ useTemplate }: { useTemplate: boolean }) {
+export async function createResume(
+  createClient: () => SupabaseClient,
+  useTemplate: boolean
+) {
   const supabase = createClient();
   const {
     data: { user },

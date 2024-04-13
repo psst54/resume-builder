@@ -1,27 +1,9 @@
-import { createClient } from "@/utils/supabase/server";
 import MainPage from "./main";
+import { createClient } from "@/utils/supabase/server";
+import { getResumeList } from "@/utils/supabase/getResumeList";
 
 export default async function Home() {
-  async function getResumeList() {
-    const supabase = createClient();
-
-    try {
-      const { data, error } = await supabase
-        .from("resume")
-        .select()
-        .order("modified_at", { ascending: false });
-
-      if (error) {
-        throw new Error();
-      }
-
-      return data;
-    } catch (error) {
-      return [];
-    }
-  }
-
-  const resumeList = await getResumeList();
+  const resumeList = await getResumeList(createClient);
 
   return <MainPage resumeList={resumeList} />;
 }
