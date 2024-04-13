@@ -18,6 +18,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
+import { updateResume } from "@/utils/supabase/updateResume";
+import { deleteResume } from "@/utils/supabase/deleteResume";
 
 function App() {
   // console.error = () => {}; // todo : fix error
@@ -97,49 +99,6 @@ function App() {
     }
   };
 
-  const saveResume = async () => {
-    try {
-      const { error: upsertError } = await supabase
-        .from("resume")
-        .update([
-          {
-            content: data,
-            title: resumeTitle,
-            modified_at: new Date(),
-            main_color: mainColor,
-          },
-        ])
-        .eq("id", resumeId);
-
-      if (upsertError) throw new Error();
-      alert("저장되었습니다.");
-    } catch (e) {
-      alert("저장에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
-    }
-  };
-
-  const deleteResume = async () => {
-    const result = confirm(
-      "삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?"
-    );
-
-    if (!result) return;
-
-    try {
-      const { error: upsertError } = await supabase
-        .from("resume")
-        .delete()
-        .eq("id", resumeId);
-
-      if (upsertError) throw new Error();
-      alert("삭제되었습니다.");
-
-      router.push("/");
-    } catch (e) {
-      alert("삭제에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
-    }
-  };
-
   useEffect(() => {
     loadData().then((res) => {
       setData(res.content);
@@ -178,8 +137,31 @@ function App() {
             setMainColor={setMainColor}
             resumeTitle={resumeTitle}
             setResumeTitle={setResumeTitle}
-            onSave={saveResume}
-            onDelete={deleteResume}
+            onSave={() => {
+              updateResume(
+                createClient,
+                resumeId!,
+                resumeTitle,
+                data,
+                mainColor
+              );
+            }}
+            onDelete={() => {
+              const result = confirm(
+                "삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?"
+              );
+              if (!result) {
+                return;
+              }
+
+              try {
+                deleteResume(createClient, resumeId!);
+                alert("삭제되었습니다.");
+                router.push("/");
+              } catch (error) {
+                alert("삭제에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
+              }
+            }}
             fileUrl={instance.url}
             fileName={`${resumeTitle}.pdf`}
           />
