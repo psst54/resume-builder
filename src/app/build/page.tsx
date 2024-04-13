@@ -20,31 +20,27 @@ import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
 import { updateResume } from "@/utils/supabase/updateResume";
 import { deleteResume } from "@/utils/supabase/deleteResume";
+import { getResume } from "@/utils/supabase/getResume";
 
 function App() {
   // console.error = () => {}; // todo : fix error
   const router = useRouter();
   const searchParams = useSearchParams();
+  const resumeId = searchParams.get("resumeId");
 
   const loadData = async () => {
     try {
-      const supabase = createClient();
-      const id = searchParams.get("resumeId");
-      const { data, error } = await supabase
-        .from("resume")
-        .select()
-        .eq("id", id);
-      if (error) throw new Error();
-      if (data.length === 0) throw new Error();
-      return data[0];
-    } catch (e) {
+      if (!resumeId) {
+        throw new Error();
+      }
+      return await getResume(createClient, resumeId);
+    } catch (error) {
       alert("이력서를 불러오지 못했습니다.");
       router.push("/");
     }
   };
 
   const [data, setData] = useState({});
-  const [resumeId, setResumeId] = useState(null);
   const [resumeTitle, setResumeTitle] = useState("");
   const [mainColor, setMainColor] = useState("#003FC7");
 
@@ -102,7 +98,6 @@ function App() {
   useEffect(() => {
     loadData().then((res) => {
       setData(res.content);
-      setResumeId(res.id);
       setResumeTitle(res.title);
       setMainColor(res.main_color);
     });
