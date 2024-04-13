@@ -37,9 +37,10 @@ export default function SignUpForm() {
   }
 
   function handleChange() {
-    const passwordValue = formRef.current!.elements["password"].value;
-    const confirmPasswordValue =
-      formRef.current!.elements["confirmPassword"].value;
+    const passwordValue = (formRef.current!.elements as any)["password"].value;
+    const confirmPasswordValue = (formRef.current!.elements as any)[
+      "confirmPassword"
+    ].value;
 
     setWarningMessageList(
       getSignUpErrorMessage(passwordValue, confirmPasswordValue)
