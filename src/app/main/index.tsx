@@ -50,6 +50,7 @@ export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
               });
 
               if (id) {
+                router.refresh();
                 router.push(`/build?resumeId=${id}`);
               }
             }}
