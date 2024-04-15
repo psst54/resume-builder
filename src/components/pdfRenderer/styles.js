@@ -27,48 +27,6 @@ const styles = StyleSheet.create({
     gap: 20,
   },
 
-  // header--------------------------------------------------------------------------
-
-  header: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginBottom: 20,
-    lineHeight: 1.2,
-  },
-  contactSection: {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 2,
-    alignItems: "center",
-  },
-
-  userName: {
-    color: COLOR.GRAY.STANDARD,
-    fontSize: 32,
-    fontWeight: 300,
-  },
-  userNameBold: {
-    color: COLOR.darkGray,
-    fontWeight: 900,
-  },
-  contactText: {
-    fontWeight: 200,
-    marginLeft: 3,
-    marginRight: 3,
-  },
-  contactItemIcon: { width: 8, height: 8 },
-  disableLinkStyle: {
-    color: COLOR.PRIMARY.STANDARD,
-  },
-
-  quote: {
-    marginTop: 10,
-
-    color: COLOR.darkGray,
-    fontSize: 12,
-  },
-
   // footer--------------------------------------------------------------------------
 
   footer: {

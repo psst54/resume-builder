@@ -1,15 +1,7 @@
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  Font,
-  Link,
-  Image,
-} from "@react-pdf/renderer";
+import { Page, View, Document, Font } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import SectionRenderer from "./SectionRenderer";
-import { CONTACT_DATA } from "./data";
+import Header from "./Header";
 import Footer from "./Footer";
 
 Font.register({
@@ -54,75 +46,12 @@ Font.registerEmojiSource({
 });
 
 export default function PDFPage({ data, mainColor }: { mainColor: string }) {
-  const nameList = data?.header?.name ? data?.header?.name.split(" ") : [];
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.pageWrapper} wrap>
-          <div style={styles.header}>
-            {data?.header?.name ? (
-              <Text style={styles.userName}>
-                {data?.header?.name
-                  ? nameList.slice(0, nameList.length - 1).join(" ")
-                  : "Untitled"}{" "}
-                <Text style={styles.userNameBold}>
-                  {data?.header?.name ? nameList[nameList.length - 1] : ""}
-                </Text>
-              </Text>
-            ) : (
-              <Text style={styles.userName}>Untitled</Text>
-            )}
+          <Header headerData={data.header} mainColor={mainColor} />
 
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: 300,
-                color: mainColor,
-              }}
-            >
-              {data?.header?.position ? data?.header?.position : "POSITION"}
-            </Text>
-            <div style={styles.contactSection}>
-              {data?.header?.contactItems?.map(
-                (contactItem, contactItemIdx) => (
-                  <>
-                    {contactItemIdx !== 0 && (
-                      <Text style={styles.contactText}>|</Text>
-                    )}
-                    {CONTACT_DATA[contactItem.type].imgUrl && (
-                      <Image
-                        src={CONTACT_DATA[contactItem.type].imgUrl}
-                        style={styles.contactItemIcon}
-                      />
-                    )}
-                    <Text style={styles.contactText}>
-                      {CONTACT_DATA[contactItem.type]?.isLink && (
-                        <Link
-                          style={[
-                            styles.disableLinkStyle,
-                            { color: mainColor },
-                          ]}
-                          src={
-                            CONTACT_DATA[contactItem.type]?.baseUrl +
-                            contactItem.text
-                          }
-                        >
-                          {contactItem.text}
-                        </Link>
-                      )}
-                      {!CONTACT_DATA[contactItem.type]?.isLink &&
-                        contactItem.text}
-                    </Text>
-                  </>
-                )
-              )}
-            </div>
-
-            {data?.header?.quote && (
-              <Text style={styles.quote}>{data?.header?.quote}</Text>
-            )}
-          </div>
           <View style={styles.sections}>
             {data &&
               data.body &&
