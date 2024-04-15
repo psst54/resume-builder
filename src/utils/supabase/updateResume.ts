@@ -5,7 +5,7 @@ export async function updateResume(
   createClient: () => SupabaseClient,
   id: string,
   title: string,
-  data,
+  data: any, // [todo] fix any
   mainColor: string
 ) {
   const supabase = createClient();
