@@ -1,8 +1,8 @@
 import { Page, View, Document, Font } from "@react-pdf/renderer";
 import { styles } from "./styles";
-import SectionRenderer from "./SectionRenderer";
 import Header from "./Header";
 import Footer from "./Footer";
+import Body from "./Body";
 
 Font.register({
   family: "Pretendard-PDF",
@@ -45,24 +45,19 @@ Font.registerEmojiSource({
   url: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/",
 });
 
-export default function PDFPage({ data, mainColor }: { mainColor: string }) {
+export default function PDFPage({
+  data,
+  mainColor,
+}: {
+  data: any; // [todo] define type
+  mainColor: string;
+}) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.pageWrapper} wrap>
           <Header headerData={data.header} mainColor={mainColor} />
-
-          <View style={styles.sections}>
-            {data &&
-              data.body &&
-              data.body.map((datum, datumIdx) => (
-                <SectionRenderer
-                  key={datumIdx}
-                  data={datum}
-                  mainColor={mainColor}
-                />
-              ))}
-          </View>
+          <Body bodyData={data.body} mainColor={mainColor} />
         </View>
 
         <Footer />
