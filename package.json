@@ -35,5 +35,8 @@
   },
   "overrides": {
     "restructure": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
   }
 }

@@ -49,7 +49,7 @@ export default function BuildScreen({
       return;
     }
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
     if (instance.url) {
       const reader = new FileReader();
@@ -59,12 +59,13 @@ export default function BuildScreen({
           responseType: "blob",
           url: instance.url,
         })
-          .then(async (response) => {
+          .then(async (response: any) => {
+            // [todo] fix any
             const file = response.data;
 
             if (file) {
               reader.onload = async (event) => {
-                const pdfData = event.target.result;
+                const pdfData = (event.target as FileReader).result;
                 const loadingTask = pdfjs.getDocument({ data: pdfData });
                 const pdf = await loadingTask.promise;
                 setMaxPageNumber(pdf.numPages);
@@ -74,12 +75,10 @@ export default function BuildScreen({
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
 
-                const renderContext = {
+                page.render({
                   canvasContext: context,
                   viewport,
-                };
-
-                page.render(renderContext);
+                });
               };
 
               reader.readAsArrayBuffer(file);
