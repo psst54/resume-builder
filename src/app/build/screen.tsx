@@ -66,7 +66,10 @@ export default function BuildScreen({
             if (file) {
               reader.onload = async (event) => {
                 const pdfData = (event.target as FileReader).result;
-                const loadingTask = pdfjs.getDocument({ data: pdfData });
+                const loadingTask = pdfjs.getDocument({
+                  // @ts-expect-error
+                  data: pdfData as unknown as BinaryData | undefined, // [todo] fix type
+                });
                 const pdf = await loadingTask.promise;
                 setMaxPageNumber(pdf.numPages);
                 const page = await pdf.getPage(pageNumber);
