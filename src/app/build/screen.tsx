@@ -51,8 +51,6 @@ export default function BuildScreen({
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    console.log(instance);
-
     if (instance.url) {
       const reader = new FileReader();
 
@@ -87,12 +85,8 @@ export default function BuildScreen({
               reader.readAsArrayBuffer(file);
             }
           })
-          .catch((error) => {
-            console.log("[error]", error);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     }
   };
 
@@ -111,10 +105,6 @@ export default function BuildScreen({
     [instance, pageNumber],
     1000
   );
-
-  useEffect(() => {
-    console.log(instance);
-  }, [instance]);
 
   function onSave() {
     updateResume(createClient, resumeId, resumeTitle, data, mainColor);

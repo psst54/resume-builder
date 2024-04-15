@@ -1,8 +1,8 @@
 import { Text, View } from "@react-pdf/renderer";
 
-import TextType from "../../TextType";
-import LongType from "../../LongType";
-import ShortType from "../../shortType";
+import TextType from "../TextType";
+import LongType from "../LongType";
+import ShortType from "../ShortType";
 import { styles } from "./styles";
 
 export default function Section({
@@ -32,9 +32,13 @@ export default function Section({
       </div>
 
       {/* [todo] */}
-      {data.type === "text" && <TextType data={data} />}
-      {data.type === "short" && <ShortType data={data} mainColor={mainColor} />}
-      {data.type === "long" && <LongType data={data} mainColor={mainColor} />}
+      {data.type === "text" && <TextType contentList={data.content} />}
+      {data.type === "short" && (
+        <ShortType contentList={data.content} mainColor={mainColor} />
+      )}
+      {data.type === "long" && (
+        <LongType contentList={data.content} mainColor={mainColor} />
+      )}
     </View>
   );
 }

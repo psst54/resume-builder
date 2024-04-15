@@ -7,7 +7,13 @@ const markdownStyles = StyleSheet.create({
   h3: { fontSize: 12, fontWeight: 600 },
 });
 
-export default function MarkdownRenderer({ content, mainColor }) {
+export default function MarkdownItem({
+  content,
+  mainColor,
+}: {
+  content: string;
+  mainColor: string;
+}) {
   return (
     <Markdown
       components={{

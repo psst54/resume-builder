@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   },
 
   // common--------------------------------------------------------------------------
-
   locationText: {
     color: COLOR.PRIMARY.STANDARD,
     fontSize: 9,
