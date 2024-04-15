@@ -9,47 +9,8 @@ import {
 } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import SectionRenderer from "./SectionRenderer";
-
-const contactBaseData = {
-  phone: {
-    imgUrl: "/phone.png",
-  },
-  email: {
-    isLink: true,
-    baseUrl: "mailto:",
-    imgUrl: "/email.png",
-  },
-  homepage: {
-    isLink: true,
-    baseUrl: "https://",
-    imgUrl: "/homepage.png",
-  },
-  github: {
-    isLink: true,
-    baseUrl: "https://github.com/",
-    imgUrl: "/github.png",
-  },
-  gitlab: {
-    isLink: true,
-    baseUrl: "https://gitlab.com/",
-  },
-  stackoverflow: {
-    isLink: true,
-    baseUrl: "https://stackoverflow.com/users/",
-  },
-  linkedin: {
-    isLink: true,
-    baseUrl: "https://www.linkedin.com/in/",
-  },
-  twitter: {
-    isLink: true,
-    baseUrl: "https://twitter.com/",
-  },
-  reddit: {
-    isLink: true,
-    baseUrl: "https://www.reddit.com/user/",
-  },
-};
+import { CONTACT_DATA } from "./data";
+import Footer from "./Footer";
 
 Font.register({
   family: "Pretendard-PDF",
@@ -92,29 +53,7 @@ Font.registerEmojiSource({
   url: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/",
 });
 
-const PDFPage = ({ data, mainColor }) => {
-  const monthData = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOBER",
-    "NOVEMBER",
-    "DECEMBER",
-  ];
-
-  const formatDate = ({ dateObj }) => {
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth();
-    const date = dateObj.getDate();
-    return monthData[month] + " " + date + ", " + year;
-  };
-
+export default function PDFPage({ data, mainColor }: { mainColor: string }) {
   const nameList = data?.header?.name ? data?.header?.name.split(" ") : [];
 
   return (
@@ -151,28 +90,28 @@ const PDFPage = ({ data, mainColor }) => {
                     {contactItemIdx !== 0 && (
                       <Text style={styles.contactText}>|</Text>
                     )}
-                    {contactBaseData[contactItem.type].imgUrl && (
+                    {CONTACT_DATA[contactItem.type].imgUrl && (
                       <Image
-                        src={contactBaseData[contactItem.type].imgUrl}
+                        src={CONTACT_DATA[contactItem.type].imgUrl}
                         style={styles.contactItemIcon}
                       />
                     )}
                     <Text style={styles.contactText}>
-                      {contactBaseData[contactItem.type]?.isLink && (
+                      {CONTACT_DATA[contactItem.type]?.isLink && (
                         <Link
                           style={[
                             styles.disableLinkStyle,
                             { color: mainColor },
                           ]}
                           src={
-                            contactBaseData[contactItem.type]?.baseUrl +
+                            CONTACT_DATA[contactItem.type]?.baseUrl +
                             contactItem.text
                           }
                         >
                           {contactItem.text}
                         </Link>
                       )}
-                      {!contactBaseData[contactItem.type]?.isLink &&
+                      {!CONTACT_DATA[contactItem.type]?.isLink &&
                         contactItem.text}
                     </Text>
                   </>
@@ -197,20 +136,8 @@ const PDFPage = ({ data, mainColor }) => {
           </View>
         </View>
 
-        <View style={styles.footer} fixed>
-          <Text style={styles.pageNumber}>
-            {formatDate({ dateObj: new Date() })}
-          </Text>
-          <Text
-            style={styles.pageNumber}
-            render={({ pageNumber, totalPages }) =>
-              `${pageNumber} / ${totalPages}`
-            }
-          />
-        </View>
+        <Footer />
       </Page>
     </Document>
   );
-};
-
-export default PDFPage;
+}

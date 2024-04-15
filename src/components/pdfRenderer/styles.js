@@ -5,18 +5,17 @@ const styles = StyleSheet.create({
   // page--------------------------------------------------------------------------
 
   page: {
+    fontFamily: "Pretendard-PDF",
+
     paddingTop: 40,
     paddingBottom: 30,
 
     display: "flex",
     flexDirection: "column",
 
-    fontFamily: "Pretendard-PDF",
     fontSize: 10,
     lineHeight: 1.4,
     wordBreak: "keep-all",
-
-    backgroundColor: COLOR.WHITE.STANDARD,
   },
   pageWrapper: {
     paddingLeft: 50,

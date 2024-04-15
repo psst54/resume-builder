@@ -8,7 +8,7 @@ import useDebounce from "@/hooks/useDebounce";
 import { usePDF } from "@react-pdf/renderer";
 
 import InputPage from "@components/inputRenderer/mainPage";
-import PDFPage from "@components/pdfRenderer/mainPage";
+import PDFPage from "@components/pdfRenderer";
 import PDFPreViewer from "@components/pdfPreViewer";
 
 import axios from "axios";
@@ -39,14 +39,19 @@ export default function BuildScreen({
   const [pdfComponent, setPdfComponent] = useState(
     <PDFPage data={data} mainColor={mainColor} />
   );
-  const [instance, updateInstance] = usePDF(pdfComponent);
-  const canvasRef = useRef(null);
+  const [instance, updateInstance] = usePDF({ document: pdfComponent });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [maxPageNumber, setMaxPageNumber] = useState(1);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
-  const renderCanvas = async ({ pageNumber }) => {
+  const renderCanvas = async ({ pageNumber }: { pageNumber: number }) => {
+    if (!canvasRef.current) {
+      return;
+    }
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+
+    console.log(instance);
 
     if (instance.url) {
       const reader = new FileReader();
@@ -82,8 +87,12 @@ export default function BuildScreen({
               reader.readAsArrayBuffer(file);
             }
           })
-          .catch((e) => {});
-      } catch (e) {}
+          .catch((error) => {
+            console.log("[error]", error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -103,6 +112,28 @@ export default function BuildScreen({
     1000
   );
 
+  useEffect(() => {
+    console.log(instance);
+  }, [instance]);
+
+  function onSave() {
+    updateResume(createClient, resumeId, resumeTitle, data, mainColor);
+  }
+
+  function onDelete() {
+    if (!confirm("삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?")) {
+      return;
+    }
+
+    try {
+      deleteResume(createClient, resumeId);
+      alert("삭제되었습니다.");
+      router.push("/");
+    } catch (error) {
+      alert("삭제에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
+    }
+  }
+
   return (
     <div css={container}>
       <Header />
@@ -116,31 +147,8 @@ export default function BuildScreen({
             setMainColor={setMainColor}
             resumeTitle={resumeTitle}
             setResumeTitle={setResumeTitle}
-            onSave={() => {
-              updateResume(
-                createClient,
-                resumeId!,
-                resumeTitle,
-                data,
-                mainColor
-              );
-            }}
-            onDelete={() => {
-              const result = confirm(
-                "삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?"
-              );
-              if (!result) {
-                return;
-              }
-
-              try {
-                deleteResume(createClient, resumeId!);
-                alert("삭제되었습니다.");
-                router.push("/");
-              } catch (error) {
-                alert("삭제에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
-              }
-            }}
+            onSave={onSave}
+            onDelete={onDelete}
             fileUrl={instance.url}
             fileName={`${resumeTitle}.pdf`}
           />
