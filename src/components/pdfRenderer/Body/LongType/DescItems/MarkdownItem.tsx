@@ -18,13 +18,13 @@ export default function MarkdownItem({
     <Markdown
       components={{
         h1(props) {
-          return <Text style={markdownStyles.h1} {...props} />;
+          return <Text style={markdownStyles.h1}>{props.children}</Text>;
         },
         h2(props) {
-          return <Text style={markdownStyles.h2} {...props} />;
+          return <Text style={markdownStyles.h2}>{props.children}</Text>;
         },
         h3(props) {
-          return <Text style={markdownStyles.h3} {...props} />;
+          return <Text style={markdownStyles.h3}>{props.children}</Text>;
         },
         ul(props) {
           if (typeof props.children === "string") {
@@ -38,7 +38,7 @@ export default function MarkdownItem({
                 flexDirection: "column",
               }}
             >
-              {props?.children?.map((child) => {
+              {(props?.children as any[]).map((child) => {
                 if (typeof child === "string") {
                   if (child !== "\n")
                     return (
@@ -94,7 +94,7 @@ export default function MarkdownItem({
             return <Text>{props.children}</Text>;
           }
 
-          let arr = [];
+          let arr: any[] = [];
           let index = 0;
           let flag = true;
 
@@ -132,20 +132,24 @@ export default function MarkdownItem({
                 paddingBottom: 0.2,
               }}
             >
-              {arr.map((item) =>
+              {arr.map((item, index: number) =>
                 item.type === "string" ? (
                   <div
+                    key={index}
                     style={{
                       display: "flex",
                       flexDirection: "row",
                     }}
                   >
-                    {item.arr.map((str) => (
-                      <Text style={{ fontWeight: 300 }}>{str}</Text>
+                    {item.arr.map((str: string, arrIndex: number) => (
+                      <Text key={arrIndex} style={{ fontWeight: 300 }}>
+                        {str}
+                      </Text>
                     ))}
                   </div>
                 ) : (
                   <div
+                    key={index}
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -159,13 +163,13 @@ export default function MarkdownItem({
           );
         },
         p(props) {
-          return <Text style={{ fontWeight: 300 }} {...props} />;
+          return <Text style={{ fontWeight: 300 }}>{props.children}</Text>;
         },
         strong(props) {
-          return <Text style={{ fontWeight: 900 }} {...props} />;
+          return <Text style={{ fontWeight: 900 }}>{props.children}</Text>;
         },
         a(props) {
-          return <Link style={{ color: mainColor }} {...props} />;
+          return <Link style={{ color: mainColor }}>{props.children}</Link>;
         },
       }}
     >

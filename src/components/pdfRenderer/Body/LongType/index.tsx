@@ -13,7 +13,6 @@ const LongType = ({
   if (!contentList) {
     return <></>;
   }
-  console.log(contentList);
 
   return (
     <View style={styles.sectionContentWrapper}>
