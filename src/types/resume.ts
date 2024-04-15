@@ -1,6 +1,15 @@
 export interface ContactItemType {
   id: number | (() => number);
-  type: string;
+  type:
+    | "phone"
+    | "email"
+    | "homepage"
+    | "github"
+    | "gitlab"
+    | "stackoverflow"
+    | "linkedin"
+    | "twitter"
+    | "reddit";
   text: string;
 }
 

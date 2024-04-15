@@ -31,9 +31,9 @@ export const CONTACT_DATA: {
     isLink: true,
     baseUrl: "https://www.linkedin.com/in/",
   },
-  twitter: {
+  x: {
     isLink: true,
-    baseUrl: "https://twitter.com/",
+    baseUrl: "https://x.com/",
   },
   reddit: {
     isLink: true,
