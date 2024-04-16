@@ -13,6 +13,7 @@ export const COLOR = {
     STANDARD: "#E2E6EF",
     HOVER: "#C0C8D9",
   },
+  darkGray: "#333333", // [todo] remove
 
   ULTRA_GRAY: "#F2F4F7",
   INPUT_BORDER: "#ccc",

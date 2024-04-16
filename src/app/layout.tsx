@@ -3,6 +3,7 @@ export const metadata = {
   title: "Resume builder",
   description: "Build your resume",
 };
+export const runtime = "edge";
 
 export default function RootLayout({
   children,

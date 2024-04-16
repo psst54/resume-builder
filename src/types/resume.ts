@@ -1,6 +1,15 @@
-export interface ContactItem {
-  id: (() => number) | number;
-  type: string;
+export interface ContactItemType {
+  id: number | (() => number);
+  type:
+    | "phone"
+    | "email"
+    | "homepage"
+    | "github"
+    | "gitlab"
+    | "stackoverflow"
+    | "linkedin"
+    | "twitter"
+    | "reddit";
   text: string;
 }
 
@@ -52,12 +61,12 @@ export interface SectionItem {
 
 export interface ResumeContent {
   header: {
-    [key: string]: string | ContactItem[];
+    [key: string]: string | ContactItemType[];
     title: string;
     name: string;
     position: string;
     quote: string;
-    contactItems: ContactItem[];
+    contactItems: ContactItemType[];
   };
   body: SectionItem[];
 }

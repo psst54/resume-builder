@@ -14,11 +14,11 @@ export async function signin(formData: FormData) {
   });
 
   if (error) {
-    redirect(`/error?message=${error.message}`);
+    return redirect(`/error?message=${error.message}`);
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return redirect("/");
 }
 
 export async function signup(formData: FormData) {
@@ -30,9 +30,9 @@ export async function signup(formData: FormData) {
   });
 
   if (error) {
-    redirect(`/error?message=${error.message}`);
+    return redirect(`/error?message=${error.message}`);
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  return redirect("/");
 }
