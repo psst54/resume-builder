@@ -55,12 +55,13 @@ export async function updateSession(request: NextRequest) {
   );
 
   // refreshing the auth token
+  await supabase.auth.getUser();
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
 
   const publicPaths = ["/login", "/error"];
-  if (!user && !publicPaths.includes(request.nextUrl.pathname)) {
+  if (!session && !publicPaths.includes(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

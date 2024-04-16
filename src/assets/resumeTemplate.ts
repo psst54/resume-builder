@@ -1,6 +1,6 @@
-import { ResumeContent, ContactItem } from "@/types/resume";
+import { ResumeContent, ContactItemType } from "@/types/resume";
 
-export const contactItemTemplate: ContactItem = {
+export const contactItemTemplate: ContactItemType = {
   type: "phone",
   text: "",
   id: () => {

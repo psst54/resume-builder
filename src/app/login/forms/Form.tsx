@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+"use client";
 
 import type { RefObject } from "react";
 import {

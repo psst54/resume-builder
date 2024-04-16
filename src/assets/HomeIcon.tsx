@@ -1,4 +1,4 @@
-const CheckIcon = ({ size, color }: { size: string; color: string }) => {
+const HomeIcon = ({ size, color }: { size: string; color: string }) => {
   return (
     <svg
       width={size}
@@ -53,4 +53,4 @@ const CheckIcon = ({ size, color }: { size: string; color: string }) => {
   );
 };
 
-export default CheckIcon;
+export default HomeIcon;

@@ -1,31 +1,9 @@
-import MainPage from "./MainPage";
+import MainPage from "./main";
 import { createClient } from "@/utils/supabase/server";
-
-export interface InputData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { getResumeList } from "@/utils/supabase/getResumeList";
 
 export default async function Home() {
-  const supabase = createClient();
-
-  const getResumeList = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("resume")
-        .select()
-        .order("modified_at", { ascending: false });
-
-      if (error) throw new Error();
-
-      return data;
-    } catch (err) {
-      return null;
-    }
-  };
-
-  const resumeList = await getResumeList();
+  const resumeList = await getResumeList(createClient);
 
   return <MainPage resumeList={resumeList} />;
 }
