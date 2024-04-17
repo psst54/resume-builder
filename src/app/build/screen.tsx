@@ -108,17 +108,22 @@ export default function BuildScreen({
     1000
   );
 
-  function onSave() {
-    updateResume(createClient, resumeId, resumeTitle, data, mainColor);
+  async function onSave() {
+    try {
+      await updateResume(createClient, resumeId, resumeTitle, data, mainColor);
+      alert("저장되었습니다.");
+    } catch (error) {
+      alert("저장에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
+    }
   }
 
-  function onDelete() {
+  async function onDelete() {
     if (!confirm("삭제한 파일은 되돌릴 수 없습니다. 삭제하시겠습니까?")) {
       return;
     }
 
     try {
-      deleteResume(createClient, resumeId);
+      await deleteResume(createClient, resumeId);
       alert("삭제되었습니다.");
       router.push("/");
     } catch (error) {

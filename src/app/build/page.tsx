@@ -9,12 +9,12 @@ async function Build({
 }) {
   const resumeId = searchParams.resumeId;
   if (!resumeId) {
-    return;
+    return <></>;
   }
 
   const resumeData = await getResume(createClient, resumeId);
 
-  return <BuildScreen resumeId={"resumeId"} initialData={resumeData} />;
+  return <BuildScreen resumeId={resumeId} initialData={resumeData} />;
 }
 
 export default Build;
