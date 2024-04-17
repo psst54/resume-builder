@@ -2,7 +2,7 @@ import { COLOR } from "@/styles/color";
 
 import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { RESUME_TABLE } from "./constant";
+import { RESUME_TABLE_OLD } from "./constant";
 
 export async function createResume(
   createClient: () => SupabaseClient,
@@ -20,7 +20,7 @@ export async function createResume(
     }
 
     const { data, error } = await supabase
-      .from(RESUME_TABLE)
+      .from(RESUME_TABLE_OLD)
       .insert({
         title: useTemplate ? "템플릿으로 시작하기" : "빈 이력서",
         content: useTemplate ? basicTemplate : emptyTemplate,
