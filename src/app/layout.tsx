@@ -1,10 +1,9 @@
 import "./globals.css";
-import { Providers } from "@redux/provider";
-
 export const metadata = {
   title: "Resume builder",
   description: "Build your resume",
 };
+export const runtime = "edge";
 
 export default function RootLayout({
   children,
@@ -13,9 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

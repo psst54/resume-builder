@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
-import { ACTION_PANEL_HEIGHT } from "@/styles";
+import { COLOR } from "@/styles/color";
+import { SIZE } from "@/styles/size";
 
 const DefaultInput = styled.input`
   font-size: 1rem;
 
   border: ${({ isDragging, mainColor }) =>
-    isDragging ? `2px solid ${mainColor}` : `1px solid ${color.inputBorder}`};
+    isDragging ? `2px solid ${mainColor}` : `1px solid ${COLOR.INPUT_BORDER}`};
 
   border-radius: 0.6rem;
   padding: 0.3rem 1rem;
@@ -34,14 +34,14 @@ const Page = styled.div`
   line-height: 1.4;
 
   width: 100%;
-  padding: 3rem 2rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
+  padding: 3rem 2rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
 
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   @media (max-width: 800px) {
-    padding: 2rem 1rem calc(${ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
+    padding: 2rem 1rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
   }
 `;
 
@@ -62,7 +62,7 @@ const SectionTitleContainer = styled.div`
   margin-bottom: 0.8rem;
 `;
 const SectionBorder = styled.div`
-  border-bottom: 2px solid ${color.gray.standard};
+  border-bottom: 2px solid ${COLOR.GRAY.STANDARD};
   flex-grow: 1;
   height: 5px;
 `;
@@ -85,18 +85,18 @@ const AddSection = styled.button`
   height: 5rem;
   background: transparent;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 1rem;
 
-  color: ${color.gray.standard};
+  color: ${COLOR.GRAY.STANDARD};
   font-size: 1rem;
   font-weight: 500;
 
   &:hover {
     cursor: pointer;
-    color: ${color.gray.standard.hover};
+    color: ${COLOR.GRAY.STANDARD.hover};
     font-weight: 900;
-    border: 2px solid ${color.lightGray.hover};
+    border: 2px solid ${COLOR.LIGHT_GRAY.HOVER};
   }
 }
 `;
@@ -105,18 +105,18 @@ const AddItem = styled.button`
   padding: 0.5rem 1rem;
   background-color: transparent;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.8rem;
 
-  color: ${color.gray.standard};
+  color: ${COLOR.GRAY.STANDARD};
   font-size: 1rem;
   font-weight: 500;
 
   &:hover {
     cursor: pointer;
-    color: ${color.gray.standard.hover};
+    color: ${COLOR.GRAY.STANDARD.hover};
     font-weight: 900;
-    border: 2px solid ${color.lightGray.hover};
+    border: 2px solid ${COLOR.LIGHT_GRAY.HOVER};
   }
 `;
 
@@ -161,7 +161,7 @@ const Textarea = styled.textarea`
   max-width: 26rem;
   height: 6rem;
 
-  border: 1px solid ${color.inputBorder};
+  border: 1px solid ${COLOR.INPUT_BORDER};
   border-radius: 0.6rem;
   padding: 0.3rem 1rem;
 `;
@@ -222,7 +222,7 @@ const SectionItemContainer = styled.div`
   flex-direction: column;
   gap: 0.6rem;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.8rem;
 
   padding: 1rem;

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 import SaveIcon from "@/assets/SaveIcon";
 import DownloadIcon from "@/assets/DownloadIcon";
@@ -22,20 +22,20 @@ const Container = styled.div`
 `;
 
 const buttonStyle = {
-  background: color.black.standard,
+  background: COLOR.BLACK.STANDARD,
   width: "3rem",
   height: "3rem",
 
-  border: "2px solid " + color.black.standard,
+  border: "2px solid " + COLOR.BLACK.STANDARD,
   borderRadius: "100%",
 
   cursor: "pointer",
 };
 const importantButton = {
-  background: color.invalid,
-  border: "2px solid " + color.invalid,
+  background: COLOR.INVALID,
+  border: "2px solid " + COLOR.INVALID,
 
-  color: color.invalid,
+  color: COLOR.INVALID,
   fontWeight: 500,
 };
 
@@ -53,11 +53,11 @@ const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
           onSave();
         }}
       >
-        <SaveIcon size="1.5rem" color={color.white.standard} />
+        <SaveIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
       </button>
       <button css={buttonStyle}>
         <A href={fileUrl} download={fileName}>
-          <DownloadIcon size="1.5rem" color={color.white.standard} />
+          <DownloadIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
         </A>
       </button>
       <button
@@ -66,7 +66,7 @@ const ActionPanel = ({ onSave, onDelete, fileUrl, fileName }) => {
           onDelete();
         }}
       >
-        <DeleteIcon size="1.5rem" color={color.white.standard} />
+        <DeleteIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
       </button>
     </Container>
   );

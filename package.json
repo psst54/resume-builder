@@ -12,7 +12,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@react-pdf/renderer": "^3.1.10",
-    "@reduxjs/toolkit": "^1.9.5",
+    "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.26.0",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
@@ -22,7 +22,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "file-loader": "^6.2.0",
-    "next": "13.4.4",
+    "next": "^14.1.4",
     "pdfjs-dist": "^3.7.107",
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
@@ -30,9 +30,13 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.0",
-    "react-redux": "^8.1.1",
-    "redux-persist": "^6.0.0",
     "typescript": "5.0.4",
     "url-loader": "^4.1.1"
+  },
+  "overrides": {
+    "restructure": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
   }
 }

@@ -140,8 +140,9 @@ const InputPage = ({
           <SectionBorder />
         </SectionTitleContainer>
 
-        {basicInformationData.map((datum) => (
+        {basicInformationData.map((datum, datumIndex) => (
           <Input
+            key={datumIndex}
             type="text"
             title={datum.title}
             value={data.header ? data.header[datum.value] : null}
@@ -236,7 +237,7 @@ const InputPage = ({
 
             {bodyItem.type === "text" &&
               bodyItem?.content?.map((contentItem, contentItemIdx) => (
-                <InputContainer>
+                <InputContainer key={contentItemIdx}>
                   <InputTitle>내용</InputTitle>
                   <Textarea
                     value={contentItem.text}
@@ -255,7 +256,7 @@ const InputPage = ({
 
             {bodyItem.type === "short" &&
               bodyItem?.content?.map((contentItem, contentItemIdx) => (
-                <SectionItemContainer>
+                <SectionItemContainer key={contentItemIdx}>
                   {shortSectionData.map(
                     (shortSectionDatum, shortSectionDatumIdx) => (
                       <InputContainer key={shortSectionDatumIdx}>
@@ -281,7 +282,7 @@ const InputPage = ({
             {bodyItem.type === "long" &&
               bodyItem?.content?.map((contentItem, contentItemIdx) => {
                 return (
-                  <SectionItemContainer>
+                  <SectionItemContainer key={contentItemIdx}>
                     <InputContainer>
                       <InputTitle>항목 이름</InputTitle>
                       <LargeInput

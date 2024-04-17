@@ -1,44 +1,9 @@
-/** @jsxImportSource @emotion/react */
-"use client";
-import react, { useState } from "react";
+import MainPage from "./main";
+import { createClient } from "@/utils/supabase/server";
+import { getResumeList } from "@/utils/supabase/getResumeList";
 
-import SignInPage from "./SignInPage";
-import MainPage from "./MainPage";
+export default async function Home() {
+  const resumeList = await getResumeList(createClient);
 
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { setSignOut } from "@features/userSlice";
-
-import { supabase } from "@libs/supabase";
-import { refreshSession } from "@libs/refreshSession";
-
-export interface InputData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-export default function Home() {
-  const isSignedIn =
-    useAppSelector((state) => state.userReducer.is_signed_in_resume_builder) ===
-    "true";
-  const dispatch = useAppDispatch();
-
-  const [inputData, setInputData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  react.useEffect(() => {
-    refreshSession(supabase, dispatch, setSignOut);
-  }, []);
-
-  return (
-    <>
-      {isSignedIn && <MainPage />}
-      {!isSignedIn && (
-        <SignInPage inputData={inputData} setInputData={setInputData} />
-      )}
-    </>
-  );
+  return <MainPage resumeList={resumeList} />;
 }

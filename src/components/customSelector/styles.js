@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { color } from "@/styles/color";
+import { COLOR } from "@/styles/color";
 
 const Wrapper = styled.div`
   width: ${(props) => (props.isTitle ? "8rem" : "50%")};
@@ -21,7 +21,7 @@ const Box = styled.div`
   padding: 0.2rem 1rem;
 
   border: ${({ isDragging, mainColor }) =>
-    isDragging ? `2px solid ${mainColor}` : `1px solid ${color.inputBorder}`};
+    isDragging ? `2px solid ${mainColor}` : `1px solid ${COLOR.INPUT_BORDER}`};
 
   border-radius: 0.8rem;
 
@@ -51,7 +51,7 @@ const OptionContainer = styled.div`
   position: absolute;
   margin-top: 0.2rem;
 
-  border: 2px solid ${color.lightGray.standard};
+  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
   border-radius: 0.8rem;
   background: #fff;
 
