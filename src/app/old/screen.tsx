@@ -16,7 +16,7 @@ import {
   grid,
   resetLinkStyle,
   secondaryCard,
-} from "../old/style";
+} from "./style";
 import { createClient } from "@/utils/supabase/client";
 import { resumeCard } from "@/components/Card/styles";
 
@@ -25,7 +25,7 @@ const newResumeOptions = [
   { useTemplate: true, buttonTitle: "템플릿으로 시작하기" },
 ];
 
-export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
+export default function OldScreen({ resumeList }: { resumeList: Resume[] }) {
   const router = useRouter();
 
   return (

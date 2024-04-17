@@ -7,8 +7,8 @@ import useDebounce from "@/hooks/useDebounce";
 
 import { usePDF } from "@react-pdf/renderer";
 
-import InputPage from "@components/inputRenderer/mainPage";
-import PDFPage from "@components/pdfRenderer";
+import InputPage from "@components/inputRendererOld";
+import PDFPage from "@components/pdfRendererOld";
 import PDFPreViewer from "@components/pdfPreViewer";
 
 import axios from "axios";
