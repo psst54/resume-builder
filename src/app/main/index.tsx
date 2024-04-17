@@ -36,7 +36,7 @@ export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
         {resumeList?.map((resumeDatum: Resume, resumeDatumIdx: number) => (
           <Link
             key={resumeDatumIdx}
-            href={`/old/build?resumeId=${resumeDatum?.id}`}
+            href={`/build?resumeId=${resumeDatum?.id}`}
             css={resetLinkStyle}
           >
             <Card data={resumeDatum} />
@@ -51,7 +51,7 @@ export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
 
               if (id) {
                 router.refresh();
-                router.push(`/old/build?resumeId=${id}`);
+                router.push(`/build?resumeId=${id}`);
               }
             }}
           >
