@@ -80,26 +80,6 @@ const SectionIcon = styled.img`
   ${({ down }) => down && "transform: rotate(0.5turn)"};
 `;
 
-const AddSection = styled.button`
-  width: 100%;
-  height: 5rem;
-  background: transparent;
-
-  border: 2px solid ${COLOR.LIGHT_GRAY.STANDARD};
-  border-radius: 1rem;
-
-  color: ${COLOR.GRAY.STANDARD};
-  font-size: 1rem;
-  font-weight: 500;
-
-  &:hover {
-    cursor: pointer;
-    color: ${COLOR.GRAY.STANDARD.hover};
-    font-weight: 900;
-    border: 2px solid ${COLOR.LIGHT_GRAY.HOVER};
-  }
-}
-`;
 const AddItem = styled.button`
   width: 100%;
   padding: 0.5rem 1rem;
@@ -235,7 +215,6 @@ export {
   SectionBorder,
   SectionTitle,
   SectionIcon,
-  AddSection,
   AddItem,
   InputContainer,
   InputTitle,

@@ -144,7 +144,7 @@ export default function BuildScreen({
 
       <div css={body}>
         <div css={inputArea}>
-          {/* <InputPage
+          <InputPage
             data={data}
             setData={setData}
             mainColor={mainColor}
@@ -155,7 +155,7 @@ export default function BuildScreen({
             onDelete={onDelete}
             fileUrl={instance.url}
             fileName={`${resumeTitle}.pdf`}
-          /> */}
+          />
         </div>
 
         <div css={previewArea}>

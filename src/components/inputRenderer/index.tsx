@@ -3,7 +3,6 @@
 import {
   Page,
   SectionWrapper,
-  AddSection,
   AddItem,
   SectionTitleContainer,
   SectionBorder,
@@ -45,6 +44,10 @@ import {
   onChangeDescItem,
   onChangeDescLink,
 } from "./updateFunction";
+import { Resume } from "@/types/resume";
+import CreateSectionButton from "./CreateSection";
+import Section from "./Section";
+import FileName from "./FileName";
 
 const basicInformationData = [
   { title: "이름", value: "name", placeholder: "Gildong Hong" },
@@ -90,11 +93,6 @@ const shortSectionData = [
   },
 ];
 
-const emptySectionTemplate = {
-  title: "",
-  type: "text",
-  content: [{ text: "" }],
-};
 const emptyContentTemplate = {
   title: "",
   position: "",
@@ -111,6 +109,8 @@ const InputPage = ({
   onDelete,
   fileUrl,
   fileName,
+}: {
+  data: Resume;
 }) => {
   return (
     <Page>
@@ -121,7 +121,17 @@ const InputPage = ({
         fileName={fileName}
       />
 
-      <SectionWrapper>
+      <Section title="파일 이름" mainColor={mainColor}>
+        <FileName />
+      </Section>
+      <Section title="색상 선택" mainColor={mainColor}>
+        <></>
+      </Section>
+      <Section title="기본 정보" mainColor={mainColor}>
+        <></>
+      </Section>
+
+      {/* <SectionWrapper>
         <TitleInput
           mainColor={mainColor}
           resumeTitle={resumeTitle}
@@ -131,6 +141,8 @@ const InputPage = ({
       <SectionWrapper>
         <ColorSelector mainColor={mainColor} setMainColor={setMainColor} />
       </SectionWrapper>
+
+
       <SectionWrapper>
         <SectionTitleContainer>
           <SectionTitle>
@@ -442,17 +454,9 @@ const InputPage = ({
             )}
           </SectionWrapper>
         );
-      })}
-      <AddSection
-        onClick={() => {
-          setData({
-            ...data,
-            body: data.body.concat(emptySectionTemplate),
-          });
-        }}
-      >
-        + 섹션 추가하기
-      </AddSection>
+      })} */}
+
+      <CreateSectionButton data={data} setData={setData} />
     </Page>
   );
 };
