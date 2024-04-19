@@ -4,7 +4,7 @@ import {
   LongSectionContent,
   DescItemType,
   DescItem,
-} from "@/types/resume";
+} from "@/types/resumeOld";
 
 export function onChangeDescItemType({
   data,

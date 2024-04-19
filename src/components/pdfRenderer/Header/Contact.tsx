@@ -2,7 +2,7 @@ import { Text, Link, Image } from "@react-pdf/renderer";
 
 import { CONTACT_DATA } from "../data";
 import { styles } from "./styles";
-import { ContactItemType } from "@/types/resume";
+import { ContactItemType } from "@/types/resumeOld";
 
 function ContactItem({
   contactItem,

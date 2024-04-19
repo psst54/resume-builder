@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { RESUME_TABLE_OLD } from "./constant";
 
-export async function updateResume(
+export async function updateResumeOld(
   createClient: () => SupabaseClient,
   id: string,
   title: string,

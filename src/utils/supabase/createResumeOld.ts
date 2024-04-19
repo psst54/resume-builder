@@ -4,7 +4,7 @@ import { emptyTemplate, basicTemplate } from "@assets/resumeTemplate";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { RESUME_TABLE_OLD } from "./constant";
 
-export async function createResume(
+export async function createResumeOld(
   createClient: () => SupabaseClient,
   useTemplate: boolean
 ) {

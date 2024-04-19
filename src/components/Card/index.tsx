@@ -2,7 +2,7 @@
 
 import { getRelativeTime } from "@utils/getRelativeTime";
 
-import { Resume } from "@/types/resume";
+import { Resume } from "@/types/resumeOld";
 import { cardTitle, dateText, resumeCard } from "./styles";
 
 export default function Card({ data }: { data: Resume }) {

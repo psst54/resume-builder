@@ -5,9 +5,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import type { Resume } from "@type/resume";
+import type { Resume } from "@/types/resumeOld";
 
-import { createResume } from "@/utils/supabase/createResume";
+import { createResume } from "@/utils/supabase/createResumeOld";
 import Header from "@components/Header";
 import Card from "@/components/Card";
 import {

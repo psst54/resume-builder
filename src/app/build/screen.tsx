@@ -18,9 +18,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
-import { updateResume } from "@/utils/supabase/updateResume";
+import { updateResume } from "@/utils/supabase/updateResumeOld";
 import { deleteResume } from "@/utils/supabase/deleteResume";
-import type { Resume } from "@/types/resume";
+import type { Resume } from "@/types/resumeOld";
 
 export default function BuildScreen({
   resumeId,

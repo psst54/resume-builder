@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ResumeContent, DescItem, LongSectionContent } from "@/types/resume";
+import { ResumeContent, DescItem, LongSectionContent } from "@/types/resumeOld";
 
 export function onChangeContentItem({
   data,

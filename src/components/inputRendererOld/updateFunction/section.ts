@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ResumeContent, SectionType } from "@/types/resume";
+import { ResumeContent, SectionType } from "@/types/resumeOld";
 
 export function onChangeSectionType({
   data,

@@ -1,82 +1,52 @@
-export interface ContactItemType {
+interface Resume {
+  id: number;
+  created_at: Date;
+  modified_at: Date;
+  main_color: string;
+  title: string;
+  basic: ResumeBasicInfo;
+  content: (TextSection | LongSection)[];
+}
+
+interface ResumeBasicInfo {
+  name: string;
+  position: string;
+  contact: Contact[];
+  address: string;
+  quote: string;
+}
+
+interface Contact {
   id: number | (() => number);
   type:
     | "phone"
     | "email"
     | "homepage"
-    | "github"
-    | "gitlab"
-    | "stackoverflow"
-    | "linkedin"
-    | "twitter"
-    | "reddit";
-  text: string;
+    | "GitHub"
+    | "GitLab"
+    | "Stack Overflow"
+    | "LinkedIn"
+    | "X"
+    | "Reddit";
+  content: string;
 }
 
-//----------------------------------------
-
-export type SectionType = "text" | "long" | "short";
-export type DescItemType = "tag" | "list" | "link" | "markdown";
-
-export interface DescItem {
-  [key: string]: DescItemType | string | string[];
-  type: DescItemType;
-  items: string[];
+interface Section {
+  id: string | (() => string);
   title: string;
-  url: string;
+}
+interface TextSection extends Section {
+  content: string;
 }
 
-//----------------------------------------
+interface ShortSection extends Section {}
 
-export interface TextSectionContent {
-  [key: string]: string;
-  text: string;
-}
-
-export interface LongSectionContent {
-  [key: string]: string | boolean | DescItem[];
-  title: string;
-  position: string;
-  location: string;
-  start: string;
-  useEndDate: boolean;
-  descItems: DescItem[];
-}
-
-export interface ShortSectionContent {
-  [key: string]: string | boolean;
-  year: string;
-  position: string;
-  subscription: boolean;
-  location: string;
-}
-
-export interface SectionItem {
-  title: string;
-  type: "text" | "long" | "short";
-  content: (TextSectionContent | LongSectionContent | ShortSectionContent)[];
-}
-
-//----------------------------------------
-
-export interface ResumeContent {
-  header: {
-    [key: string]: string | ContactItemType[];
-    title: string;
-    name: string;
-    position: string;
-    quote: string;
-    contactItems: ContactItemType[];
+interface LongSection extends Section {
+  date: {
+    start: Date;
+    end: Date;
+    useEnd: boolean;
+    useCurrent: boolean;
   };
-  body: SectionItem[];
-}
-
-export interface Resume {
-  id: number;
-  created_at: Date;
-  modified_at: Date;
-  content: ResumeContent;
-  main_color: string;
-  title: string;
-  uid: string;
+  position: string;
 }

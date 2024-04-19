@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { ResumeContent } from "@/types/resume";
+import { ResumeContent } from "@/types/resumeOld";
 import { contactItemTemplate } from "@assets/resumeTemplate";
 
 export function onChangeHeader({
