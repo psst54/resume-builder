@@ -5,7 +5,7 @@ interface Resume {
   mainColor: string;
   fileName: string;
   userInfo: ResumeUserInfo;
-  content: (TextSection | LongSection)[];
+  sectionList: (TextSection | ShortSection | LongSection)[];
 }
 
 interface ResumeUserInfo {
