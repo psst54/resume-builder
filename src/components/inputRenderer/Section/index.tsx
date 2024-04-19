@@ -9,16 +9,10 @@ import {
   titleStyle,
 } from "./styles";
 
-function SectionTitle({
-  title,
-  mainColor,
-}: {
-  title: string;
-  mainColor: string;
-}) {
+function SectionTitle({ title, color }: { title: string; color: string }) {
   return (
     <h1 css={titleStyle}>
-      <span css={{ fontSize: SECTION_TITLE_FONT_SIZE, color: mainColor }}>
+      <span css={{ fontSize: SECTION_TITLE_FONT_SIZE, color: color }}>
         {title[0]}
       </span>
       {title.substring(1)}
@@ -28,17 +22,17 @@ function SectionTitle({
 
 export default function Section({
   title,
-  mainColor,
+  color,
   children,
 }: {
   title: string;
-  mainColor: string;
+  color: string;
   children: ReactElement;
 }) {
   return (
     <div css={container}>
       <div css={titleContainer}>
-        <SectionTitle title={title} mainColor={mainColor} />
+        <SectionTitle title={title} color={color} />
         <div css={divider} />
       </div>
 

@@ -22,12 +22,6 @@ import {
   SectionItemContainer,
 } from "./styles";
 import ActionPanel from "./ActionPanel";
-import Selector from "../customSelector";
-import Input from "./input";
-import ContactItems from "./contactItems";
-import TitleInput from "./titleInput";
-import ColorSelector from "./ColorSelector";
-import DescItemsDragWrapper from "./descItemsDragWrapper";
 
 import {
   onChangeHeader,
@@ -48,6 +42,8 @@ import { Resume } from "@/types/resume";
 import CreateSectionButton from "./CreateSection";
 import Section from "./Section";
 import FileName from "./FileName";
+import Color from "./Color";
+import UserInfo from "./UserInfo";
 
 const basicInformationData = [
   { title: "이름", value: "name", placeholder: "Gildong Hong" },
@@ -121,26 +117,27 @@ const InputPage = ({
         fileName={fileName}
       />
 
-      <Section title="파일 이름" mainColor={mainColor}>
+      <Section title="파일 이름" color={mainColor}>
         <FileName
           resumeFileName={resumeFileName}
           setResumeFileName={setResumeFileName}
         />
       </Section>
-      <Section title="색상 선택" mainColor={mainColor}>
-        <></>
+      <Section title="색상 선택" color={mainColor}>
+        <Color color={mainColor} setColor={setMainColor} />
       </Section>
-      <Section title="기본 정보" mainColor={mainColor}>
-        <></>
+      <Section title="기본 정보" color={mainColor}>
+        <UserInfo
+          userInfoData={data.userInfo}
+          setData={(field: string, value: string) => {
+            const newUserInfo = { ...data.userInfo };
+            newUserInfo[field] = value;
+            setData({ ...data, userInfo: newUserInfo });
+          }}
+        />
       </Section>
 
-      {/* <SectionWrapper>
-        <TitleInput
-          mainColor={mainColor}
-          resumeTitle={resumeTitle}
-          setResumeTitle={setResumeTitle}
-        />
-      </SectionWrapper>
+      {/* 
       <SectionWrapper>
         <ColorSelector mainColor={mainColor} setMainColor={setMainColor} />
       </SectionWrapper>

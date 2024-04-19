@@ -6,11 +6,11 @@ import { Backdrop, ColorPreview } from "./styles";
 const INPUT_TITLE = "팔레트";
 
 export default function Palette({
-  mainColor,
-  setMainColor,
+  color,
+  setColor,
 }: {
-  mainColor: string;
-  setMainColor: Dispatch<SetStateAction<string>>;
+  color: string;
+  setColor: Dispatch<SetStateAction<string>>;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Palette({
       <InputTitle>{INPUT_TITLE}</InputTitle>
       <div style={{ position: "relative" }}>
         <ColorPreview
-          mainColor={mainColor}
+          mainColor={color}
           onClick={() => {
             setIsOpen(true);
           }}
@@ -33,9 +33,9 @@ export default function Palette({
               }}
             />
             <HexColorPicker
-              color={mainColor}
+              color={color}
               onChange={(res) => {
-                setMainColor(res);
+                setColor(res);
               }}
               style={{
                 position: "absolute",
