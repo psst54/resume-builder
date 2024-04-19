@@ -20,7 +20,7 @@ import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
 import { updateResumeOld } from "@/utils/supabase/updateResumeOld";
 import { deleteResume } from "@/utils/supabase/deleteResume";
-import type { Resume } from "@/types/resumeOld";
+import type { Resume } from "@/types/resume";
 import { RESUME_TABLE } from "@/utils/supabase/constant";
 
 export default function BuildScreen({
@@ -33,9 +33,9 @@ export default function BuildScreen({
   // console.error = () => {}; // todo : fix error
   const router = useRouter();
 
-  const [data, setData] = useState(initialData.content);
+  const [data, setData] = useState<Resume>(initialData);
   const [resumeTitle, setResumeTitle] = useState(initialData.title);
-  const [mainColor, setMainColor] = useState(initialData.main_color || "#000");
+  const [mainColor, setMainColor] = useState(initialData.mainColor || "#000");
 
   const [pdfComponent, setPdfComponent] = useState(
     <PDFPage data={data} mainColor={mainColor} />
@@ -144,7 +144,7 @@ export default function BuildScreen({
 
       <div css={body}>
         <div css={inputArea}>
-          <InputPage
+          {/* <InputPage
             data={data}
             setData={setData}
             mainColor={mainColor}
@@ -155,7 +155,7 @@ export default function BuildScreen({
             onDelete={onDelete}
             fileUrl={instance.url}
             fileName={`${resumeTitle}.pdf`}
-          />
+          /> */}
         </div>
 
         <div css={previewArea}>

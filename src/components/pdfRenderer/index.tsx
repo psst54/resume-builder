@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import Header from "./Header";
 import Footer from "./Footer";
 import Body from "./Body";
+import { Resume } from "@/types/resume";
 
 Font.register({
   family: "Pretendard-PDF",
@@ -49,15 +50,17 @@ export default function PDFPage({
   data,
   mainColor,
 }: {
-  data: any; // [todo] define type
+  data: Resume;
   mainColor: string;
 }) {
+  console.log(data);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.pageWrapper} wrap>
-          <Header headerData={data.header} mainColor={mainColor} />
-          <Body bodyData={data.body} mainColor={mainColor} />
+          <Header headerData={data.userInfo} mainColor={mainColor} />
+          <Body bodyData={data.sectionList} mainColor={mainColor} />
         </View>
 
         <Footer />

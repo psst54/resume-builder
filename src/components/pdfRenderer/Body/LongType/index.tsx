@@ -1,35 +1,35 @@
-import { View, Text, Link } from "@react-pdf/renderer";
+import { View } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import Header from "./Header";
-import DescItems from "./DescItems";
+import { LongSectionItemType } from "@/types/resume";
+import MarkdownItem from "./MarkdownItem";
 
 const LongType = ({
-  contentList,
+  itemList,
   mainColor,
 }: {
-  contentList: any; // [todo] define type
+  itemList: LongSectionItemType[];
   mainColor: string;
 }) => {
-  if (!contentList) {
+  if (!itemList) {
     return <></>;
   }
 
   return (
     <View style={styles.sectionContentWrapper}>
-      {contentList.map(
-        (
-          content: any, // [todo] define type
-          contentIdx: number
-        ) => (
-          <View key={contentIdx} style={styles.sectionContent} wrap={false}>
-            <div style={styles.sectionMain}>
-              <Header content={content} mainColor={mainColor} />
+      {itemList.map((item: LongSectionItemType, itemIndex: number) => (
+        <View key={itemIndex} style={styles.sectionContent} wrap={false}>
+          <div style={styles.sectionMain}>
+            <Header content={item} mainColor={mainColor} />
 
-              <DescItems descItems={content.descItems} mainColor={mainColor} />
-            </div>
-          </View>
-        )
-      )}
+            <MarkdownItem
+              key={itemIndex}
+              content={item.content}
+              mainColor={mainColor}
+            />
+          </div>
+        </View>
+      ))}
     </View>
   );
 };

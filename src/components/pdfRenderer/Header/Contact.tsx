@@ -2,13 +2,13 @@ import { Text, Link, Image } from "@react-pdf/renderer";
 
 import { CONTACT_DATA } from "../data";
 import { styles } from "./styles";
-import { ContactItemType } from "@/types/resumeOld";
+import { Contact } from "@/types/resume";
 
 function ContactItem({
   contactItem,
   mainColor,
 }: {
-  contactItem: ContactItemType;
+  contactItem: Contact;
   mainColor: string;
 }) {
   const imageUrl = CONTACT_DATA[contactItem.type].imgUrl;
@@ -20,12 +20,12 @@ function ContactItem({
       {isLink ? (
         <Link
           style={{ color: mainColor, height: 12 }}
-          src={CONTACT_DATA[contactItem.type]?.baseUrl + contactItem.text}
+          src={CONTACT_DATA[contactItem.type]?.baseUrl + contactItem.content}
         >
-          {contactItem.text}
+          {contactItem.content}
         </Link>
       ) : (
-        <Text style={{ height: 12 }}>{contactItem.text}</Text>
+        <Text style={{ height: 12 }}>{contactItem.content}</Text>
       )}
     </div>
   );
@@ -35,7 +35,7 @@ export default function Contact({
   contactItems,
   mainColor,
 }: {
-  contactItems: ContactItemType[];
+  contactItems: Contact[];
   mainColor: string;
 }) {
   if (!contactItems) {
@@ -44,16 +44,14 @@ export default function Contact({
 
   return (
     <div style={styles.contactSection}>
-      {contactItems?.map(
-        (contactItem: ContactItemType, contactItemIdx: number) => (
-          <div style={styles.contactItemWrapper}>
-            {contactItemIdx !== 0 && (
-              <Text style={styles.contactDivider}>|</Text>
-            )}
-            <ContactItem contactItem={contactItem} mainColor={mainColor} />
-          </div>
-        )
-      )}
+      {contactItems?.map((contactItem: Contact, contactItemIndex: number) => (
+        <div key={contactItemIndex} style={styles.contactItemWrapper}>
+          {contactItemIndex !== 0 && (
+            <Text style={styles.contactDivider}>|</Text>
+          )}
+          <ContactItem contactItem={contactItem} mainColor={mainColor} />
+        </div>
+      ))}
     </div>
   );
 }

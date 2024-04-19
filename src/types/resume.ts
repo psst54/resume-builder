@@ -1,4 +1,4 @@
-interface Resume {
+export interface Resume {
   id: number;
   createdAt: Date;
   modifiedAt: Date;
@@ -7,10 +7,10 @@ interface Resume {
   mainColor: string;
 
   userInfo: ResumeUserInfo;
-  sectionList: (TextSection | ShortSection | LongSection)[];
+  sectionList: (TextSectionType | ShortSectionType | LongSectionType)[];
 }
 
-interface ResumeUserInfo {
+export interface ResumeUserInfo {
   name: string;
   position: string;
   contact: Contact[];
@@ -29,33 +29,35 @@ type ContactType =
   | "X"
   | "Reddit";
 
-interface Contact {
+export interface Contact {
   id: number | (() => number);
   type: ContactType;
   content: string;
 }
 
-interface Section {
+export interface SectionType {
   id: string | (() => string);
   title: string;
   type: "text" | "short" | "long";
 }
-interface TextSection extends Section {
+export interface TextSectionType extends SectionType {
   type: "text";
   content: string;
 }
 
-interface ShortSectionItem {
+export interface ShortSectionItemType {
+  date: string;
   position: string;
   content: string;
   location: string;
 }
-interface ShortSection extends Section {
+
+export interface ShortSectionType extends SectionType {
   type: "short";
-  itemList: ShortSectionItem[];
+  itemList: ShortSectionItemType[];
 }
 
-interface LongSectionItem {
+export interface LongSectionItemType {
   title: string;
   date: {
     start: string;
@@ -68,9 +70,9 @@ interface LongSectionItem {
   content: markdownString;
 }
 
-interface LongSection extends Section {
+export interface LongSectionType extends SectionType {
   type: "long";
-  itemList: LongSectionItem[];
+  itemList: LongSectionItemType[];
 }
 
 type markdownString = string;

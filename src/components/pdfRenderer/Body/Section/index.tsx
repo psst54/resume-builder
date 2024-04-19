@@ -4,12 +4,18 @@ import TextType from "../TextType";
 import LongType from "../LongType";
 import ShortType from "../ShortType";
 import { styles } from "./styles";
+import {
+  LongSectionType,
+  SectionType,
+  ShortSectionType,
+  TextSectionType,
+} from "@/types/resume";
 
 export default function Section({
   data,
   mainColor,
 }: {
-  data: any; // [todo] define type
+  data: SectionType;
   mainColor: string;
 }) {
   const titleHead = data.title.slice(0, 3);
@@ -32,12 +38,20 @@ export default function Section({
       </div>
 
       {/* [todo] */}
-      {data.type === "text" && <TextType contentList={data.content} />}
+      {data.type === "text" && (
+        <TextType content={(data as TextSectionType).content} />
+      )}
       {data.type === "short" && (
-        <ShortType contentList={data.content} mainColor={mainColor} />
+        <ShortType
+          itemList={(data as ShortSectionType).itemList}
+          mainColor={mainColor}
+        />
       )}
       {data.type === "long" && (
-        <LongType contentList={data.content} mainColor={mainColor} />
+        <LongType
+          itemList={(data as LongSectionType).itemList}
+          mainColor={mainColor}
+        />
       )}
     </View>
   );

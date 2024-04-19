@@ -1,48 +1,44 @@
 import { Text } from "@react-pdf/renderer";
 import { styles } from "./styles";
+import { ShortSectionItemType } from "@/types/resume";
 
 export default function ShortType({
-  contentList,
+  itemList,
   mainColor,
 }: {
-  contentList: any; // [todo] define type
+  itemList: ShortSectionItemType[];
   mainColor: string;
 }) {
-  if (!contentList) {
+  if (!itemList) {
     return <></>;
   }
 
   return (
     <div style={styles.itemWrapper}>
-      {contentList.map(
-        (
-          content: any, // [todo] define type
-          contentIndex: number
-        ) => (
-          <div key={contentIndex} style={styles.itemContainer}>
-            <div style={styles.leftSide}>
-              <Text style={styles.yearText}>{content.year}</Text>
-              <div style={styles.leftContainer}>
-                <Text style={styles.honorInfo}>
-                  <Text style={styles.positionText}>{content.position}</Text>,{" "}
-                  {content.subscription}
-                </Text>
-              </div>
+      {itemList.map((item: ShortSectionItemType, itemIndex: number) => (
+        <div key={itemIndex} style={styles.itemContainer}>
+          <div style={styles.leftSide}>
+            <Text style={styles.yearText}>{item.date}</Text>
+            <div style={styles.leftContainer}>
+              <Text style={styles.honorInfo}>
+                <Text style={styles.positionText}>{item.position}</Text>,{" "}
+                {item.content}
+              </Text>
             </div>
-
-            <Text
-              style={[
-                styles.location,
-                {
-                  color: mainColor,
-                },
-              ]}
-            >
-              {content.location}
-            </Text>
           </div>
-        )
-      )}
+
+          <Text
+            style={[
+              styles.location,
+              {
+                color: mainColor,
+              },
+            ]}
+          >
+            {item.location}
+          </Text>
+        </div>
+      ))}
     </div>
   );
 }
