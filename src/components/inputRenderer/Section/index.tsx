@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { ReactElement } from "react";
-import { container, divider, titleContainer, titleStyle } from "./styles";
+import {
+  SECTION_TITLE_FONT_SIZE,
+  container,
+  divider,
+  titleContainer,
+  titleStyle,
+} from "./styles";
 
 function SectionTitle({
   title,
@@ -12,7 +18,9 @@ function SectionTitle({
 }) {
   return (
     <h1 css={titleStyle}>
-      <span css={{ fontSize: "1.2rem", color: mainColor }}>{title[0]}</span>
+      <span css={{ fontSize: SECTION_TITLE_FONT_SIZE, color: mainColor }}>
+        {title[0]}
+      </span>
       {title.substring(1)}
     </h1>
   );

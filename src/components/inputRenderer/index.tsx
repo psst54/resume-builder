@@ -103,8 +103,8 @@ const InputPage = ({
   setData,
   mainColor,
   setMainColor,
-  resumeTitle,
-  setResumeTitle,
+  resumeFileName,
+  setResumeFileName,
   onSave,
   onDelete,
   fileUrl,
@@ -122,7 +122,10 @@ const InputPage = ({
       />
 
       <Section title="파일 이름" mainColor={mainColor}>
-        <FileName />
+        <FileName
+          resumeFileName={resumeFileName}
+          setResumeFileName={setResumeFileName}
+        />
       </Section>
       <Section title="색상 선택" mainColor={mainColor}>
         <></>

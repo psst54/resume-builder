@@ -34,7 +34,7 @@ export default function BuildScreen({
   const router = useRouter();
 
   const [data, setData] = useState<Resume>(initialData);
-  const [resumeTitle, setResumeTitle] = useState(initialData.title);
+  const [resumeFileName, setResumeFileName] = useState(initialData.fileName);
   const [mainColor, setMainColor] = useState(initialData.mainColor || "#000");
 
   const [pdfComponent, setPdfComponent] = useState(
@@ -114,7 +114,7 @@ export default function BuildScreen({
       await updateResumeOld(
         createClient,
         resumeId,
-        resumeTitle,
+        resumeFileName,
         data,
         mainColor
       );
@@ -149,12 +149,12 @@ export default function BuildScreen({
             setData={setData}
             mainColor={mainColor}
             setMainColor={setMainColor}
-            resumeTitle={resumeTitle}
-            setResumeTitle={setResumeTitle}
+            resumeFileName={resumeFileName}
+            setResumeFileName={setResumeFileName}
             onSave={onSave}
             onDelete={onDelete}
             fileUrl={instance.url}
-            fileName={`${resumeTitle}.pdf`}
+            fileName={`${resumeFileName}.pdf`}
           />
         </div>
 

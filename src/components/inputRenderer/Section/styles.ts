@@ -1,5 +1,7 @@
 import { COLOR } from "@/styles/color";
 
+export const SECTION_TITLE_FONT_SIZE = "1.5rem";
+
 export const container = {
   display: "flex",
   flexDirection: "column" as const,
@@ -16,9 +18,8 @@ export const titleContainer = {
 };
 
 export const titleStyle = {
-  fontSize: "1.2rem",
-  fontWeight: 800,
-  color: "#000",
+  fontSize: SECTION_TITLE_FONT_SIZE,
+  fontWeight: 400,
 };
 
 export const divider = {
