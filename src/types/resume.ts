@@ -2,8 +2,10 @@ interface Resume {
   id: number;
   createdAt: Date;
   modifiedAt: Date;
-  mainColor: string;
+
   fileName: string;
+  mainColor: string;
+
   userInfo: ResumeUserInfo;
   sectionList: (TextSection | ShortSection | LongSection)[];
 }
@@ -36,8 +38,10 @@ interface Contact {
 interface Section {
   id: string | (() => string);
   title: string;
+  type: "text" | "short" | "long";
 }
 interface TextSection extends Section {
+  type: "text";
   content: string;
 }
 
@@ -47,7 +51,7 @@ interface ShortSectionItem {
   location: string;
 }
 interface ShortSection extends Section {
-  date: string;
+  type: "short";
   itemList: ShortSectionItem[];
 }
 
@@ -55,7 +59,7 @@ interface LongSectionItem {
   title: string;
   date: {
     start: string;
-    end: string;
+    end?: string;
     useEnd: boolean;
     useCurrent: boolean;
     useDuration: boolean;
@@ -65,6 +69,7 @@ interface LongSectionItem {
 }
 
 interface LongSection extends Section {
+  type: "long";
   itemList: LongSectionItem[];
 }
 
