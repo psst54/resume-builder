@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import type { Resume } from "@/types/resumeOld";
 
-import { createResume } from "@/utils/supabase/createResumeOld";
+import { createResumeOld } from "@/utils/supabase/createResumeOld";
 import Header from "@components/Header";
 import Card from "@/components/Card";
 import {
@@ -47,7 +47,10 @@ export default function MainPage({ resumeList }: { resumeList: Resume[] }) {
           <button
             css={[resumeCard, secondaryCard]}
             onClick={async () => {
-              const id = await createResume(createClient, option.useTemplate);
+              const id = await createResumeOld(
+                createClient,
+                option.useTemplate
+              );
 
               if (id) {
                 router.refresh();

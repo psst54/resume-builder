@@ -1,10 +1,9 @@
 import OldScreen from "./screen";
 import { createClient } from "@/utils/supabase/server";
-import { getResumeList } from "@/utils/supabase/getResumeList";
-import { RESUME_TABLE_OLD } from "@/utils/supabase/constant";
+import { getResumeListOld } from "@/utils/supabase/getResumeListOld";
 
 export default async function Home() {
-  const resumeList = await getResumeList(createClient, RESUME_TABLE_OLD);
+  const resumeList = await getResumeListOld(createClient);
 
   return <OldScreen resumeList={resumeList} />;
 }
