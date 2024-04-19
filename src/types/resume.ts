@@ -58,6 +58,7 @@ interface LongSectionItem {
     end: string;
     useEnd: boolean;
     useCurrent: boolean;
+    useDuration: boolean;
   };
   position: string;
   content: markdownString;
