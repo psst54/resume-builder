@@ -18,9 +18,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
-import { updateResume } from "@/utils/supabase/updateResumeOld";
+import { updateResumeOld } from "@/utils/supabase/updateResumeOld";
 import { deleteResume } from "@/utils/supabase/deleteResume";
 import type { Resume } from "@/types/resumeOld";
+import { RESUME_TABLE_OLD } from "@/utils/supabase/constant";
 
 export default function BuildScreen({
   resumeId,
@@ -110,7 +111,13 @@ export default function BuildScreen({
 
   async function onSave() {
     try {
-      await updateResume(createClient, resumeId, resumeTitle, data, mainColor);
+      await updateResumeOld(
+        createClient,
+        resumeId,
+        resumeTitle,
+        data,
+        mainColor
+      );
       alert("저장되었습니다.");
     } catch (error) {
       alert("저장에 실패했습니다. 잠시 뒤에 다시 시도해주세요.");
@@ -123,7 +130,7 @@ export default function BuildScreen({
     }
 
     try {
-      await deleteResume(createClient, resumeId);
+      await deleteResume(createClient, RESUME_TABLE_OLD, resumeId);
       alert("삭제되었습니다.");
       router.push("/");
     } catch (error) {
