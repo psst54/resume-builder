@@ -1,14 +1,14 @@
 interface Resume {
   id: number;
-  created_at: Date;
-  modified_at: Date;
-  main_color: string;
-  title: string;
-  basic: ResumeBasicInfo;
+  createdAt: Date;
+  modifiedAt: Date;
+  mainColor: string;
+  fileName: string;
+  userInfo: ResumeUserInfo;
   content: (TextSection | LongSection)[];
 }
 
-interface ResumeBasicInfo {
+interface ResumeUserInfo {
   name: string;
   position: string;
   contact: Contact[];
@@ -16,18 +16,20 @@ interface ResumeBasicInfo {
   quote: string;
 }
 
+type ContactType =
+  | "phone"
+  | "email"
+  | "homepage"
+  | "GitHub"
+  | "GitLab"
+  | "Stack Overflow"
+  | "LinkedIn"
+  | "X"
+  | "Reddit";
+
 interface Contact {
   id: number | (() => number);
-  type:
-    | "phone"
-    | "email"
-    | "homepage"
-    | "GitHub"
-    | "GitLab"
-    | "Stack Overflow"
-    | "LinkedIn"
-    | "X"
-    | "Reddit";
+  type: ContactType;
   content: string;
 }
 
@@ -39,14 +41,30 @@ interface TextSection extends Section {
   content: string;
 }
 
-interface ShortSection extends Section {}
+interface ShortSectionItem {
+  position: string;
+  content: string;
+  location: string;
+}
+interface ShortSection extends Section {
+  date: string;
+  itemList: ShortSectionItem[];
+}
 
-interface LongSection extends Section {
+interface LongSectionItem {
+  title: string;
   date: {
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
     useEnd: boolean;
     useCurrent: boolean;
   };
   position: string;
+  content: markdownString;
 }
+
+interface LongSection extends Section {
+  itemList: LongSectionItem[];
+}
+
+type markdownString = string;
