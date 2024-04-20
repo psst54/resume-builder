@@ -11,8 +11,8 @@ function ContactItem({
   contactItem: Contact;
   mainColor: string;
 }) {
-  const imageUrl = CONTACT_DATA[contactItem.type].imgUrl;
-  const isLink = CONTACT_DATA[contactItem.type].isLink;
+  const imageUrl = CONTACT_DATA[contactItem.type]?.imgUrl || "";
+  const isLink = CONTACT_DATA[contactItem.type]?.isLink;
 
   return (
     <div style={styles.contactItem}>

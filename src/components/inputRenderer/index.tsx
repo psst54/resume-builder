@@ -1,60 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
-import {
-  Page,
-  SectionWrapper,
-  AddItem,
-  SectionTitleContainer,
-  SectionBorder,
-  SectionTitle,
-  SectionIcon,
-  InputContainer,
-  InputTitle,
-  LargeInput,
-  Textarea,
-  DateInputContainer,
-  DateInputWrapper,
-  DateInput,
-  DateDivider,
-  CheckBoxWrapper,
-  CheckBox,
-  Check,
-  SectionItemContainer,
-} from "./styles";
+import { Page } from "./styles";
 import ActionPanel from "./ActionPanel";
 
-import {
-  onChangeHeader,
-  onAddContactItem,
-  onChangeSectionType,
-  onMoveUp,
-  onMoveDown,
-  onChangeContentItem,
-  onAddContentItem,
-  onToggleUseEndDate,
-  onChangeDescItemType,
-  onAddDescItem,
-  onDeleteDescItem,
-  onChangeDescItem,
-  onChangeDescLink,
-} from "./updateFunction";
-import { Resume } from "@/types/resume";
+import { Contact, Resume } from "@/types/resume";
 import CreateSectionButton from "./CreateSection";
 import Section from "./Section";
 import FileName from "./FileName";
 import Color from "./Color";
 import UserInfo, { UserInfoFields } from "./UserInfo";
 import ContactInput from "./Contact";
-
-const basicInformationData = [
-  { title: "이름", value: "name", placeholder: "Gildong Hong" },
-  { title: "직책", value: "position", placeholder: "FRONTEND DEVELOPER" },
-  {
-    title: "한마디",
-    value: "quote",
-    placeholder: '"한마디는 빈칸으로 둘 수 있습니다."',
-  },
-];
+import { Dispatch, SetStateAction } from "react";
 
 const InputPage = ({
   data,
@@ -69,6 +25,11 @@ const InputPage = ({
   fileName,
 }: {
   data: Resume;
+  setData: Dispatch<SetStateAction<Resume>>;
+  mainColor: string;
+  setMainColor: Dispatch<SetStateAction<string>>;
+  resumeFileName: string;
+  setResumeFileName: Dispatch<SetStateAction<string>>;
 }) => {
   return (
     <Page>
@@ -79,15 +40,20 @@ const InputPage = ({
         fileName={fileName}
       />
 
+      {/* ---------- 파일 이름 ---------- */}
       <Section title="파일 이름" color={mainColor}>
         <FileName
           resumeFileName={resumeFileName}
           setResumeFileName={setResumeFileName}
         />
       </Section>
+
+      {/* ---------- 색상 선택 ---------- */}
       <Section title="색상 선택" color={mainColor}>
         <Color color={mainColor} setColor={setMainColor} />
       </Section>
+
+      {/* ---------- 기본 정보 ---------- */}
       <Section title="기본 정보" color={mainColor}>
         <>
           <UserInfo
@@ -98,7 +64,16 @@ const InputPage = ({
               setData({ ...data, userInfo: newUserInfo });
             }}
           />
-          <ContactInput data={data.userInfo.contact} setData={setData} />
+          <ContactInput
+            data={data.userInfo.contact}
+            setContactData={({ contact }: { contact: Contact[] }) => {
+              const userInfo = { ...data.userInfo };
+              setData({
+                ...data,
+                userInfo: { ...userInfo, contact },
+              });
+            }}
+          />
         </>
       </Section>
 

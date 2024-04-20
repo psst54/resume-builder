@@ -1,79 +1,84 @@
+/** @jsxImportSource @emotion/react */
+
 import react from "react";
+import Image from "next/image";
 import {
-  Wrapper,
-  Box,
-  Backdrop,
-  OptionWrapper,
-  OptionContainer,
-  Option,
+  backdrop,
+  optionItem,
+  optionListContainer,
+  optionListWrapper,
+  selector,
+  wrapper,
 } from "./styles";
 
-const Selector = ({
-  selected,
-  options,
-  data,
-  setData,
+export default function Selector({
+  value,
+  optionList,
   onChange,
-  isTitle,
-  isDragging,
-  mainColor,
-}) => {
+}: {
+  value: string;
+  optionList: { label: string; value: string }[];
+  onChange: (value: string) => void;
+}) {
   const [isOpen, setIsOpen] = react.useState(false);
-
-  const selectedItem = options.find((option) => option.value === selected);
+  const label = optionList.find((option) => option.value === value)?.label;
 
   return (
-    <Wrapper isTitle={isTitle}>
-      <Box
+    <div css={wrapper}>
+      <div
+        css={selector}
         onClick={() => {
-          if (options) setIsOpen(true);
+          setIsOpen(true);
         }}
-        isTitle={isTitle}
-        isDragging={isDragging}
-        mainColor={mainColor}
       >
-        {selectedItem ? selectedItem.title : ""}
-        <img
+        <p
+          css={{
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            wordBreak: "break-all" as const,
+          }}
+        >
+          {label}
+        </p>
+
+        <Image
+          width="16"
+          height="16"
           src="/triangle.svg"
+          alt="open icon"
           style={{
-            width: "1rem",
-            height: "1rem",
             transform: isOpen ? "none" : "rotate(0.5turn)",
           }}
         />
-      </Box>
+      </div>
 
       {isOpen && (
-        <OptionWrapper>
-          <Backdrop
+        <div css={optionListWrapper}>
+          <div
+            css={backdrop}
             onClick={() => {
               setIsOpen(false);
             }}
           />
-          <OptionContainer>
-            {options.map((option, optionIndex) => {
+          <div css={optionListContainer}>
+            {optionList.map((option, optionIndex) => {
               return (
-                <Option
+                <p
                   key={optionIndex}
+                  css={optionItem}
                   onClick={() => {
-                    onChange({
-                      data,
-                      setData,
-                      idxObj,
-                      selectedValue: option.value,
-                    });
+                    onChange(option.value);
                     setIsOpen(false);
                   }}
                 >
-                  {option.title}
-                </Option>
+                  {option.label}
+                </p>
               );
             })}
-          </OptionContainer>
-        </OptionWrapper>
+          </div>
+        </div>
       )}
-    </Wrapper>
+    </div>
   );
-};
-
-export default Selector;
+}

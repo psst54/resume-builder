@@ -3,93 +3,75 @@
 import react from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import DraggableItem from "../Draggable";
+
+import { Contact, ContactType } from "@/types/resume";
+
 import { CONTACT_DATA } from "./data";
-import { Contact, Resume } from "@/types/resume";
-import Image from "next/image";
-import { defaultInput, largeInput } from "../Input/styles";
+import Icon from "./Icon";
+import DraggableItem from "../Draggable";
+import Selector from "@/components/Selector";
+import { defaultInput, inputWrapper, largeInput } from "../Input/styles";
+import { COLOR } from "@/styles/color";
 
 export default function ContactInput({
   data,
-  setData,
+  setContactData,
 }: {
   data: Contact[];
-  setData: any;
+  setContactData: ({ contact }: { contact: Contact[] }) => void;
 }) {
-  const setContactType = ({ idxObj, selectedValue }) => {
-    setData({
-      ...data,
-      header: {
-        ...data.header,
-        contactItems: data.header.contactItems.map(
-          (oldContactItem, oldContactItemIdx) => {
-            return oldContactItemIdx === idxObj.contactItemIdx
-              ? { ...oldContactItem, type: selectedValue }
-              : oldContactItem;
-          }
-        ),
-      },
+  function onChangeType(index: number, value: ContactType) {
+    const newContact: Contact[] = data.map(
+      (datum: Contact, datumIndex: number) =>
+        datumIndex === index ? { ...datum, type: value } : datum
+    );
+    setContactData({ contact: newContact });
+  }
+
+  function onChangeContent(index: number, value: string) {
+    const newContact: Contact[] = data.map(
+      (datum: Contact, datumIndex: number) =>
+        datumIndex === index ? { ...datum, content: value } : datum
+    );
+    setContactData({ contact: newContact });
+  }
+
+  function onDelete(index: number) {
+    setContactData({
+      contact: data.filter(
+        (_: Contact, prevIndex: number) => index !== prevIndex
+      ),
     });
-  };
+  }
 
-  const updateContactItem = ({ idx, value }) => {
-    setData({
-      ...data,
-      header: {
-        ...data.header,
-        contactItems: data.header.contactItems.map(
-          (oldContactItem, oldContactItemIdx) => {
-            return oldContactItemIdx === idx
-              ? { ...oldContactItem, text: value }
-              : oldContactItem;
-          }
-        ),
-      },
-    });
-  };
+  function onAdd() {
+    const contactTemplate: Contact = {
+      id: new Date().getTime(),
+      type: "phone",
+      content: "",
+    };
 
-  const deleteContactItem = ({ idx }) => {
-    setData({
-      ...data,
-      header: {
-        ...data.header,
-        contactItems: data.header.contactItems.filter(
-          (_, oldContactItemIdx) => oldContactItemIdx !== idx
-        ),
-      },
-    });
-  };
+    setContactData({ contact: data.concat(contactTemplate) });
+  }
 
-  const onDrag = react.useCallback((dragIndex: number, hoverIndex: number) => {
-    setData((prevData: Resume) => {
-      const prevContactList = [...prevData.userInfo.contact];
+  const onDrag = react.useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const newContact: Contact[] = [...data];
+      newContact.splice(dragIndex, 1);
+      newContact.splice(hoverIndex, 0, data[dragIndex]);
 
-      prevContactList.splice(dragIndex, 1);
-      prevContactList.splice(
-        hoverIndex,
-        0,
-        prevData.userInfo.contact[dragIndex]
-      );
-
-      return {
-        ...prevData,
-        userInfo: {
-          ...prevData.userInfo,
-          contact: prevContactList,
-        },
-      };
-    });
-  }, []);
+      setContactData({ contact: newContact });
+    },
+    [data]
+  );
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
         {data.map((contactItem: Contact, contactItemIndex: number) => {
-          const itemDefinition = CONTACT_DATA.find(
+          const placeholder = CONTACT_DATA.find(
             (contactTypeDatum) => contactTypeDatum.type === contactItem.type
-          )!;
-          const type = itemDefinition.type;
-          const placeholder = itemDefinition.placeholder;
+          )!.placeholder;
 
           return (
             <DraggableItem
@@ -98,28 +80,55 @@ export default function ContactInput({
               id={contactItemIndex}
               index={contactItemIndex}
             >
-              <div css={{ display: "flex", alignItems: "center" }}>
-                <input
-                  css={[defaultInput, largeInput]}
-                  value={contactItem.content}
-                  placeholder={placeholder}
-                  onChange={(event) => {
-                    // onChange(event.target.value);
+              <div css={inputWrapper}>
+                <Selector
+                  value={contactItem.type}
+                  optionList={CONTACT_DATA.map((datum) => ({
+                    label: datum.title,
+                    value: datum.type,
+                  }))}
+                  onChange={(value: ContactType) => {
+                    onChangeType(contactItemIndex, value);
                   }}
                 />
-                <Image
-                  src="/drag.svg"
-                  alt="drag icon"
-                  width="24"
-                  height="24"
-                  css={{
-                    cursor: "pointer",
-                  }}
-                />
+
+                <div css={{ display: "flex", alignItems: "center" }}>
+                  <input
+                    css={[defaultInput, largeInput]}
+                    value={contactItem.content}
+                    placeholder={placeholder}
+                    onChange={(event) => {
+                      onChangeContent(contactItemIndex, event.target.value);
+                    }}
+                  />
+                  <Icon title="drag" />
+                  <Icon
+                    title="delete"
+                    onClick={() => {
+                      onDelete(contactItemIndex);
+                    }}
+                  />
+                </div>
               </div>
             </DraggableItem>
           );
         })}
+
+        <button
+          css={{
+            background: "white",
+            border: `1px solid ${COLOR.INPUT_BORDER}`,
+            borderRadius: "1rem",
+            padding: "0.5rem",
+
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            onAdd();
+          }}
+        >
+          연락 수단 추가
+        </button>
       </div>
     </DndProvider>
   );

@@ -34,8 +34,9 @@ export default function UserInfo({
 }) {
   return (
     <div>
-      {textFieldList.map((field) => (
+      {textFieldList.map((field, index) => (
         <Input
+          key={index}
           title={field.title}
           value={data[field.field]}
           onChange={(value: string) => {
