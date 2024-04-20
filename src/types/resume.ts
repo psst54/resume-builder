@@ -18,7 +18,7 @@ export interface ResumeUserInfo {
   quote: string;
 }
 
-type ContactType =
+export type ContactType =
   | "phone"
   | "email"
   | "homepage"

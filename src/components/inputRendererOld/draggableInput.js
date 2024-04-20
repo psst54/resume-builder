@@ -83,9 +83,12 @@ const Input = ({
     item: () => {
       return { id, index };
     },
-    collect: (monitor) => ({
-      isDragging: id && id === monitor.getItem()?.id,
-    }),
+    collect: (monitor) => {
+      console.log("123", monitor.getItem());
+      return {
+        isDragging: id && id === monitor.getItem()?.id,
+      };
+    },
   });
 
   drag(drop(ref));

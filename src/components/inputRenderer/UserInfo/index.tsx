@@ -1,9 +1,11 @@
 import { ResumeUserInfo } from "@/types/resume";
 import Input from "../Input";
 
+export type UserInfoFields = Exclude<keyof ResumeUserInfo, "contact">;
+
 const textFieldList: {
   title: string;
-  field: Exclude<keyof ResumeUserInfo, "contact">;
+  field: UserInfoFields;
   placeholder: string;
 }[] = [
   {
@@ -24,18 +26,18 @@ const textFieldList: {
 ];
 
 export default function UserInfo({
-  userInfoData,
+  data,
   setData,
 }: {
-  userInfoData: ResumeUserInfo;
-  setData: (field: string, value: string) => void;
+  data: ResumeUserInfo;
+  setData: (field: UserInfoFields, value: string) => void;
 }) {
   return (
     <div>
       {textFieldList.map((field) => (
         <Input
           title={field.title}
-          value={userInfoData[field.field]}
+          value={data[field.field]}
           onChange={(value: string) => {
             setData(field.field, value);
           }}

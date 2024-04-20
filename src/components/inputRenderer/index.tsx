@@ -43,7 +43,8 @@ import CreateSectionButton from "./CreateSection";
 import Section from "./Section";
 import FileName from "./FileName";
 import Color from "./Color";
-import UserInfo from "./UserInfo";
+import UserInfo, { UserInfoFields } from "./UserInfo";
+import ContactInput from "./Contact";
 
 const basicInformationData = [
   { title: "이름", value: "name", placeholder: "Gildong Hong" },
@@ -54,45 +55,6 @@ const basicInformationData = [
     placeholder: '"한마디는 빈칸으로 둘 수 있습니다."',
   },
 ];
-
-const sectionTypeData = [
-  {
-    title: "텍스트",
-    value: "text",
-  },
-  {
-    title: "상세",
-    value: "long",
-  },
-  {
-    title: "간단",
-    value: "short",
-  },
-];
-
-const shortSectionData = [
-  {
-    title: "일자",
-    field: "year",
-  },
-  {
-    title: "역할",
-    field: "position",
-  },
-  {
-    title: "활동명",
-    field: "subscription",
-  },
-  {
-    title: "위치",
-    field: "location",
-  },
-];
-
-const emptyContentTemplate = {
-  title: "",
-  position: "",
-};
 
 const InputPage = ({
   data,
@@ -127,59 +89,20 @@ const InputPage = ({
         <Color color={mainColor} setColor={setMainColor} />
       </Section>
       <Section title="기본 정보" color={mainColor}>
-        <UserInfo
-          userInfoData={data.userInfo}
-          setData={(field: string, value: string) => {
-            const newUserInfo = { ...data.userInfo };
-            newUserInfo[field] = value;
-            setData({ ...data, userInfo: newUserInfo });
-          }}
-        />
+        <>
+          <UserInfo
+            data={data.userInfo}
+            setData={(field: UserInfoFields, value: string) => {
+              const newUserInfo = { ...data.userInfo };
+              newUserInfo[field] = value;
+              setData({ ...data, userInfo: newUserInfo });
+            }}
+          />
+          <ContactInput data={data.userInfo.contact} setData={setData} />
+        </>
       </Section>
 
       {/* 
-      <SectionWrapper>
-        <ColorSelector mainColor={mainColor} setMainColor={setMainColor} />
-      </SectionWrapper>
-
-
-      <SectionWrapper>
-        <SectionTitleContainer>
-          <SectionTitle>
-            <span css={{ fontSize: "1.2rem", color: mainColor }}>기</span>본
-            정보
-          </SectionTitle>
-          <SectionBorder />
-        </SectionTitleContainer>
-
-        {basicInformationData.map((datum, datumIndex) => (
-          <Input
-            key={datumIndex}
-            type="text"
-            title={datum.title}
-            value={data.header ? data.header[datum.value] : null}
-            placeholder={datum.placeholder}
-            setValue={(event) => {
-              onChangeHeader({
-                data,
-                setData,
-                field: datum.value,
-                value: event.target.value,
-              });
-            }}
-          />
-        ))}
-
-        <ContactItems data={data} setData={setData} mainColor={mainColor} />
-
-        <AddItem
-          onClick={() => {
-            onAddContactItem({ data, setData });
-          }}
-        >
-          + 연락 정보 추가하기
-        </AddItem>
-      </SectionWrapper>
       {data?.body?.map((bodyItem, bodyItemIdx) => {
         return (
           <SectionWrapper key={bodyItemIdx}>

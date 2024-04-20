@@ -50,7 +50,7 @@ export const defaultInput = {
   },
 };
 
-export const LargeInput = {
+export const largeInput = {
   fontWeight: 300,
 
   width: "100%",
