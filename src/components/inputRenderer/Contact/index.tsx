@@ -116,18 +116,24 @@ export default function ContactInput({
 
         <button
           css={{
-            background: "white",
-            border: `1px solid ${COLOR.INPUT_BORDER}`,
+            display: "flex",
+            width: "fit-content",
+            background: "black",
+            padding: "0.5rem 1rem",
+            border: "none",
             borderRadius: "1rem",
-            padding: "0.5rem",
-
             cursor: "pointer",
+            color: "white",
+
+            "&:active": {
+              background: COLOR.GRAY.LIGHT,
+            },
           }}
           onClick={() => {
             onAdd();
           }}
         >
-          연락 수단 추가
+          + 연락 수단 추가
         </button>
       </div>
     </DndProvider>
