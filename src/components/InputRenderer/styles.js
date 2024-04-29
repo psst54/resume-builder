@@ -30,18 +30,20 @@ const margin = "2rem";
 const Page = styled.div`
   position: relative;
 
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  width: 100%;
+  min-height: 100%;
+  padding: 1.5rem 1rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
+  background: ${COLOR.ULTRA_GRAY.STANDARD};
+
   font-size: 1rem;
   line-height: 1.4;
 
-  width: 100%;
-  padding: 3rem 2rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 2rem;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  @media (max-width: 800px) {
-    padding: 2rem 1rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 1rem;
+  background: @media (max-width: 800px) {
+    padding: 1rem 0.5rem calc(${SIZE.ACTION_PANEL_HEIGHT} + ${margin}) 0.5rem;
   }
 `;
 

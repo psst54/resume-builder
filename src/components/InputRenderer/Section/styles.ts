@@ -8,6 +8,10 @@ export const container = {
   gap: "1rem",
 
   width: "100%",
+  padding: "1rem",
+  background: "white",
+
+  borderRadius: "1rem",
 };
 
 export const titleContainer = {

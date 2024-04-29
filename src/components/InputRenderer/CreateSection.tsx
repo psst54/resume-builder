@@ -6,21 +6,18 @@ import { Resume, TextSectionType } from "@/types/resume";
 
 const button = {
   width: "100%",
-  height: "5rem",
-  background: "transparent",
+  padding: "0.5rem",
+  background: COLOR.BLACK.STANDARD,
 
-  border: `2px solid ${COLOR.LIGHT_GRAY.STANDARD}`,
+  color: COLOR.WHITE.STANDARD,
   borderRadius: "1rem",
+};
 
-  color: COLOR.GRAY.STANDARD,
-  fontSize: "1rem",
-  fontWeight: 500,
-
+export const hoverButton = {
   "&:hover": {
     cursor: "pointer",
-    color: COLOR.GRAY.HOVER,
     fontWeight: 900,
-    border: `2px solid ${COLOR.LIGHT_GRAY.HOVER}`,
+    background: COLOR.BLACK.HOVER,
   },
 };
 
@@ -40,7 +37,7 @@ export default function CreateSectionButton({
 }) {
   return (
     <button
-      css={button}
+      css={[button, hoverButton]}
       onClick={() => {
         setData({
           ...data,
