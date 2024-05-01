@@ -4,7 +4,6 @@ import { Page } from "./styles";
 import ActionPanel from "./ActionPanel";
 
 import { Contact, Resume, SectionItem } from "@/types/resume";
-import CreateSectionButton from "./CreateSection";
 import Section from "./Section";
 import FileName from "./FileName";
 import Color from "./Color";
@@ -12,6 +11,8 @@ import UserInfo, { UserInfoFields } from "./UserInfo";
 import ContactInput from "./Contact";
 import { Dispatch, SetStateAction } from "react";
 import SectionItemRenderer from "./SectionItemRenderer";
+import CreateButton from "./CreateButton";
+import { TEXT_SECTION_TEMPLATE } from "./CreateButton/template";
 
 const InputPage = ({
   data,
@@ -32,6 +33,13 @@ const InputPage = ({
   resumeFileName: string;
   setResumeFileName: Dispatch<SetStateAction<string>>;
 }) => {
+  function onAddSection() {
+    setData({
+      ...data,
+      sectionList: data.sectionList.concat(TEXT_SECTION_TEMPLATE),
+    });
+  }
+
   return (
     <Page>
       <ActionPanel
@@ -86,7 +94,7 @@ const InputPage = ({
         >
           <SectionItemRenderer
             sectionItem={sectionItem}
-            setSectionItemData={(newSectionItem: SectionItem) => {
+            setSectionItem={(newSectionItem: SectionItem) => {
               const prevSectionList = data.sectionList;
               setData({
                 ...data,
@@ -379,7 +387,7 @@ const InputPage = ({
         );
       })} */}
 
-      <CreateSectionButton data={data} setData={setData} />
+      <CreateButton type="섹션" onClick={onAddSection} />
     </Page>
   );
 };

@@ -6,33 +6,38 @@ import Textarea from "../Input/Textarea";
 
 export default function TextSectionRenderer({
   sectionItem,
-  setSectionItemData,
+  setSectionItem,
 }: {
   sectionItem: TextSectionType;
-  setSectionItemData: (value: TextSectionType) => void;
+  setSectionItem: (value: TextSectionType) => void;
 }) {
+  // [?] 합치는게 나을까?
+  function onChangeTitle(value: string) {
+    setSectionItem({
+      ...sectionItem,
+      title: value,
+    });
+  }
+
+  function onChangeContent(value: string) {
+    setSectionItem({
+      ...sectionItem,
+      content: value,
+    });
+  }
+
   return (
     <div css={{ display: "flex", flexDirection: "column" }}>
       <Input
         title="섹션 이름"
         value={sectionItem.title}
-        onChange={(value: string) => {
-          setSectionItemData({
-            ...sectionItem,
-            title: value,
-          });
-        }}
+        onChange={onChangeTitle}
         placeholder="섹션 이름을 입력해주세요."
       />
       <Textarea
         title="내용"
         value={sectionItem.content}
-        onChange={(value: string) => {
-          setSectionItemData({
-            ...sectionItem,
-            content: value,
-          });
-        }}
+        onChange={onChangeContent}
         placeholder="내용을 입력해주세요."
       />
     </div>

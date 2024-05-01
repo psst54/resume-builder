@@ -5,24 +5,24 @@ import ShortSectionRenderer from "./ShortSectionRenderer";
 
 export default function SectionItemRenderer({
   sectionItem,
-  setSectionItemData,
+  setSectionItem,
 }: {
   sectionItem: SectionItem;
-  setSectionItemData: (value: SectionItem) => void;
+  setSectionItem: (value: SectionItem) => void;
 }) {
   switch (sectionItem.type) {
     case "text":
       return (
         <TextSectionRenderer
           sectionItem={sectionItem}
-          setSectionItemData={setSectionItemData}
+          setSectionItem={setSectionItem}
         />
       );
     case "short":
       return (
         <ShortSectionRenderer
           sectionItem={sectionItem}
-          setSectionItemData={setSectionItemData}
+          setSectionItem={setSectionItem}
         />
       );
     case "long":
