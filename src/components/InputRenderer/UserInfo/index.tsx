@@ -27,10 +27,10 @@ const textFieldList: {
 
 export default function UserInfo({
   data,
-  setData,
+  setUserInfo,
 }: {
   data: ResumeUserInfo;
-  setData: (field: UserInfoFields, value: string) => void;
+  setUserInfo: (field: UserInfoFields, value: string) => void;
 }) {
   return (
     <div>
@@ -40,7 +40,7 @@ export default function UserInfo({
           title={field.title}
           value={data[field.field]}
           onChange={(value: string) => {
-            setData(field.field, value);
+            setUserInfo(field.field, value);
           }}
           placeholder={field.placeholder}
         />

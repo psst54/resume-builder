@@ -33,6 +33,30 @@ const InputPage = ({
   resumeFileName: string;
   setResumeFileName: Dispatch<SetStateAction<string>>;
 }) => {
+  function setUserInfo(field: UserInfoFields, value: string) {
+    const newUserInfo = { ...data.userInfo };
+    newUserInfo[field] = value;
+    setData({ ...data, userInfo: newUserInfo });
+  }
+
+  function setSectionItem(newSectionItem: SectionItem, index: number) {
+    const prevSectionList = data.sectionList;
+    setData({
+      ...data,
+      sectionList: prevSectionList.map(
+        (prevSectionItem, prevSectionItemIndex) =>
+          prevSectionItemIndex === index ? newSectionItem : prevSectionItem
+      ),
+    });
+  }
+
+  function setContactData({ contact }: { contact: Contact[] }) {
+    setData({
+      ...data,
+      userInfo: { ...data.userInfo, contact },
+    });
+  }
+
   function onAddSection() {
     setData({
       ...data,
@@ -65,23 +89,10 @@ const InputPage = ({
       {/* ---------- 기본 정보 ---------- */}
       <Section title="기본 정보" color={mainColor}>
         <>
-          <UserInfo
-            data={data.userInfo}
-            setData={(field: UserInfoFields, value: string) => {
-              const newUserInfo = { ...data.userInfo };
-              newUserInfo[field] = value;
-              setData({ ...data, userInfo: newUserInfo });
-            }}
-          />
+          <UserInfo data={data.userInfo} setUserInfo={setUserInfo} />
           <ContactInput
             data={data.userInfo.contact}
-            setContactData={({ contact }: { contact: Contact[] }) => {
-              const userInfo = { ...data.userInfo };
-              setData({
-                ...data,
-                userInfo: { ...userInfo, contact },
-              });
-            }}
+            setContactData={setContactData}
           />
         </>
       </Section>
@@ -95,16 +106,7 @@ const InputPage = ({
           <SectionItemRenderer
             sectionItem={sectionItem}
             setSectionItem={(newSectionItem: SectionItem) => {
-              const prevSectionList = data.sectionList;
-              setData({
-                ...data,
-                sectionList: prevSectionList.map(
-                  (prevSectionItem, prevSectionItemIndex) =>
-                    prevSectionItemIndex === sectionItemIdx
-                      ? newSectionItem
-                      : prevSectionItem
-                ),
-              });
+              setSectionItem(newSectionItem, sectionItemIdx);
             }}
           />
         </Section>
