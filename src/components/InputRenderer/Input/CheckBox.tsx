@@ -2,6 +2,7 @@
 
 import CheckIcon from "@/assets/CheckIcon";
 import { checkbox, checkboxWrapper } from "./styles";
+import { COLOR } from "@/styles/color";
 
 export default function CheckBox({
   title,

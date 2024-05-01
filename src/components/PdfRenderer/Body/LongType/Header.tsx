@@ -54,10 +54,12 @@ export default function Header({
             },
           ]}
         >
-          {content.location ? content.location : ""}
+          {content.location}
         </Text>
-        <Text style={styles.date}>{`${content.start ? content.start : ""}${
-          content.useEndDate ? ` - ${content.end ? content.end : ""}` : ""
+        <Text style={styles.date}>{`${content.date.start}${
+          content.date.useEnd || content.date.useCurrent
+            ? ` - ${content.date.useCurrent ? "진행중" : content.date.end}`
+            : ""
         }`}</Text>
       </div>
     </div>

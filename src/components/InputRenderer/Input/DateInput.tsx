@@ -80,13 +80,13 @@ export default function DateInput({
               onChange({ ...value, useCurrent: !value.useCurrent });
             }}
           />
-          <CheckBox
+          {/* <CheckBox
             title="기간 보이기"
             value={value.useDuration}
             onChange={() => {
               onChange({ ...value, useDuration: !value.useDuration });
             }}
-          />
+          /> */}
         </div>
       </div>
     </div>
