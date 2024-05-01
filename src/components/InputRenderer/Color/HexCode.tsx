@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import Input from "../Input";
+import Input from "../Input/LongInput";
 
 const INPUT_TITLE = "Hex Code";
 const PLACEHOLDER = "#000000";

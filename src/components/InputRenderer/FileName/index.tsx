@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Dispatch, SetStateAction } from "react";
-import Input from "../Input";
+import Input from "../Input/LongInput";
 
 export default function FileName({
   resumeFileName,

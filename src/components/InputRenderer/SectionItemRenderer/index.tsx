@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { SectionItem } from "@/types/resume";
-import Input from "../Input";
-import Textarea from "../Textarea";
+import Input from "../Input/LongInput";
+import Textarea from "../Input/Textarea";
 
 export default function SectionItemRenderer({
   sectionItem,

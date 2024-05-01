@@ -1,5 +1,5 @@
 import { ResumeUserInfo } from "@/types/resume";
-import Input from "../Input";
+import Input from "../Input/LongInput";
 
 export type UserInfoFields = Exclude<keyof ResumeUserInfo, "contact">;
 
