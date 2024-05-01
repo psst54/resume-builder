@@ -18,10 +18,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
-import { updateResumeOld } from "@/utils/supabase/updateResumeOld";
 import { deleteResume } from "@/utils/supabase/deleteResume";
 import type { Resume } from "@/types/resume";
 import { RESUME_TABLE } from "@/utils/supabase/constant";
+import { updateResume } from "@/utils/supabase/updateResume";
 
 export default function BuildScreen({
   resumeId,
@@ -111,7 +111,7 @@ export default function BuildScreen({
 
   async function onSave() {
     try {
-      await updateResumeOld(
+      await updateResume(
         createClient,
         resumeId,
         resumeFileName,
