@@ -29,12 +29,16 @@ export const inputTitle = {
 };
 
 export const defaultInput = {
-  fontSize: "1rem",
+  padding: "0.3rem 1rem",
 
   border: `1px solid ${COLOR.INPUT_BORDER}`,
-
   borderRadius: "0.6rem",
-  padding: "0.3rem 1rem",
+
+  fontSize: "1rem",
+
+  ":disabled": {
+    background: COLOR.ULTRA_GRAY.STANDARD,
+  },
 
   "::placeholder": {
     color: "#ccc",
@@ -56,3 +60,28 @@ export const largeInput = {
   width: "100%",
   maxWidth: "26rem",
 };
+
+export const smallInput = {
+  fontWeight: 300,
+
+  width: "auto",
+  maxWidth: "10rem",
+};
+
+export const checkboxWrapper = {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.25rem",
+
+  background: "transparent",
+  border: "none",
+};
+
+export const checkbox = (isChecked: boolean) => ({
+  width: "1.25rem",
+  height: "1.25rem",
+  background: isChecked ? COLOR.BLACK.STANDARD : "transparent",
+
+  border: `1px solid ${COLOR.BLACK.STANDARD}`,
+  borderRadius: "0.25rem",
+});

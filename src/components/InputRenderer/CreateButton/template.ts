@@ -1,4 +1,8 @@
-import { ShortSectionItemType, TextSectionType } from "@/types/resume";
+import {
+  LongSectionItemType,
+  ShortSectionItemType,
+  TextSectionType,
+} from "@/types/resume";
 
 export const TEXT_SECTION_TEMPLATE: TextSectionType = {
   id: new Date().getTime().toString(),
@@ -12,4 +16,17 @@ export const SHORT_SECTION_ITEM_LIST_TEMPLATE: ShortSectionItemType = {
   position: "",
   content: "",
   location: "",
+};
+
+export const LONG_SECTION_ITEM_LIST_TEMPLATE: LongSectionItemType = {
+  title: "",
+  date: {
+    start: "",
+    end: "",
+    useEnd: false,
+    useCurrent: false,
+    useDuration: false,
+  },
+  position: "",
+  content: "",
 };

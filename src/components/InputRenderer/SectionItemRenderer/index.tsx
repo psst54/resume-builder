@@ -2,6 +2,7 @@
 import { SectionItem } from "@/types/resume";
 import TextSectionRenderer from "./TextSectionRenderer";
 import ShortSectionRenderer from "./ShortSectionRenderer";
+import LongSectionRenderer from "./LongSectionRenderer";
 
 export default function SectionItemRenderer({
   sectionItem,
@@ -27,15 +28,10 @@ export default function SectionItemRenderer({
       );
     case "long":
       return (
-        <div>
-          {sectionItem.itemList.map((item) => (
-            <div key={item.title}>
-              <div>{item.title}</div>
-              <div>{item.date.start}</div>
-              <div>{item.date.end}</div>
-            </div>
-          ))}
-        </div>
+        <LongSectionRenderer
+          sectionItem={sectionItem}
+          setSectionItem={setSectionItem}
+        />
       );
 
     default:

@@ -59,17 +59,20 @@ export interface ShortSectionType extends SectionType {
   itemList: ShortSectionItemType[];
 }
 
+export interface DateItem {
+  start: string;
+  end?: string;
+  useEnd: boolean;
+  useCurrent: boolean;
+  useDuration: boolean;
+}
+
 export interface LongSectionItemType {
   title: string;
-  date: {
-    start: string;
-    end?: string;
-    useEnd: boolean;
-    useCurrent: boolean;
-    useDuration: boolean;
-  };
+  date: DateItem;
   position: string;
   content: markdownString;
+  location: string;
 }
 
 export interface LongSectionType extends SectionType {
