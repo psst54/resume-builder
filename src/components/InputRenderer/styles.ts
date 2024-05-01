@@ -5,7 +5,13 @@ import { SIZE } from "@/styles/size";
 const DefaultInput = styled.input`
   font-size: 1rem;
 
-  border: ${({ isDragging, mainColor }) =>
+  border: ${({
+    isDragging,
+    mainColor,
+  }: {
+    isDragging: boolean;
+    mainColor: string;
+  }) =>
     isDragging ? `2px solid ${mainColor}` : `1px solid ${COLOR.INPUT_BORDER}`};
 
   border-radius: 0.6rem;
@@ -79,7 +85,7 @@ const SectionIcon = styled.img`
   padding: 0.2rem;
 
   cursor: pointer;
-  ${({ down }) => down && "transform: rotate(0.5turn)"};
+  ${({ down }: { down: boolean }) => down && "transform: rotate(0.5turn)"};
 `;
 
 const AddItem = styled.button`
@@ -96,7 +102,7 @@ const AddItem = styled.button`
 
   &:hover {
     cursor: pointer;
-    color: ${COLOR.GRAY.STANDARD.hover};
+    color: ${COLOR.GRAY.HOVER};
     font-weight: 900;
     border: 2px solid ${COLOR.LIGHT_GRAY.HOVER};
   }
@@ -186,10 +192,15 @@ const CheckBox = styled.div`
 
   width: 1.2rem;
   height: 1.2rem;
-  background: ${({ checked, mainColor }) =>
-    checked ? mainColor : "transparent"};
+  background: ${({
+    checked,
+    mainColor,
+  }: {
+    checked: boolean;
+    mainColor: string;
+  }) => (checked ? mainColor : "transparent")};
 
-  border: ${({ checked, mainColor }) =>
+  border: ${({ checked, mainColor }: { checked: boolean; mainColor: string }) =>
     checked ? "none" : `2px solid ${mainColor}`};
   border-radius: 0.2rem;
 `;
