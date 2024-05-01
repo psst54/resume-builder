@@ -3,7 +3,7 @@
 import { Page } from "./styles";
 import ActionPanel from "./ActionPanel";
 
-import { Contact, Resume } from "@/types/resume";
+import { Contact, Resume, SectionItem } from "@/types/resume";
 import CreateSectionButton from "./CreateSection";
 import Section from "./Section";
 import FileName from "./FileName";
@@ -78,18 +78,29 @@ const InputPage = ({
         </>
       </Section>
 
-      {data.sectionList.map((sectionItem, sectionItemIdx) => {
-        console.log(sectionItemIdx, sectionItem);
-        return (
-          <Section
-            key={sectionItemIdx}
-            title={`${sectionItemIdx + 1}번째 섹션`}
-            color={mainColor}
-          >
-            <SectionItemRenderer sectionItem={sectionItem} />
-          </Section>
-        );
-      })}
+      {data.sectionList.map((sectionItem, sectionItemIdx) => (
+        <Section
+          key={sectionItemIdx}
+          title={`${sectionItemIdx + 1}번째 섹션`}
+          color={mainColor}
+        >
+          <SectionItemRenderer
+            sectionItem={sectionItem}
+            setSectionItemData={(newSectionItem: SectionItem) => {
+              const prevSectionList = data.sectionList;
+              setData({
+                ...data,
+                sectionList: prevSectionList.map(
+                  (prevSectionItem, prevSectionItemIndex) =>
+                    prevSectionItemIndex === sectionItemIdx
+                      ? newSectionItem
+                      : prevSectionItem
+                ),
+              });
+            }}
+          />
+        </Section>
+      ))}
 
       {/* 
       {data?.body?.map((bodyItem, bodyItemIdx) => {
