@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { SectionItem, TextSectionType } from "@/types/resume";
+import { TextSectionType } from "@/types/resume";
 import Input from "../Input/LongInput";
 import Textarea from "../Input/Textarea";
 
@@ -9,7 +9,7 @@ export default function TextSectionRenderer({
   setSectionItemData,
 }: {
   sectionItem: TextSectionType;
-  setSectionItemData: (value: SectionItem) => void;
+  setSectionItemData: (value: TextSectionType) => void;
 }) {
   return (
     <div css={{ display: "flex", flexDirection: "column" }}>
@@ -22,7 +22,7 @@ export default function TextSectionRenderer({
             title: value,
           });
         }}
-        placeholder="pdf 파일 이름을 입력해주세요."
+        placeholder="섹션 이름을 입력해주세요."
       />
       <Textarea
         title="내용"

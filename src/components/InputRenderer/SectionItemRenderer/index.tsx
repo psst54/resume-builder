@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { SectionItem } from "@/types/resume";
 import TextSectionRenderer from "./TextSectionRenderer";
+import ShortSectionRenderer from "./ShortSectionRenderer";
 
 export default function SectionItemRenderer({
   sectionItem,
@@ -19,16 +20,10 @@ export default function SectionItemRenderer({
       );
     case "short":
       return (
-        <div>
-          {sectionItem.itemList.map((item) => (
-            <div key={item.date}>
-              <div>{item.date}</div>
-              <div>{item.position}</div>
-              <div>{item.content}</div>
-              <div>{item.location}</div>
-            </div>
-          ))}
-        </div>
+        <ShortSectionRenderer
+          sectionItem={sectionItem}
+          setSectionItemData={setSectionItemData}
+        />
       );
     case "long":
       return (
