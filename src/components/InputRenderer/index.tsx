@@ -89,7 +89,7 @@ const InputPage = ({
       {data.sectionList.map((sectionItem, sectionItemIdx) => (
         <Section
           key={sectionItemIdx}
-          title={`${sectionItemIdx + 1}번째 섹션`}
+          title={sectionItem.title}
           color={mainColor}
         >
           <SectionItemRenderer
