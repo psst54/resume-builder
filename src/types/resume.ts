@@ -1,3 +1,5 @@
+export type SectionItem = TextSectionType | ShortSectionType | LongSectionType;
+
 export interface Resume {
   id: number;
   createdAt: Date;
@@ -7,7 +9,7 @@ export interface Resume {
   mainColor: string;
 
   userInfo: ResumeUserInfo;
-  sectionList: (TextSectionType | ShortSectionType | LongSectionType)[];
+  sectionList: SectionItem[];
 }
 
 export interface ResumeUserInfo {

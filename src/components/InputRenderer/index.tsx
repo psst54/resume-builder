@@ -11,6 +11,7 @@ import Color from "./Color";
 import UserInfo, { UserInfoFields } from "./UserInfo";
 import ContactInput from "./Contact";
 import { Dispatch, SetStateAction } from "react";
+import SectionItemRenderer from "./SectionItemRenderer";
 
 const InputPage = ({
   data,
@@ -76,6 +77,19 @@ const InputPage = ({
           />
         </>
       </Section>
+
+      {data.sectionList.map((sectionItem, sectionItemIdx) => {
+        console.log(sectionItemIdx, sectionItem);
+        return (
+          <Section
+            key={sectionItemIdx}
+            title={`${sectionItemIdx + 1}번째 섹션`}
+            color={mainColor}
+          >
+            <SectionItemRenderer sectionItem={sectionItem} />
+          </Section>
+        );
+      })}
 
       {/* 
       {data?.body?.map((bodyItem, bodyItemIdx) => {
