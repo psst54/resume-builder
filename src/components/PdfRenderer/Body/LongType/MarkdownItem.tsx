@@ -38,7 +38,7 @@ export default function MarkdownItem({
     });
   }, [content]);
 
-  function renderNodes(node, index) {
+  function renderNodes(node: any, index: number) {
     if (Object.keys(node).length === 0) return <View></View>;
 
     switch (node.type) {
@@ -47,7 +47,9 @@ export default function MarkdownItem({
       }
 
       case "root": {
-        return node.children.map((child, index) => renderNodes(child, index));
+        return node.children.map((child: any, index: number) =>
+          renderNodes(child, index)
+        );
       }
 
       case "raw": {
@@ -55,16 +57,17 @@ export default function MarkdownItem({
       }
 
       case "heading": {
+        const style =
+          node.depth === 1
+            ? markdownStyles.h1
+            : node.depth === 2
+            ? markdownStyles.h2
+            : markdownStyles.h3;
         return (
-          <View
-            style={[
-              markdownStyles.view,
-              node.depth === 1 && markdownStyles.h1,
-              node.depth === 2 && markdownStyles.h2,
-              node.depth >= 3 && markdownStyles.h3,
-            ]}
-          >
-            {node.children.map((child, index) => renderNodes(child, index))}
+          <View style={[markdownStyles.view, style]}>
+            {node.children.map((child: any, index: number) =>
+              renderNodes(child, index)
+            )}
           </View>
         );
       }
@@ -72,7 +75,9 @@ export default function MarkdownItem({
       case "paragraph": {
         return (
           <View style={[markdownStyles.text, markdownStyles.view]}>
-            {node.children.map((child, index) => renderNodes(child, index))}
+            {node.children.map((child: any, index: number) =>
+              renderNodes(child, index)
+            )}
           </View>
         );
       }
@@ -80,7 +85,7 @@ export default function MarkdownItem({
       case "list": {
         return (
           <View>
-            {node.children.map((child, index) => (
+            {node.children.map((child: any, index: number) => (
               <View style={markdownStyles.view}>
                 <Text>{"• "}</Text>
                 <View style={{ display: "flex", flexDirection: "column" }}>
@@ -93,7 +98,9 @@ export default function MarkdownItem({
       }
 
       case "listItem": {
-        return node.children.map((child, index) => renderNodes(child, index));
+        return node.children.map((child: any, index: number) =>
+          renderNodes(child, index)
+        );
       }
 
       case "inlineCode": {
@@ -120,7 +127,9 @@ export default function MarkdownItem({
             src={node.url}
             style={[markdownStyles.text, { color: mainColor }]}
           >
-            {node.children.map((child, index) => renderNodes(child, index))}
+            {node.children.map((child: any, index: number) =>
+              renderNodes(child, index)
+            )}
           </Link>
         );
       }
@@ -128,7 +137,9 @@ export default function MarkdownItem({
       case "strong": {
         return (
           <View style={[markdownStyles.view, { fontWeight: 900 }]}>
-            {node.children.map((child, index) => renderNodes(child, index))}
+            {node.children.map((child: any, index: number) =>
+              renderNodes(child, index)
+            )}
           </View>
         );
       }
