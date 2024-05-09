@@ -16,7 +16,7 @@ import {
   grid,
   resetLinkStyle,
   secondaryCard,
-} from "../old/style";
+} from "./style";
 import { createClient } from "@/utils/supabase/client";
 import { resumeCard } from "@/components/Card/styles";
 
