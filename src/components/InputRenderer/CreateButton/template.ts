@@ -1,6 +1,8 @@
 import {
   LongSectionItemType,
+  LongSectionType,
   ShortSectionItemType,
+  ShortSectionType,
   TextSectionType,
 } from "@/types/resume";
 
@@ -18,6 +20,13 @@ export const SHORT_SECTION_ITEM_LIST_TEMPLATE: ShortSectionItemType = {
   location: "",
 };
 
+export const SHORT_SECTION_TEMPLATE: ShortSectionType = {
+  id: new Date().getTime().toString(),
+  title: "새로운 섹션",
+  type: "short",
+  itemList: [SHORT_SECTION_ITEM_LIST_TEMPLATE],
+};
+
 export const LONG_SECTION_ITEM_LIST_TEMPLATE: LongSectionItemType = {
   title: "",
   date: {
@@ -29,4 +38,12 @@ export const LONG_SECTION_ITEM_LIST_TEMPLATE: LongSectionItemType = {
   },
   position: "",
   content: "",
+  location: "",
+};
+
+export const LONG_SECTION_TEMPLATE: LongSectionType = {
+  id: new Date().getTime().toString(),
+  title: "새로운 섹션",
+  type: "long",
+  itemList: [LONG_SECTION_ITEM_LIST_TEMPLATE],
 };
