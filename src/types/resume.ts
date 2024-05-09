@@ -1,14 +1,18 @@
-interface Resume {
+export type SectionItem = TextSectionType | ShortSectionType | LongSectionType;
+
+export interface Resume {
   id: number;
   createdAt: Date;
   modifiedAt: Date;
-  mainColor: string;
+
   fileName: string;
+  mainColor: string;
+
   userInfo: ResumeUserInfo;
-  content: (TextSection | LongSection)[];
+  sectionList: SectionItem[];
 }
 
-interface ResumeUserInfo {
+export interface ResumeUserInfo {
   name: string;
   position: string;
   contact: Contact[];
@@ -16,7 +20,7 @@ interface ResumeUserInfo {
   quote: string;
 }
 
-type ContactType =
+export type ContactType =
   | "phone"
   | "email"
   | "homepage"
@@ -27,44 +31,53 @@ type ContactType =
   | "X"
   | "Reddit";
 
-interface Contact {
+export interface Contact {
   id: number | (() => number);
   type: ContactType;
   content: string;
 }
 
-interface Section {
+export interface SectionType {
   id: string | (() => string);
   title: string;
+  type: "text" | "short" | "long";
 }
-interface TextSection extends Section {
+export interface TextSectionType extends SectionType {
+  type: "text";
   content: string;
 }
 
-interface ShortSectionItem {
+export interface ShortSectionItemType {
+  date: string;
   position: string;
   content: string;
   location: string;
 }
-interface ShortSection extends Section {
-  date: string;
-  itemList: ShortSectionItem[];
+
+export interface ShortSectionType extends SectionType {
+  type: "short";
+  itemList: ShortSectionItemType[];
 }
 
-interface LongSectionItem {
+export interface DateItem {
+  start: string;
+  end?: string;
+  useEnd: boolean;
+  useCurrent: boolean;
+  useDuration: boolean;
+}
+
+export interface LongSectionItemType {
   title: string;
-  date: {
-    start: string;
-    end: string;
-    useEnd: boolean;
-    useCurrent: boolean;
-  };
+  date: DateItem;
   position: string;
   content: markdownString;
+  location: string;
 }
 
-interface LongSection extends Section {
-  itemList: LongSectionItem[];
+export interface LongSectionType extends SectionType {
+  type: "long";
+  itemList: LongSectionItemType[];
 }
 
 type markdownString = string;

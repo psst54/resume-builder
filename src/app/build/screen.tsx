@@ -7,9 +7,9 @@ import useDebounce from "@/hooks/useDebounce";
 
 import { usePDF } from "@react-pdf/renderer";
 
-import InputPage from "@components/inputRenderer";
-import PDFPage from "@components/pdfRenderer";
-import PDFPreViewer from "@components/pdfPreViewer";
+import InputPage from "@components/InputRenderer";
+import PDFPage from "@components/PdfRenderer";
+import PDFPreViewer from "@components/PdfPreViewer";
 
 import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
@@ -18,10 +18,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { container, body, inputArea, previewArea } from "./styles";
 import Header from "@components/Header";
 import { createClient } from "@/utils/supabase/client";
-import { updateResumeOld } from "@/utils/supabase/updateResumeOld";
 import { deleteResume } from "@/utils/supabase/deleteResume";
-import type { Resume } from "@/types/resumeOld";
+import type { Resume } from "@/types/resume";
 import { RESUME_TABLE } from "@/utils/supabase/constant";
+import { updateResume } from "@/utils/supabase/updateResume";
 
 export default function BuildScreen({
   resumeId,
@@ -33,9 +33,9 @@ export default function BuildScreen({
   // console.error = () => {}; // todo : fix error
   const router = useRouter();
 
-  const [data, setData] = useState(initialData.content);
-  const [resumeTitle, setResumeTitle] = useState(initialData.title);
-  const [mainColor, setMainColor] = useState(initialData.main_color || "#000");
+  const [data, setData] = useState<Resume>(initialData);
+  const [resumeFileName, setResumeFileName] = useState(initialData.fileName);
+  const [mainColor, setMainColor] = useState(initialData.mainColor || "#000");
 
   const [pdfComponent, setPdfComponent] = useState(
     <PDFPage data={data} mainColor={mainColor} />
@@ -111,10 +111,10 @@ export default function BuildScreen({
 
   async function onSave() {
     try {
-      await updateResumeOld(
+      await updateResume(
         createClient,
         resumeId,
-        resumeTitle,
+        resumeFileName,
         data,
         mainColor
       );
@@ -149,12 +149,12 @@ export default function BuildScreen({
             setData={setData}
             mainColor={mainColor}
             setMainColor={setMainColor}
-            resumeTitle={resumeTitle}
-            setResumeTitle={setResumeTitle}
+            resumeFileName={resumeFileName}
+            setResumeFileName={setResumeFileName}
             onSave={onSave}
             onDelete={onDelete}
             fileUrl={instance.url}
-            fileName={`${resumeTitle}.pdf`}
+            fileName={`${resumeFileName}.pdf`}
           />
         </div>
 

@@ -1,4 +1,10 @@
-const CheckIcon = ({ size, color }: { size: string; color: string }) => {
+const CheckIcon = ({
+  size = "1rem",
+  color = "#000000",
+}: {
+  size?: string;
+  color?: string;
+}) => {
   return (
     <svg
       width={size}

@@ -5,9 +5,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import type { Resume } from "@/types/resumeOld";
+import type { Resume } from "@/types/resume";
 
-import { createResume } from "@/utils/supabase/createResumeOld";
+import { createResume } from "@/utils/supabase/createResume";
 import Header from "@components/Header";
 import Card from "@/components/Card";
 import {
@@ -16,7 +16,7 @@ import {
   grid,
   resetLinkStyle,
   secondaryCard,
-} from "../old/style";
+} from "./style";
 import { createClient } from "@/utils/supabase/client";
 import { resumeCard } from "@/components/Card/styles";
 

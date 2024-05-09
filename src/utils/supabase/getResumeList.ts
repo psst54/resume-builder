@@ -1,16 +1,14 @@
 import { SupabaseClient } from "@supabase/supabase-js";
+import { RESUME_TABLE } from "./constant";
 
-export async function getResumeList(
-  createClient: () => SupabaseClient,
-  table: string
-) {
+export async function getResumeList(createClient: () => SupabaseClient) {
   const supabase = createClient();
 
   try {
     const { data, error } = await supabase
-      .from(table)
+      .from(RESUME_TABLE)
       .select()
-      .order("modified_at", { ascending: false });
+      .order("modifiedAt", { ascending: false });
 
     if (error) {
       throw new Error();
