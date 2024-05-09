@@ -87,8 +87,8 @@ export default function ContactInput({
                     label: datum.title,
                     value: datum.type,
                   }))}
-                  onChange={(value: ContactType) => {
-                    onChangeType(contactItemIndex, value);
+                  onChange={(value: string) => {
+                    onChangeType(contactItemIndex, value as ContactType);
                   }}
                 />
 
