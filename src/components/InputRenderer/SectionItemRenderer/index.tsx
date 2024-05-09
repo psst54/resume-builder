@@ -10,7 +10,10 @@ import {
   TEXT_SECTION_TEMPLATE,
 } from "../CreateButton/template";
 
-function test(sectionItem, setSectionItem) {
+function render(
+  sectionItem: SectionItem,
+  setSectionItem: (value: SectionItem) => void
+) {
   switch (sectionItem.type) {
     case "text":
       return (
@@ -46,7 +49,7 @@ export default function SectionItemRenderer({
   sectionItem: SectionItem;
   setSectionItem: (value: SectionItem) => void;
 }) {
-  const tttt = [
+  const sectionOptions = [
     { label: "텍스트", value: "text", template: TEXT_SECTION_TEMPLATE },
     { label: "간단", value: "short", template: SHORT_SECTION_TEMPLATE },
     { label: "상세", value: "long", template: LONG_SECTION_TEMPLATE },
@@ -56,15 +59,17 @@ export default function SectionItemRenderer({
     <>
       <Selector
         value={sectionItem.type}
-        optionList={tttt.map((datum) => ({
+        optionList={sectionOptions.map((datum) => ({
           label: datum.label,
           value: datum.value,
         }))}
         onChange={(value: string) => {
-          setSectionItem(tttt.find((tt) => tt.value === value).template);
+          setSectionItem(
+            sectionOptions.find((option) => option.value === value)!.template
+          );
         }}
       />
-      {test(sectionItem, setSectionItem)}
+      {render(sectionItem, setSectionItem)}
     </>
   );
 }
