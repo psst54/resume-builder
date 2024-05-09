@@ -1,82 +1,83 @@
-export interface ContactItemType {
-  id: number | (() => number);
-  type:
-    | "phone"
-    | "email"
-    | "homepage"
-    | "github"
-    | "gitlab"
-    | "stackoverflow"
-    | "linkedin"
-    | "twitter"
-    | "reddit";
-  text: string;
-}
-
-//----------------------------------------
-
-export type SectionType = "text" | "long" | "short";
-export type DescItemType = "tag" | "list" | "link" | "markdown";
-
-export interface DescItem {
-  [key: string]: DescItemType | string | string[];
-  type: DescItemType;
-  items: string[];
-  title: string;
-  url: string;
-}
-
-//----------------------------------------
-
-export interface TextSectionContent {
-  [key: string]: string;
-  text: string;
-}
-
-export interface LongSectionContent {
-  [key: string]: string | boolean | DescItem[];
-  title: string;
-  position: string;
-  location: string;
-  start: string;
-  useEndDate: boolean;
-  descItems: DescItem[];
-}
-
-export interface ShortSectionContent {
-  [key: string]: string | boolean;
-  year: string;
-  position: string;
-  subscription: boolean;
-  location: string;
-}
-
-export interface SectionItem {
-  title: string;
-  type: "text" | "long" | "short";
-  content: (TextSectionContent | LongSectionContent | ShortSectionContent)[];
-}
-
-//----------------------------------------
-
-export interface ResumeContent {
-  header: {
-    [key: string]: string | ContactItemType[];
-    title: string;
-    name: string;
-    position: string;
-    quote: string;
-    contactItems: ContactItemType[];
-  };
-  body: SectionItem[];
-}
+export type SectionItem = TextSectionType | ShortSectionType | LongSectionType;
 
 export interface Resume {
   id: number;
-  created_at: Date;
-  modified_at: Date;
-  content: ResumeContent;
-  main_color: string;
-  title: string;
-  uid: string;
+  createdAt: Date;
+  modifiedAt: Date;
+
+  fileName: string;
+  mainColor: string;
+
+  userInfo: ResumeUserInfo;
+  sectionList: SectionItem[];
 }
+
+export interface ResumeUserInfo {
+  name: string;
+  position: string;
+  contact: Contact[];
+  address: string;
+  quote: string;
+}
+
+export type ContactType =
+  | "phone"
+  | "email"
+  | "homepage"
+  | "GitHub"
+  | "GitLab"
+  | "Stack Overflow"
+  | "LinkedIn"
+  | "X"
+  | "Reddit";
+
+export interface Contact {
+  id: number | (() => number);
+  type: ContactType;
+  content: string;
+}
+
+export interface SectionType {
+  id: string | (() => string);
+  title: string;
+  type: "text" | "short" | "long";
+}
+export interface TextSectionType extends SectionType {
+  type: "text";
+  content: string;
+}
+
+export interface ShortSectionItemType {
+  date: string;
+  position: string;
+  content: string;
+  location: string;
+}
+
+export interface ShortSectionType extends SectionType {
+  type: "short";
+  itemList: ShortSectionItemType[];
+}
+
+export interface DateItem {
+  start: string;
+  end?: string;
+  useEnd: boolean;
+  useCurrent: boolean;
+  useDuration: boolean;
+}
+
+export interface LongSectionItemType {
+  title: string;
+  date: DateItem;
+  position: string;
+  content: markdownString;
+  location: string;
+}
+
+export interface LongSectionType extends SectionType {
+  type: "long";
+  itemList: LongSectionItemType[];
+}
+
+type markdownString = string;

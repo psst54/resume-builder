@@ -1,5 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { RESUME_TABLE_OLD } from "./constant";
+import { RESUME_TABLE } from "./constant";
 
 export async function updateResume(
   createClient: () => SupabaseClient,
@@ -11,13 +11,13 @@ export async function updateResume(
   const supabase = createClient();
 
   const { error } = await supabase
-    .from(RESUME_TABLE_OLD)
+    .from(RESUME_TABLE)
     .update([
       {
-        content: data,
-        title,
-        modified_at: new Date(),
-        main_color: mainColor,
+        ...data,
+        fileName: title,
+        modifiedAt: new Date(),
+        mainColor,
       },
     ])
     .eq("id", id);

@@ -13,13 +13,15 @@ export const COLOR = {
     STANDARD: "#E2E6EF",
     HOVER: "#C0C8D9",
   },
+  ULTRA_GRAY: {
+    STANDARD: "#EEF1F7",
+  },
   darkGray: "#333333", // [todo] remove
 
-  ULTRA_GRAY: "#F2F4F7",
   INPUT_BORDER: "#ccc",
 
   WHITE: { STANDARD: "#fff", HOVER: "#f3f3f3", ACTIVE: "#eee" },
-  BLACK: { STANDARD: "#000", HOVER: "#000", ACTIVE: "#000" },
+  BLACK: { STANDARD: "#000", HOVER: "#404040", ACTIVE: "#000" },
 
   VALID: "#23DC3D",
   INVALID: "red",

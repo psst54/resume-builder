@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import type { Resume } from "@type/resume";
+import type { Resume } from "@/types/resume";
 
 import { createResume } from "@/utils/supabase/createResume";
 import Header from "@components/Header";

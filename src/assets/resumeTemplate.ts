@@ -1,4 +1,4 @@
-import { ResumeContent, ContactItemType } from "@/types/resume";
+import { ResumeContent, ContactItemType } from "@/types/resumeOld";
 
 export const contactItemTemplate: ContactItemType = {
   type: "phone",
