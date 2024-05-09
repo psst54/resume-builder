@@ -9,7 +9,7 @@ import { usePDF } from "@react-pdf/renderer";
 
 import InputPage from "@components/inputRendererOld";
 import PDFPage from "@components/pdfRendererOld";
-import PDFPreViewer from "@components/pdfPreViewer";
+import PDFPreViewer from "@components/PdfPreViewer";
 
 import axios from "axios";
 import * as pdfjs from "pdfjs-dist";
