@@ -15,7 +15,7 @@ export default function ActionPanel({
 }: {
   onSave: () => void;
   onDelete: () => void;
-  fileUrl: string;
+  fileUrl: string | null;
   fileName: string;
 }) {
   return (
@@ -30,7 +30,7 @@ export default function ActionPanel({
       </button>
 
       <button css={button}>
-        <a href={fileUrl} download={fileName}>
+        <a href={fileUrl || ""} download={fileName}>
           <DownloadIcon size="1.5rem" color={COLOR.WHITE.STANDARD} />
         </a>
       </button>

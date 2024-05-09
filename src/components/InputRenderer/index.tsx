@@ -32,6 +32,10 @@ const InputPage = ({
   setMainColor: Dispatch<SetStateAction<string>>;
   resumeFileName: string;
   setResumeFileName: Dispatch<SetStateAction<string>>;
+  onSave: () => void;
+  onDelete: () => void;
+  fileUrl: string | null;
+  fileName: string;
 }) => {
   function setUserInfo(field: UserInfoFields, value: string) {
     const newUserInfo = { ...data.userInfo };
