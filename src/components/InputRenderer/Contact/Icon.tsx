@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import Image from "next/image";
 
 export default function Icon({
@@ -5,7 +7,7 @@ export default function Icon({
   onClick,
 }: {
   title: string;
-  onClick?: Function;
+  onClick?: any; // [todo] fix any
 }) {
   return (
     <Image
