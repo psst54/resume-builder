@@ -14,28 +14,28 @@ export const CONTACT_DATA: {
     baseUrl: "https://",
     imgUrl: "/homepage.png",
   },
-  github: {
+  GitHub: {
     isLink: true,
     baseUrl: "https://github.com/",
     imgUrl: "/github.png",
   },
-  gitlab: {
+  GitLab: {
     isLink: true,
     baseUrl: "https://gitlab.com/",
   },
-  stackoverflow: {
+  "Stack Overflow": {
     isLink: true,
     baseUrl: "https://stackoverflow.com/users/",
   },
-  linkedin: {
+  LinkedIn: {
     isLink: true,
     baseUrl: "https://www.linkedin.com/in/",
   },
-  x: {
+  X: {
     isLink: true,
     baseUrl: "https://x.com/",
   },
-  reddit: {
+  Reddit: {
     isLink: true,
     baseUrl: "https://www.reddit.com/user/",
   },
