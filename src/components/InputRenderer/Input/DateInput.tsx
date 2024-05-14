@@ -47,10 +47,10 @@ export default function DateInput({
               <p>~</p>
               <input
                 css={[defaultInput, smallInput]}
-                value={value.start}
+                value={value.end}
                 placeholder={placeholder}
                 onChange={(event) => {
-                  onChange({ ...value, start: event.target.value });
+                  onChange({ ...value, end: event.target.value });
                 }}
                 disabled={value.useCurrent}
               />
