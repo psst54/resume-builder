@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   sectionMain: {
     display: "flex",
     flexDirection: "column",
-    gap: 3,
+    gap: 1,
     flexBasis: 0,
     flexGrow: 1,
   },

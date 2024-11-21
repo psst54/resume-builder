@@ -111,8 +111,8 @@ export default function MarkdownItem({
               {
                 backgroundColor: COLOR.LIGHT_GRAY.STANDARD,
                 borderRadius: 4,
-                paddingLeft: 5,
-                paddingRight: 5,
+                paddingLeft: 4,
+                paddingRight: 4,
               },
             ]}
           >
